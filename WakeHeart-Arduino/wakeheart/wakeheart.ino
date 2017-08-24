@@ -24,7 +24,7 @@ volatile boolean QS = false;
 
 static boolean serialVisual = true;
 SoftwareSerial btSerial(2, 3);
-
+//얄루 얄랄루
 int blueTx=2;   //Tx (보내는핀 설정)at
 int blueRx=3;   //Rx (받는핀 설정)
 SoftwareSerial mySerial(blueTx, blueRx);
