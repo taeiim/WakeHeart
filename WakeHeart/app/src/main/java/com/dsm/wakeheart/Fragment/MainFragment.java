@@ -54,6 +54,10 @@ public class MainFragment extends android.support.v4.app.Fragment {
         final SnakeView snakeView = (SnakeView) rootView.findViewById(R.id.snake);
         snakeView.setMinValue(0);
         snakeView.setMaxValue(150);
+        snakeView.addValue(100);
+        snakeView.addValue(50);
+        snakeView.addValue(80);
+
 
         return rootView;
     }
