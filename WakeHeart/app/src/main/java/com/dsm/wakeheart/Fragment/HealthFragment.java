@@ -17,10 +17,11 @@ import com.dsm.wakeheart.R;
 
 public class HealthFragment extends android.support.v4.app.Fragment {
 
+    View rootView;
     ImageView manImage;
     ImageView womanImage;
     RelativeLayout imgLayout;
-    View rootView;
+    int bpm;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -28,16 +29,22 @@ public class HealthFragment extends android.support.v4.app.Fragment {
 
 
         setImage();
-        womanImage.setVisibility(View.GONE);
+
+
+        setBPM();
         return rootView;
     }
 
+    private void setBPM(){
+        bpm = 90;
+
+    }
     private void setImage(){
         manImage= (ImageView) rootView.findViewById(R.id.man_img);
         womanImage = (ImageView) rootView.findViewById(R.id.woman_img);
         imgLayout = (RelativeLayout) rootView.findViewById(R.id.imageLayout);
 
-
+        womanImage.setVisibility(View.GONE);
 
         manImage.setOnClickListener(new View.OnClickListener() {
             @Override

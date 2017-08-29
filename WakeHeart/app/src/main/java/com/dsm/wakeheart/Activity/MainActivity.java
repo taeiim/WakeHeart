@@ -1,4 +1,4 @@
-package com.dsm.wakeheart;
+package com.dsm.wakeheart.Activity;
 
 import android.graphics.Color;
 import android.os.Bundle;
@@ -17,6 +17,7 @@ import com.dsm.wakeheart.Fragment.Graph2Fragment;
 import com.dsm.wakeheart.Fragment.HealthFragment;
 import com.dsm.wakeheart.Fragment.HelperFragment;
 import com.dsm.wakeheart.Fragment.MainFragment;
+import com.dsm.wakeheart.R;
 
 public class MainActivity extends AppCompatActivity implements AHBottomNavigation.OnTabSelectedListener {
     AHBottomNavigation bottomNavigation;
