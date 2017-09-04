@@ -17,12 +17,12 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Wake Heart"
-                android:textColor="@color/colorAccent"
-                android:textSize="25dp" />
+            <ImageView
+                android:layout_width="300dp"
+                android:layout_height="45dp"
+                android:layout_marginTop="12dp"
+                android:src="@drawable/logo_yellow_img"
+                />
         </RelativeLayout>
     </android.support.v7.widget.Toolbar>
 
