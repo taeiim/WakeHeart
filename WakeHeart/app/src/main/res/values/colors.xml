@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-<<<<<<< HEAD
+
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
-=======
+
     <color name="colorPrimary">#E43F3F</color>
     <color name="colorPrimaryDark">#CB2828</color>
     <color name="colorAccent">#FFC107</color>
 
     <color name="bottom_section_color">#F2ECEC</color>
     <color name="colorIcon">#52012D</color>
->>>>>>> cc246bfe468acab87c3707c0d7044aa425137571
+
 </resources>
