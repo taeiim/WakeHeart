@@ -5,9 +5,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 <<<<<<< HEAD
+<<<<<<< HEAD
     tools:context="com.dsm.wakeheart.MainActivity"
+=======
+    tools:context="com.dsm.wakeheart.Activity.MainActivity"
+>>>>>>> cc246bfe468acab87c3707c0d7044aa425137571
     android:id="@+id/content_id">
 
+    <android.support.v4.view.ViewPager
+        android:id="@+id/view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </android.support.v4.view.ViewPager>
     <android.support.design.widget.CoordinatorLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
@@ -25,4 +35,11 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+<<<<<<< HEAD
+=======
+
+    </android.support.design.widget.CoordinatorLayout>
+
+
+>>>>>>> cc246bfe468acab87c3707c0d7044aa425137571
 </android.support.constraint.ConstraintLayout>

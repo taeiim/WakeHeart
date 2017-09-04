@@ -1,11 +1,128 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <TextView
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="health"/>
+        android:background="@color/colorPrimary"
+        android:minHeight="?attr/actionBarSize">
 
-</LinearLayout>
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center">
+
+            <ImageView
+                android:layout_width="300dp"
+                android:layout_height="45dp"
+                android:layout_marginTop="12dp"
+                android:src="@drawable/logo_yellow_img"
+                />
+        </RelativeLayout>
+    </android.support.v7.widget.Toolbar>
+
+    <LinearLayout
+        android:id="@+id/currentBpmLayout"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:gravity="center"
+        android:layout_below="@+id/toolbar"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+
+
+            <ImageView
+                android:id="@+id/heart_icon"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:src="@drawable/heart_icon" />
+
+            <TextView
+                android:id="@+id/TextViewAvg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/heart_icon"
+                android:text="하루 평균 심박수"
+                android:layout_marginTop="8dp"
+                android:layout_marginLeft="15dp"
+                android:textColor="@color/colorPrimary" />
+
+            <TextView
+                android:id="@+id/BPM_TextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/heart_icon"
+                android:layout_below="@+id/TextViewAvg"
+                android:text="93"
+                android:textSize="40dp"
+                android:layout_marginLeft="15dp"
+                android:textColor="@color/colorPrimary"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="BPM"
+                android:textColor="@color/colorPrimary"
+                android:layout_toRightOf="@+id/BPM_TextView"
+                android:layout_below="@+id/TextViewAvg"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="10dp"/>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/healthLayout"
+        android:layout_below="@+id/currentBpmLayout"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:background="#FBEFF2">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="나의 건강상태는?"
+            android:textSize="18dp"
+            android:textColor="#110000"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="평균 이하"
+            android:textSize="25dp"
+            android:textColor="@color/colorPrimary"
+            android:textStyle="bold"
+            android:layout_marginTop="10dp"
+            />
+    </LinearLayout>
+    <RelativeLayout
+        android:id="@+id/imageLayout"
+        android:layout_width="match_parent"
+        android:layout_height="210dp"
+        android:layout_below="@+id/healthLayout">
+
+        <ImageView
+            android:id="@+id/man_img"
+            android:layout_width="match_parent"
+            android:layout_height="210dp"
+            android:src="@drawable/health_man_img" />
+
+        <ImageView
+            android:id="@+id/woman_img"
+            android:layout_width="match_parent"
+            android:layout_height="210dp"
+            android:src="@drawable/health_woman_img" />
+
+    </RelativeLayout>
+
+
+</RelativeLayout>
