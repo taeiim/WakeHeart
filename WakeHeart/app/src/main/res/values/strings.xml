@@ -1,9 +1,3 @@
 <resources>
     <string name="app_name">WakeHeart</string>
-    <string name="tab_graph1">Graph1</string>
-    <string name="tab_graph2">Graph2</string>
-    <string name="tab_main">Main</string>
-    <string name="tab_health">Health</string>
-    <string name="tab_helper">Helper</string>
-
 </resources>

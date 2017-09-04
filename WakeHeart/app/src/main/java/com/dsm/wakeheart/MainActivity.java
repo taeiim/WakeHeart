@@ -1,5 +1,6 @@
 package com.dsm.wakeheart;
 
+<<<<<<< HEAD
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -17,6 +18,10 @@ import com.dsm.wakeheart.Fragment.Graph2Fragment;
 import com.dsm.wakeheart.Fragment.HealthFragment;
 import com.dsm.wakeheart.Fragment.HelperFragment;
 import com.dsm.wakeheart.Fragment.MainFragment;
+=======
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+>>>>>>> 27a0a3d5167a13e9c081cf76eeba051bb51c0a42
 
 public class MainActivity extends AppCompatActivity implements AHBottomNavigation.OnTabSelectedListener {
     AHBottomNavigation bottomNavigation;
@@ -25,6 +30,7 @@ public class MainActivity extends AppCompatActivity implements AHBottomNavigatio
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+<<<<<<< HEAD
 
         bottomNavigation = (AHBottomNavigation) findViewById(R.id.bottom_navigation);
         bottomNavigation.setOnTabSelectedListener(this);
@@ -73,5 +79,7 @@ public class MainActivity extends AppCompatActivity implements AHBottomNavigatio
             getSupportFragmentManager().beginTransaction().replace(R.id.content_id, helperFragment).commit();
         }
         return true;
+=======
+>>>>>>> 27a0a3d5167a13e9c081cf76eeba051bb51c0a42
     }
 }
