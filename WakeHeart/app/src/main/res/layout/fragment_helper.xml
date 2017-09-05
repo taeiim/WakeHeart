@@ -24,5 +24,15 @@
         </RelativeLayout>
     </android.support.v7.widget.Toolbar>
 
+    <RelativeLayout
+        android:orientation="vertical" android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <RelativeLayout
+            android:id="@+id/map_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
+
+
+    </RelativeLayout>
 </LinearLayout>

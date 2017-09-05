@@ -51,7 +51,6 @@ public class MainActivity extends AppCompatActivity implements AHBottomNavigatio
 
         bottomNavigation.setCurrentItem(2);  //처음 시작 화면 main
 
-
     }
 
 
