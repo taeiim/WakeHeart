@@ -39,6 +39,7 @@ dependencies {
     compile 'info.hoang8f:fbutton:1.0.5'
     compile 'com.txusballesteros:snake:1.0'
     compile 'com.naver.maps.open:naver-map-api:2.1.2@aar'
+    compile 'com.android.support:cardview-v7:26.+'
     testCompile 'junit:junit:4.12'
 
 
