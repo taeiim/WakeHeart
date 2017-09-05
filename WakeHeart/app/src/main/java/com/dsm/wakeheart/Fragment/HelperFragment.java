@@ -22,6 +22,7 @@ public class HelperFragment extends android.support.v4.app.Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_helper,container,false);
 
+        
 
         return rootView;
 

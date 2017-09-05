@@ -38,6 +38,7 @@ dependencies {
     compile 'com.aurelhubert:ahbottomnavigation:2.1.0'
     compile 'info.hoang8f:fbutton:1.0.5'
     compile 'com.txusballesteros:snake:1.0'
+    compile 'com.naver.maps.open:naver-map-api:2.1.2@aar'
     testCompile 'junit:junit:4.12'
 
 
