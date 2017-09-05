@@ -1,4 +1,5 @@
 <resources>
+<<<<<<< HEAD
     <string name="app_name">Wake Heart</string>
     <string name="tab_graph1">Graph1</string>
     <string name="tab_graph2">Graph2</string>
@@ -6,4 +7,7 @@
     <string name="tab_health">Health</string>
     <string name="tab_helper">Helper</string>
 
+=======
+    <string name="app_name">WakeHeart</string>
+>>>>>>> 76c92f86248147a7e7118a8927516e84b6975a13
 </resources>

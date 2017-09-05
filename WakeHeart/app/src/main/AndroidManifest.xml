@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.dsm.wakeheart">
+<<<<<<< HEAD
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.INTERNET">
     </uses-permission>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION">
     </uses-permission>
+=======
+>>>>>>> 76c92f86248147a7e7118a8927516e84b6975a13
 
     <application
         android:allowBackup="true"
