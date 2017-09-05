@@ -23,6 +23,7 @@ import com.dsm.wakeheart.R;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.Toast;
 
 
 public class MainActivity extends AppCompatActivity implements AHBottomNavigation.OnTabSelectedListener {
@@ -66,12 +67,14 @@ public class MainActivity extends AppCompatActivity implements AHBottomNavigatio
         if (position == 0) {
             Graph1Fragment graph1Fragment = new Graph1Fragment();
             getSupportFragmentManager().beginTransaction().replace(R.id.content_id, graph1Fragment).commit();
+
         } else if (position == 1) {
             Graph2Fragment graph2Fragment = new Graph2Fragment();
             getSupportFragmentManager().beginTransaction().replace(R.id.content_id, graph2Fragment).commit();
         } else if (position == 2) {
             MainFragment mainFragment = new MainFragment();
             getSupportFragmentManager().beginTransaction().replace(R.id.content_id, mainFragment).commit();
+            Toast.makeText(getApplicationContext(),"button onclick",Toast.LENGTH_SHORT).show();
         } else if (position == 3) {
             HealthFragment healthFragment = new HealthFragment();
             getSupportFragmentManager().beginTransaction().replace(R.id.content_id, healthFragment).commit();

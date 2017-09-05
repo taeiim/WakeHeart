@@ -27,9 +27,15 @@ import java.util.List;
 
 public class HelperFragment extends android.support.v4.app.Fragment {
 //    private NMapView mMapView;
-    @Nullable
+
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setRetainInstance(true);
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_helper,container,false);
 
         ViewPager viewPager = (ViewPager) rootView.findViewById(R.id.view_pager);
@@ -38,34 +44,16 @@ public class HelperFragment extends android.support.v4.app.Fragment {
         TabLayout tabs = (TabLayout) rootView.findViewById(R.id.result_tabs);
         tabs.setupWithViewPager(viewPager);
 
-
-
-
-//        mMapView = (NMapView)rootView.findViewById(R.id.mapView);
-//
-//        mMapView = new NMapView(getActivity().getApplicationContext());
-//        mMapView.setClientId("oPDj1y9Xk6B_IakJkQ0J");
-//
-//        // initialize map view
-//        mMapView.setClickable(true);
-//        mMapView.setEnabled(true);
-//        mMapView.setFocusable(true);
-//        mMapView.setFocusableInTouchMode(true);
-//        mMapView.requestFocus();
-
         return rootView;
 
-
     }
-    private void setupViewPager(ViewPager viewPager) {
 
+    private void setupViewPager(ViewPager viewPager) {
 
         Adapter adapter = new Adapter(getChildFragmentManager());
         adapter.addFragment(new RestAreaFragment(), "휴게소");
         adapter.addFragment(new WiseSayingFragment(), "명언");
         viewPager.setAdapter(adapter);
-
-
 
     }
 
