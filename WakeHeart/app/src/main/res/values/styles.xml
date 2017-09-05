@@ -8,8 +8,6 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-<<<<<<< HEAD
-=======
 
     <style name="Widget.Design.TextInputLayout" parent="AppTheme">
         <item name="hintTextAppearance">@style/AppTheme.TextFloatLabelAppearance</item>
@@ -31,5 +29,4 @@
     </style>
 
 
->>>>>>> cc246bfe468acab87c3707c0d7044aa425137571
 </resources>
