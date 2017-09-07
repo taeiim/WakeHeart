@@ -11,6 +11,8 @@ import android.widget.RelativeLayout;
 
 import com.dsm.wakeheart.R;
 
+import jp.wasabeef.blurry.Blurry;
+
 /**
  * Created by parktaeim on 2017. 8. 25..
  */
@@ -26,7 +28,6 @@ public class HealthFragment extends android.support.v4.app.Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_health,container,false);
-
 
         setImage();
 
