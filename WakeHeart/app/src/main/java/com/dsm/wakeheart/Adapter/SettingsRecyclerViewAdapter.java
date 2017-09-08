@@ -45,6 +45,7 @@ public class SettingsRecyclerViewAdapter extends RecyclerView.Adapter<SettingsRe
 
         public TextView title;
         public ImageView icon;
+        public View.OnClickListener onClickListener;
 
         public ViewHolder(View view){
             super(view);
