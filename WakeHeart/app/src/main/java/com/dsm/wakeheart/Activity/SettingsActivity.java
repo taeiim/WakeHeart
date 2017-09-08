@@ -1,17 +1,15 @@
 package com.dsm.wakeheart.Activity;
 
-import android.content.ClipData;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.dsm.wakeheart.Adapter.SettingsRecyclerViewAdapter;
 import com.dsm.wakeheart.Model.SettingsItem;
@@ -54,9 +52,12 @@ public class SettingsActivity extends AppCompatActivity{
             @Override
             public void onItemClick(View view, int position) {
                 if(position==0){
-                    Intent intent1 = new Intent(SettingsActivity.this,AccountManageActivity.class);
-                    startActivity(intent1);
+                    Intent intent0 = new Intent(SettingsActivity.this,AccountManageActivity.class);
+                    startActivity(intent0);
                 }else if(position == 1){
+                    Intent intent1 = new Intent(SettingsActivity.this,ChangePasswordActivity.class);
+                    startActivity(intent1);
+                }else if(position == 2){
                     Intent intent2 = new Intent(SettingsActivity.this,MusicManageActivity.class);
                     startActivity(intent2);
                 }
@@ -76,6 +77,7 @@ public class SettingsActivity extends AppCompatActivity{
         ArrayList items = new ArrayList<>();
         //Setting item in RecyclerView
         items.add(new SettingsItem(R.drawable.person_icon,"계정관리"));
+        items.add(new SettingsItem(R.drawable.password_icon,"비밀번호 변경"));
         items.add(new SettingsItem(R.drawable.music_icon,"음악설정"));
         layoutManager = new LinearLayoutManager(this);
 
@@ -83,5 +85,10 @@ public class SettingsActivity extends AppCompatActivity{
 
         adapter = new SettingsRecyclerViewAdapter(items,context);
         recyclerView.setAdapter(adapter);
+
+        //구분선
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(getApplicationContext(),LinearLayoutManager.VERTICAL);
+        dividerItemDecoration.setDrawable(getApplicationContext().getResources().getDrawable(R.drawable.recycler_divider));
+        recyclerView.addItemDecoration(dividerItemDecoration);
     }
 }

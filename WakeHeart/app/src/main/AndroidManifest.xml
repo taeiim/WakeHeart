@@ -29,6 +29,7 @@
         <activity android:name=".Activity.SettingsActivity"/>
         <activity android:name=".Activity.MusicManageActivity"/>
         <activity android:name=".Activity.AccountManageActivity"/>
+        <activity android:name=".Activity.ChangePasswordActivity"/>
     </application>
 
 

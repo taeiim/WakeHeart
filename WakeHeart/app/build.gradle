@@ -44,6 +44,7 @@ dependencies {
     compile 'com.github.florent37:materialtextfield:1.0.7'
     compile 'com.github.ceryle:RadioRealButton:v2.1.1'
     compile 'com.shawnlin:number-picker:2.4.4'
+    compile 'me.zhanghai.android.materialedittext:library:1.0.5'
     testCompile 'junit:junit:4.12'
 
 
