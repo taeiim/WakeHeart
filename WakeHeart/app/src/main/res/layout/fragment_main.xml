@@ -14,38 +14,47 @@
 
         <RelativeLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center">
+            android:layout_height="wrap_content">
 
             <ImageView
-                android:layout_width="300dp"
-                android:layout_height="45dp"
-                android:layout_marginTop="12dp"
+                android:id="@id/logo_img"
+                android:layout_width="160dp"
+                android:layout_height="40dp"
+                android:layout_centerInParent="true"
                 android:src="@drawable/logo_yellow_img"
                 />
+
+            <ImageView
+                android:id="@+id/setting_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/setting_icon"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:paddingRight="15dp"/>
         </RelativeLayout>
     </android.support.v7.widget.Toolbar>
 
     <RelativeLayout
-    android:id="@+id/offLayout"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:gravity="center">
+        android:id="@+id/offLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center">
 
-    <info.hoang8f.widget.FButton
-    android:id="@+id/OnOffButton"
-    android:layout_width="170dp"
-    android:layout_height="170dp"
-    android:layout_gravity="center"
-    android:layout_marginBottom="50dp"
-    android:text="OFF"
-    android:textColor="#FFFFFF"
-    android:textSize="35dp"
-    fbutton:buttonColor="@color/colorPrimary"
-    fbutton:cornerRadius="100dp"
-    fbutton:shadowColor="@color/colorPrimaryDark"
-    fbutton:shadowEnabled="true"
-    fbutton:shadowHeight="8dp" />
+        <info.hoang8f.widget.FButton
+            android:id="@+id/OnOffButton"
+            android:layout_width="170dp"
+            android:layout_height="170dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="50dp"
+            android:text="OFF"
+            android:textColor="#FFFFFF"
+            android:textSize="35dp"
+            fbutton:buttonColor="@color/colorPrimary"
+            fbutton:cornerRadius="100dp"
+            fbutton:shadowColor="@color/colorPrimaryDark"
+            fbutton:shadowEnabled="true"
+            fbutton:shadowHeight="8dp" />
     </RelativeLayout>
 
     <RelativeLayout
