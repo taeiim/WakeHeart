@@ -1,6 +1,7 @@
 package com.dsm.wakeheart.Fragment;
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -9,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
+import com.dsm.wakeheart.Activity.SettingsActivity;
 import com.dsm.wakeheart.R;
 
 import jp.wasabeef.blurry.Blurry;
@@ -23,6 +25,8 @@ public class HealthFragment extends android.support.v4.app.Fragment {
     ImageView manImage;
     ImageView womanImage;
     RelativeLayout imgLayout;
+    ImageView settingsBtn;
+
     int bpm;
     @Nullable
     @Override
@@ -30,9 +34,18 @@ public class HealthFragment extends android.support.v4.app.Fragment {
         rootView = inflater.inflate(R.layout.fragment_health,container,false);
 
         setImage();
-
-
         setBPM();
+
+        //설정 버튼 누르면 설정 액티비티로 넘어감
+        settingsBtn = (ImageView) rootView.findViewById(R.id.setting_icon);
+        settingsBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), SettingsActivity.class);
+                startActivity(intent);
+            }
+        });
+
         return rootView;
     }
 

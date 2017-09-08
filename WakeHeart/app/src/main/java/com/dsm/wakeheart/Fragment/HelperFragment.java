@@ -2,6 +2,7 @@ package com.dsm.wakeheart.Fragment;
 
 import android.app.Fragment;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
@@ -13,9 +14,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Adapter;
+import android.widget.ImageView;
 import android.widget.TabHost;
 
 import com.dsm.wakeheart.Activity.LoginActivity;
+import com.dsm.wakeheart.Activity.SettingsActivity;
 import com.nhn.android.maps.NMapView;
 
 import com.dsm.wakeheart.R;
@@ -32,6 +35,7 @@ import jp.wasabeef.blurry.Blurry;
 public class HelperFragment extends android.support.v4.app.Fragment {
 //    private NMapView mMapView;
 
+    ImageView settingsBtn;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +51,16 @@ public class HelperFragment extends android.support.v4.app.Fragment {
 
         TabLayout tabs = (TabLayout) rootView.findViewById(R.id.result_tabs);
         tabs.setupWithViewPager(viewPager);
+
+        //설정 버튼 누르면 설정 액티비티로 넘어감
+        settingsBtn = (ImageView) rootView.findViewById(R.id.setting_icon);
+        settingsBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), SettingsActivity.class);
+                startActivity(intent);
+            }
+        });
 
         return rootView;
 

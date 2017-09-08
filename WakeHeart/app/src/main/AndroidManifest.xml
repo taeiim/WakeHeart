@@ -26,6 +26,7 @@
         </activity>
 
         <activity android:name=".Activity.SignUpActivity"></activity>
+        <activity android:name=".Activity.SettingsActivity"/>
     </application>
 
 
