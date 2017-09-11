@@ -17,13 +17,13 @@ public class StatusController {
 		if (status.count() == 0) {
 			status.init();
 		}
-		Float status = Float.parseFloat(req.getParameter("status"));
+		Float _status = Float.parseFloat(req.getParameter("status"));
 		int user = Integer.parseInt(req.getParameter("user"));
 		String time = req.getParameter("time");
 		int gender = Integer.parseInt(req.getParameter("gender"));
 		int age = Integer.parseInt(req.getParameter("age"));
 		
-		status.insertAll(status, user, time, gender, age);
+		status.insertAll(_status, user, time, gender, age);
 		
         res.setHeader("Content-Type", "text/html");
         res.write("Hello World");

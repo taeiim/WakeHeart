@@ -37,6 +37,17 @@ public class User implements Model {
 		
 	}
 
+	public void insertAll(String id, String password, String nickname, int gender, int age) {
+    	Document document = new Document();
+
+    	document.put("id", id);
+    	document.put("password", password);
+    	document.put("gender", gender);
+    	document.put("age", age);
+    	
+    	connector.insertQuery(collection, document);
+    }
+	
 	@Override
     public void update(String fieldName, Object value, Object newValue) {
         connector.updateQuery(collection, fieldName, value, newValue);
