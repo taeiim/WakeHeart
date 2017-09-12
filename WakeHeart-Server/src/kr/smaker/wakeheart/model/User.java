@@ -28,15 +28,48 @@ public class User implements Model {
 	}
 	
 	@Override
-	public String find(String data) {
-        return connector.findQuery(collection, new Document("name", data));
+	public String find(String id) {
+        return connector.findQuery(collection, new Document("id", id));
 	}
+	
+	public Boolean auth(String id, String password) {
+		Document document = new Document();
+
+    	document.put("id", id);
+    	document.put("password", password);
+    	
+    	String result = null;
+    	
+    	try {
+            result = connector.findQuery(collection, new Document(document));
+    	} catch (NullPointerException e) {
+    		result = null;
+    	}
+        
+        if (result != null) {
+        	return true;
+        } else {
+            return false;
+        }
+    }
 	
 	@Override
 	public void insert(String arg0) {
 		
 	}
 
+	public void insertAll(String id, String password, String nickname, int gender, int age) {
+    	Document document = new Document();
+
+    	document.put("id", id);
+    	document.put("password", password);
+    	document.put("nickname", nickname);
+    	document.put("gender", gender);
+    	document.put("age", age);
+    	
+    	connector.insertQuery(collection, document);
+    }
+	
 	@Override
     public void update(String fieldName, Object value, Object newValue) {
         connector.updateQuery(collection, fieldName, value, newValue);
