@@ -76,7 +76,7 @@ public class SettingsActivity extends AppCompatActivity{
 
         ArrayList items = new ArrayList<>();
         //Setting item in RecyclerView
-        items.add(new SettingsItem(R.drawable.person_icon,"계정관리"));
+        items.add(new SettingsItem(R.drawable.person_icon,"내 정보"));
         items.add(new SettingsItem(R.drawable.password_icon,"비밀번호 변경"));
         items.add(new SettingsItem(R.drawable.music_icon,"음악설정"));
         layoutManager = new LinearLayoutManager(this);

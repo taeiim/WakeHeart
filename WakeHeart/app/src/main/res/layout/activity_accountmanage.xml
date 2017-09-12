@@ -28,7 +28,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="계정관리"
+                android:text="내 정보"
                 android:textColor="@color/colorAccent"
                 android:layout_toRightOf="@+id/back_icon"
                 android:textSize="16dp"
@@ -38,4 +38,8 @@
         </RelativeLayout>
     </android.support.v7.widget.Toolbar>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="아이디"/>
 </LinearLayout>

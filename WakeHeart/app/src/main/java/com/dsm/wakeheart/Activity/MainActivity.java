@@ -45,11 +45,11 @@ public class MainActivity extends AppCompatActivity implements AHBottomNavigatio
     private void createNavItems() {
         AHBottomNavigation bottomNavigation = (AHBottomNavigation) findViewById(R.id.bottom_navigation);
 
-        AHBottomNavigationItem item1 = new AHBottomNavigationItem(R.string.tab_graph1, R.drawable.chart1_icon, R.color.colorIcon);
-        AHBottomNavigationItem item2 = new AHBottomNavigationItem(R.string.tab_graph2, R.drawable.chart2_icon, R.color.colorIcon);
-        AHBottomNavigationItem item3 = new AHBottomNavigationItem(R.string.tab_main, R.drawable.button_icon, R.color.colorIcon);
-        AHBottomNavigationItem item4 = new AHBottomNavigationItem(R.string.tab_health, R.drawable.health_icon, R.color.colorIcon);
-        AHBottomNavigationItem item5 = new AHBottomNavigationItem(R.string.tab_helper, R.drawable.helper_icon, R.color.colorIcon);
+        AHBottomNavigationItem item1 = new AHBottomNavigationItem(R.string.tab_graph1, R.drawable.chart1_icon, R.color.colorPrimary);
+        AHBottomNavigationItem item2 = new AHBottomNavigationItem(R.string.tab_graph2, R.drawable.chart2_icon, R.color.colorPrimary);
+        AHBottomNavigationItem item3 = new AHBottomNavigationItem(R.string.tab_main, R.drawable.button_icon, R.color.colorPrimary);
+        AHBottomNavigationItem item4 = new AHBottomNavigationItem(R.string.tab_health, R.drawable.health_icon, R.color.colorPrimary);
+        AHBottomNavigationItem item5 = new AHBottomNavigationItem(R.string.tab_helper, R.drawable.helper_icon, R.color.colorPrimary);
 
         bottomNavigation.addItem(item1);
         bottomNavigation.addItem(item2);
