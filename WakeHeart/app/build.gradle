@@ -45,6 +45,9 @@ dependencies {
     compile 'com.github.ceryle:RadioRealButton:v2.1.1'
     compile 'com.shawnlin:number-picker:2.4.4'
     compile 'me.zhanghai.android.materialedittext:library:1.0.5'
+    compile 'com.squareup.retrofit2:retrofit:2.0.1'
+    compile 'com.squareup.retrofit2:converter-gson:2.0.1'
+    compile 'com.squareup.okhttp3:okhttp:3.8.0'
     testCompile 'junit:junit:4.12'
 
 

@@ -51,15 +51,17 @@ public class SettingsActivity extends AppCompatActivity{
         recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getApplicationContext(), recyclerView, new RecyclerItemClickListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                if(position==0){
+                if(position==0){  //내 정보
                     Intent intent0 = new Intent(SettingsActivity.this,AccountManageActivity.class);
                     startActivity(intent0);
-                }else if(position == 1){
+                }else if(position == 1){  // 비밀번호 변경
                     Intent intent1 = new Intent(SettingsActivity.this,ChangePasswordActivity.class);
                     startActivity(intent1);
-                }else if(position == 2){
+                }else if(position == 2){  // 음악 설정
                     Intent intent2 = new Intent(SettingsActivity.this,MusicManageActivity.class);
                     startActivity(intent2);
+                }else if(position == 3){  // 로그아웃
+                    //로그아웃
                 }
             }
 
@@ -79,6 +81,7 @@ public class SettingsActivity extends AppCompatActivity{
         items.add(new SettingsItem(R.drawable.person_icon,"내 정보"));
         items.add(new SettingsItem(R.drawable.password_icon,"비밀번호 변경"));
         items.add(new SettingsItem(R.drawable.music_icon,"음악설정"));
+        items.add(new SettingsItem(R.drawable.out_icon ,"로그아웃"));
         layoutManager = new LinearLayoutManager(this);
 
         recyclerView.setLayoutManager(layoutManager);

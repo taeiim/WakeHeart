@@ -33,7 +33,8 @@ public class HealthFragment extends android.support.v4.app.Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_health,container,false);
 
-        setImage();
+//        setImage();
+        setTable();
         setBPM();
 
         //설정 버튼 누르면 설정 액티비티로 넘어감
@@ -49,33 +50,57 @@ public class HealthFragment extends android.support.v4.app.Fragment {
         return rootView;
     }
 
+    private void setTable() {
+        final RelativeLayout table_man = (RelativeLayout) rootView.findViewById(R.id.table_man);
+        final RelativeLayout table_woman = (RelativeLayout) rootView.findViewById(R.id.table_woman);
+        table_woman.setVisibility(View.GONE);
+
+        table_man.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                table_man.setVisibility(View.GONE);
+                table_woman.setVisibility(View.VISIBLE);
+            }
+        });
+
+        table_woman.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                table_man.setVisibility(View.VISIBLE);
+                table_woman.setVisibility(View.GONE);
+            }
+        });
+    }
+
     private void setBPM(){
         bpm = 90;
 
     }
-    private void setImage(){
-        manImage= (ImageView) rootView.findViewById(R.id.man_img);
-        womanImage = (ImageView) rootView.findViewById(R.id.woman_img);
-        imgLayout = (RelativeLayout) rootView.findViewById(R.id.imageLayout);
 
-        womanImage.setVisibility(View.GONE);
 
-        manImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                manImage.setVisibility(View.GONE);
-                womanImage.setVisibility(View.VISIBLE);
-            }
-        });
-
-        womanImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                manImage.setVisibility(View.VISIBLE);
-                womanImage.setVisibility(View.GONE);
-            }
-        });
-
-    }
+//    private void setImage(){
+//        manImage= (ImageView) rootView.findViewById(R.id.man_img);
+//        womanImage = (ImageView) rootView.findViewById(R.id.woman_img);
+//        imgLayout = (RelativeLayout) rootView.findViewById(R.id.imageLayout);
+//
+//        womanImage.setVisibility(View.GONE);
+//
+//        manImage.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                manImage.setVisibility(View.GONE);
+//                womanImage.setVisibility(View.VISIBLE);
+//            }
+//        });
+//
+//        womanImage.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                manImage.setVisibility(View.VISIBLE);
+//                womanImage.setVisibility(View.GONE);
+//            }
+//        });
+//
+//    }
 
 }
