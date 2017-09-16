@@ -35,7 +35,7 @@ public class SignUpActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<ResData> call, Response<ResData> response) {
                 if(response.body().res){
-
+                    
                 }else {
 
                 }

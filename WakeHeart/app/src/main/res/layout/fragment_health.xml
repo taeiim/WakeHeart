@@ -157,6 +157,7 @@
                 <TableRow>
 
                     <TextView
+                        android:id="@+id/man_age_18"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:text="18-25"
@@ -164,6 +165,7 @@
                         android:textColor="#000000" />
 
                     <TextView
+                        android:id="@+id/man_age_26"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:text="26-35"
@@ -171,6 +173,7 @@
                         android:textColor="#000000" />
 
                     <TextView
+                        android:id="@+id/man_age_36"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:text="36-45"
@@ -178,6 +181,7 @@
                         android:textColor="#000000" />
 
                     <TextView
+                        android:id="@+id/man_age_46"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:text="46-55"
@@ -185,6 +189,7 @@
                         android:textColor="#000000" />
 
                     <TextView
+                        android:id="@+id/man_age_56"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:text="56-65"
@@ -192,6 +197,7 @@
                         android:textColor="#000000" />
 
                     <TextView
+                        android:id="@+id/man_age_65"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:gravity="center"
@@ -219,6 +225,7 @@
                 <TableRow>
 
                     <TextView
+                        android:id="@+id/man_health_athlete"
                         android:layout_width="70dp"
                         android:layout_marginTop="2dp"
                         android:gravity="center"
@@ -227,6 +234,7 @@
                         android:textColor="#000000" />
 
                     <TextView
+                        android:id="@+id/man_1_18"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:gravity="center"
@@ -234,6 +242,7 @@
                         android:text="49-55"
                         android:textColor="#000000" />
                     <TextView
+                        android:id="@+id/man_1_26"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:gravity="center"
@@ -241,6 +250,7 @@
                         android:text="49-54"
                         android:textColor="#000000" />
                     <TextView
+                        android:id="@+id/man_1_36"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:gravity="center"
@@ -248,6 +258,7 @@
                         android:text="50-56"
                         android:textColor="#000000" />
                     <TextView
+                        android:id="@+id/man_1_46"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:gravity="center"
@@ -255,6 +266,7 @@
                         android:text="50-57"
                         android:textColor="#000000" />
                     <TextView
+                        android:id="@+id/man_1_56"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:gravity="center"
@@ -262,6 +274,7 @@
                         android:text="51-56"
                         android:textColor="#000000" />
                     <TextView
+                        android:id="@+id/man_1_65"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:gravity="center"
@@ -274,12 +287,14 @@
                 <TableRow>
 
                     <TextView
+                        android:id="@+id/man_health_verygood"
                         android:layout_width="70dp"
                         android:gravity="center"
                         android:padding="3dp"
                         android:text="뛰어남"
                         android:textColor="#000000" />
                     <TextView
+                        android:id="@+id/man_2_18"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:gravity="center"
@@ -287,6 +302,7 @@
                         android:text="56-61"
                         android:textColor="#000000" />
                     <TextView
+                        android:id="@+id/man_2_26"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:gravity="center"
@@ -294,6 +310,7 @@
                         android:text="55-61"
                         android:textColor="#000000" />
                     <TextView
+                        android:id="@+id/man_2_36"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:gravity="center"
@@ -301,6 +318,7 @@
                         android:text="57-62"
                         android:textColor="#000000" />
                     <TextView
+                        android:id="@+id/man_2_46"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:gravity="center"
@@ -308,6 +326,7 @@
                         android:text="58-63"
                         android:textColor="#000000" />
                     <TextView
+                        android:id="@+id/man_2_56"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:gravity="center"
@@ -315,6 +334,7 @@
                         android:text="57-61"
                         android:textColor="#000000" />
                     <TextView
+                        android:id="@+id/man_2_65"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:gravity="center"
@@ -327,12 +347,14 @@
                 <TableRow>
 
                     <TextView
+                        android:id="@+id/man_health_good"
                         android:layout_width="70dp"
                         android:gravity="center"
                         android:padding="3dp"
                         android:text="좋음"
                         android:textColor="#000000" />
                     <TextView
+                        android:id="@+id/man_3_18"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:gravity="center"
@@ -340,6 +362,7 @@
                         android:text="62-65"
                         android:textColor="#000000" />
                     <TextView
+                        android:id="@+id/man_3_26"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:gravity="center"
@@ -347,6 +370,7 @@
                         android:text="62-65"
                         android:textColor="#000000" />
                     <TextView
+                        android:id="@+id/man_3_36"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:gravity="center"
@@ -354,6 +378,7 @@
                         android:text="63-66"
                         android:textColor="#000000" />
                     <TextView
+                        android:id="@+id/man_3_46"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:gravity="center"
@@ -361,6 +386,7 @@
                         android:text="64-67"
                         android:textColor="#000000" />
                     <TextView
+                        android:id="@+id/man_3_56"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:gravity="center"
@@ -368,6 +394,7 @@
                         android:text="62-67"
                         android:textColor="#000000" />
                     <TextView
+                        android:id="@+id/man_3_65"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:gravity="center"
@@ -380,6 +407,7 @@
                 <TableRow>
 
                     <TextView
+                        android:id="@+id/man_health_aboveAvg"
                         android:layout_width="70dp"
                         android:gravity="center"
                         android:padding="3dp"
@@ -387,6 +415,7 @@
                         android:textColor="#000000" />
 
                     <TextView
+                        android:id="@+id/man_4_18"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:gravity="center"
@@ -394,6 +423,7 @@
                         android:text="66-69"
                         android:textColor="#000000" />
                     <TextView
+                        android:id="@+id/man_4_26"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:gravity="center"
@@ -401,6 +431,7 @@
                         android:text="66-70"
                         android:textColor="#000000" />
                     <TextView
+                        android:id="@+id/man_4_36"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:gravity="center"
@@ -408,6 +439,7 @@
                         android:text="67-70"
                         android:textColor="#000000" />
                     <TextView
+                        android:id="@+id/man_4_46"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:gravity="center"
@@ -415,6 +447,7 @@
                         android:text="68-71"
                         android:textColor="#000000" />
                     <TextView
+                        android:id="@+id/man_4_56"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:gravity="center"
@@ -422,6 +455,7 @@
                         android:text="68-71"
                         android:textColor="#000000" />
                     <TextView
+                        android:id="@+id/man_4_65"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:gravity="center"
@@ -434,12 +468,14 @@
                 <TableRow>
 
                     <TextView
+                        android:id="@+id/man_health_avg"
                         android:layout_width="70dp"
                         android:gravity="center"
                         android:padding="3dp"
                         android:text="평균"
                         android:textColor="#000000" />
                     <TextView
+                        android:id="@+id/man_5_18"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:gravity="center"
@@ -447,6 +483,7 @@
                         android:text="70-73"
                         android:textColor="#000000" />
                     <TextView
+                        android:id="@+id/man_5_26"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:gravity="center"
@@ -454,6 +491,7 @@
                         android:text="71-74"
                         android:textColor="#000000" />
                     <TextView
+                        android:id="@+id/man_5_36"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:gravity="center"
@@ -461,6 +499,7 @@
                         android:text="71-75"
                         android:textColor="#000000" />
                     <TextView
+                        android:id="@+id/man_5_46"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:gravity="center"
@@ -468,6 +507,7 @@
                         android:text="72-76"
                         android:textColor="#000000" />
                     <TextView
+                        android:id="@+id/man_5_56"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:gravity="center"
@@ -475,6 +515,7 @@
                         android:text="72-75"
                         android:textColor="#000000" />
                     <TextView
+                        android:id="@+id/man_5_65"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:gravity="center"
@@ -487,6 +528,7 @@
                 <TableRow>
 
                     <TextView
+                        android:id="@+id/man_health_belowAvg"
                         android:layout_width="70dp"
                         android:gravity="center"
                         android:padding="3dp"
@@ -494,6 +536,7 @@
                         android:textColor="#000000" />
 
                     <TextView
+                        android:id="@+id/man_6_18"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:gravity="center"
@@ -501,6 +544,7 @@
                         android:text="74-81"
                         android:textColor="#000000" />
                     <TextView
+                        android:id="@+id/man_6_26"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:gravity="center"
@@ -508,6 +552,7 @@
                         android:text="75-81"
                         android:textColor="#000000" />
                     <TextView
+                        android:id="@+id/man_6_36"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:gravity="center"
@@ -515,6 +560,7 @@
                         android:text="76-82"
                         android:textColor="#000000" />
                     <TextView
+                        android:id="@+id/man_6_46"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:gravity="center"
@@ -522,6 +568,7 @@
                         android:text="77-83"
                         android:textColor="#000000" />
                     <TextView
+                        android:id="@+id/man_6_56"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:gravity="center"
@@ -529,6 +576,7 @@
                         android:text="76-81"
                         android:textColor="#000000" />
                     <TextView
+                        android:id="@+id/man_6_65"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:gravity="center"
@@ -541,6 +589,7 @@
                 <TableRow>
 
                     <TextView
+                        android:id="@+id/man_health_bad"
                         android:layout_width="70dp"
                         android:gravity="center"
                         android:padding="3dp"
@@ -548,6 +597,7 @@
                         android:textColor="#000000" />
 
                     <TextView
+                        android:id="@+id/man_7_18"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:gravity="center"
@@ -555,6 +605,7 @@
                         android:text="82+"
                         android:textColor="#000000" />
                     <TextView
+                        android:id="@+id/man_7_26"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:gravity="center"
@@ -562,6 +613,7 @@
                         android:text="82+"
                         android:textColor="#000000" />
                     <TextView
+                        android:id="@+id/man_7_36"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:gravity="center"
@@ -569,6 +621,7 @@
                         android:text="83+"
                         android:textColor="#000000" />
                     <TextView
+                        android:id="@+id/man_7_46"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:gravity="center"
@@ -576,6 +629,7 @@
                         android:text="84+"
                         android:textColor="#000000" />
                     <TextView
+                        android:id="@+id/man_7_56"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:gravity="center"
@@ -583,6 +637,7 @@
                         android:text="82+"
                         android:textColor="#000000" />
                     <TextView
+                        android:id="@+id/man_7_65"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:gravity="center"
@@ -638,6 +693,7 @@
                 <TableRow>
 
                     <TextView
+                        android:id="@+id/woman_age_18"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:text="18-25"
@@ -645,6 +701,7 @@
                         android:textColor="#000000" />
 
                     <TextView
+                        android:id="@+id/woman_age_26"
                         android:layout_width="0dp"
                         android:gravity="center"
                         android:layout_weight="1"
@@ -652,6 +709,7 @@
                         android:textColor="#000000" />
 
                     <TextView
+                        android:id="@+id/woman_age_36"
                         android:layout_width="0dp"
                         android:gravity="center"
                         android:layout_weight="1"
@@ -659,6 +717,7 @@
                         android:textColor="#000000" />
 
                     <TextView
+                        android:id="@+id/woman_age_46"
                         android:layout_width="0dp"
                         android:gravity="center"
                         android:layout_weight="1"
@@ -666,6 +725,7 @@
                         android:textColor="#000000" />
 
                     <TextView
+                        android:id="@+id/woman_age_56"
                         android:layout_width="0dp"
                         android:gravity="center"
                         android:layout_weight="1"
@@ -673,6 +733,7 @@
                         android:textColor="#000000" />
 
                     <TextView
+                        android:id="@+id/woman_age_65"
                         android:layout_width="0dp"
                         android:gravity="center"
                         android:layout_weight="1"
@@ -700,6 +761,7 @@
                 <TableRow>
 
                     <TextView
+                        android:id="@+id/woman_health_athlete"
                         android:layout_width="70dp"
                         android:layout_marginTop="2dp"
                         android:gravity="center"
@@ -708,6 +770,7 @@
                         android:textColor="#000000" />
 
                     <TextView
+                        android:id="@+id/woman_1_18"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:gravity="center"
@@ -715,6 +778,7 @@
                         android:text="54-60"
                         android:textColor="#000000" />
                     <TextView
+                        android:id="@+id/woman_1_26"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:gravity="center"
@@ -722,6 +786,7 @@
                         android:text="54-59"
                         android:textColor="#000000" />
                     <TextView
+                        android:id="@+id/woman_1_36"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:gravity="center"
@@ -729,6 +794,7 @@
                         android:text="54-59"
                         android:textColor="#000000" />
                     <TextView
+                        android:id="@+id/woman_1_46"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:gravity="center"
@@ -736,6 +802,7 @@
                         android:text="54-60"
                         android:textColor="#000000" />
                     <TextView
+                        android:id="@+id/woman_1_56"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:gravity="center"
@@ -743,6 +810,7 @@
                         android:text="54-59"
                         android:textColor="#000000" />
                     <TextView
+                        android:id="@+id/woman_1_65"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:gravity="center"
@@ -755,12 +823,14 @@
                 <TableRow>
 
                     <TextView
+                        android:id="@+id/woman_health_verygood"
                         android:layout_width="70dp"
                         android:gravity="center"
                         android:padding="3dp"
                         android:text="뛰어남"
                         android:textColor="#000000" />
                     <TextView
+                        android:id="@+id/woman_2_18"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:gravity="center"
@@ -768,6 +838,7 @@
                         android:text="61-65"
                         android:textColor="#000000" />
                     <TextView
+                        android:id="@+id/woman_2_26"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:gravity="center"
@@ -775,6 +846,7 @@
                         android:text="60-64"
                         android:textColor="#000000" />
                     <TextView
+                        android:id="@+id/woman_2_36"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:gravity="center"
@@ -782,6 +854,7 @@
                         android:text="60-64"
                         android:textColor="#000000" />
                     <TextView
+                        android:id="@+id/woman_2_46"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:gravity="center"
@@ -789,6 +862,7 @@
                         android:text="61-65"
                         android:textColor="#000000" />
                     <TextView
+                        android:id="@+id/woman_2_56"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:gravity="center"
@@ -796,6 +870,7 @@
                         android:text="60-64"
                         android:textColor="#000000" />
                     <TextView
+                        android:id="@+id/woman_2_65"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:gravity="center"
@@ -808,12 +883,14 @@
                 <TableRow>
 
                     <TextView
+                        android:id="@+id/woman_health_good"
                         android:layout_width="70dp"
                         android:gravity="center"
                         android:padding="3dp"
                         android:text="좋음"
                         android:textColor="#000000" />
                     <TextView
+                        android:id="@+id/woman_3_18"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:gravity="center"
@@ -821,6 +898,7 @@
                         android:text="66-69"
                         android:textColor="#000000" />
                     <TextView
+                        android:id="@+id/woman_3_26"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:gravity="center"
@@ -828,6 +906,7 @@
                         android:text="65-68"
                         android:textColor="#000000" />
                     <TextView
+                        android:id="@+id/woman_3_36"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:gravity="center"
@@ -835,6 +914,7 @@
                         android:text="65-69"
                         android:textColor="#000000" />
                     <TextView
+                        android:id="@+id/woman_3_46"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:gravity="center"
@@ -842,6 +922,7 @@
                         android:text="66-69"
                         android:textColor="#000000" />
                     <TextView
+                        android:id="@+id/woman_3_56"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:gravity="center"
@@ -849,6 +930,7 @@
                         android:text="65-68"
                         android:textColor="#000000" />
                     <TextView
+                        android:id="@+id/woman_3_65"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:gravity="center"
@@ -861,6 +943,7 @@
                 <TableRow>
 
                     <TextView
+                        android:id="@+id/woman_health_aboveAvg"
                         android:layout_width="70dp"
                         android:gravity="center"
                         android:padding="3dp"
@@ -868,6 +951,7 @@
                         android:textColor="#000000" />
 
                     <TextView
+                        android:id="@+id/woman_4_18"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:gravity="center"
@@ -875,6 +959,7 @@
                         android:text="70-73"
                         android:textColor="#000000" />
                     <TextView
+                        android:id="@+id/woman_4_26"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:gravity="center"
@@ -882,6 +967,7 @@
                         android:text="69-72"
                         android:textColor="#000000" />
                     <TextView
+                        android:id="@+id/woman_4_36"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:gravity="center"
@@ -889,6 +975,7 @@
                         android:text="70-73"
                         android:textColor="#000000" />
                     <TextView
+                        android:id="@+id/woman_4_46"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:gravity="center"
@@ -896,6 +983,7 @@
                         android:text="70-73"
                         android:textColor="#000000" />
                     <TextView
+                        android:id="@+id/woman_4_56"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:gravity="center"
@@ -903,6 +991,7 @@
                         android:text="69-73"
                         android:textColor="#000000" />
                     <TextView
+                        android:id="@+id/woman_4_65"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:gravity="center"
@@ -915,12 +1004,14 @@
                 <TableRow>
 
                     <TextView
+                        android:id="@+id/woman_health_avg"
                         android:layout_width="70dp"
                         android:gravity="center"
                         android:padding="3dp"
                         android:text="평균"
                         android:textColor="#000000" />
                     <TextView
+                        android:id="@+id/woman_5_18"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:gravity="center"
@@ -928,6 +1019,7 @@
                         android:text="74-78"
                         android:textColor="#000000" />
                     <TextView
+                        android:id="@+id/woman_5_26"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:gravity="center"
@@ -935,6 +1027,7 @@
                         android:text="73-76"
                         android:textColor="#000000" />
                     <TextView
+                        android:id="@+id/woman_5_36"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:gravity="center"
@@ -942,6 +1035,7 @@
                         android:text="74-78"
                         android:textColor="#000000" />
                     <TextView
+                        android:id="@+id/woman_5_46"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:gravity="center"
@@ -949,6 +1043,7 @@
                         android:text="74-77"
                         android:textColor="#000000" />
                     <TextView
+                        android:id="@+id/woman_5_56"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:gravity="center"
@@ -956,6 +1051,7 @@
                         android:text="74-77"
                         android:textColor="#000000" />
                     <TextView
+                        android:id="@+id/woman_5_65"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:gravity="center"
@@ -968,6 +1064,7 @@
                 <TableRow>
 
                     <TextView
+                        android:id="@+id/woman_health_belowAvg"
                         android:layout_width="70dp"
                         android:gravity="center"
                         android:padding="3dp"
@@ -975,6 +1072,7 @@
                         android:textColor="#000000" />
 
                     <TextView
+                        android:id="@+id/woman_6_18"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:gravity="center"
@@ -982,6 +1080,7 @@
                         android:text="79-84"
                         android:textColor="#000000" />
                     <TextView
+                        android:id="@+id/woman_6_26"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:gravity="center"
@@ -989,6 +1088,7 @@
                         android:text="77-82"
                         android:textColor="#000000" />
                     <TextView
+                        android:id="@+id/woman_6_36"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:gravity="center"
@@ -996,6 +1096,7 @@
                         android:text="79-84"
                         android:textColor="#000000" />
                     <TextView
+                        android:id="@+id/woman_6_46"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:gravity="center"
@@ -1003,6 +1104,7 @@
                         android:text="78-83"
                         android:textColor="#000000" />
                     <TextView
+                        android:id="@+id/woman_6_56"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:gravity="center"
@@ -1010,6 +1112,7 @@
                         android:text="78-83"
                         android:textColor="#000000" />
                     <TextView
+                        android:id="@+id/woman_6_65"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:gravity="center"
@@ -1022,6 +1125,7 @@
                 <TableRow>
 
                     <TextView
+                        android:id="@+id/woman_health_bad"
                         android:layout_width="70dp"
                         android:gravity="center"
                         android:padding="3dp"
@@ -1029,6 +1133,7 @@
                         android:textColor="#000000" />
 
                     <TextView
+                        android:id="@+id/woman_7_18"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:gravity="center"
@@ -1036,6 +1141,7 @@
                         android:text="85+"
                         android:textColor="#000000" />
                     <TextView
+                        android:id="@+id/woman_7_26"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:gravity="center"
@@ -1043,6 +1149,7 @@
                         android:text="83+"
                         android:textColor="#000000" />
                     <TextView
+                        android:id="@+id/woman_7_36"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:gravity="center"
@@ -1050,6 +1157,7 @@
                         android:text="85+"
                         android:textColor="#000000" />
                     <TextView
+                        android:id="@+id/woman_7_46"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:gravity="center"
@@ -1057,6 +1165,7 @@
                         android:text="84+"
                         android:textColor="#000000" />
                     <TextView
+                        android:id="@+id/woman_7_56"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:gravity="center"
@@ -1064,6 +1173,7 @@
                         android:text="84+"
                         android:textColor="#000000" />
                     <TextView
+                        android:id="@+id/woman_7_65"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:gravity="center"
@@ -1075,25 +1185,4 @@
             </TableLayout>
         </LinearLayout>
     </RelativeLayout>
-    <!--<RelativeLayout-->
-    <!--android:id="@+id/imageLayout"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="210dp"-->
-    <!--android:layout_below="@+id/healthLayout">-->
-
-    <!--<ImageView-->
-    <!--android:id="@+id/man_img"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="210dp"-->
-    <!--android:src="@drawable/health_man_img" />-->
-
-    <!--<ImageView-->
-    <!--android:id="@+id/woman_img"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="210dp"-->
-    <!--android:src="@drawable/health_woman_img" />-->
-
-    <!--</RelativeLayout>-->
-
-
 </RelativeLayout>
