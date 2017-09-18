@@ -15,15 +15,29 @@ public class Phrase implements Model {
     }
     
     @Override
+	public void insert(String arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+    
+    @Override
     public void init() {
-        connector.insertQuery(collection, new Document("id", ""));
+    	
+    	
         connector.insertQuery(collection, new Document("name", ""));
         connector.insertQuery(collection, new Document("description", ""));
     }
 
-    @Override
-    public void insert(String name) {
-        connector.insertQuery(collection, new Document("name", name));
+    public void insertAll(String name, String description) {
+    	Document doc = new Document();
+    	doc.put("name", name);
+    	doc.put("description", description);
+    	
+        connector.insertQuery(collection, doc);
+    }
+    
+    public String findAll() {
+    	return connector.findAllQuery(collection);
     }
 
     @Override
