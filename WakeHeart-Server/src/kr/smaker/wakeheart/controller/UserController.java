@@ -16,11 +16,10 @@ public class UserController {
 		user.connect();
 		String id = req.getParameter("id");
 		String password = req.getParameter("password");
-		String nickname = req.getParameter("nickname");
 		int gender = Integer.parseInt(req.getParameter("gender"));
 		int age = Integer.parseInt(req.getParameter("age"));
 
-		user.insertAll(id, password, nickname, gender, age);
+		user.insertAll(id, password, gender, age);
 
 		HashMap<String, Object> data = new HashMap<String, Object>();
 
@@ -69,7 +68,29 @@ public class UserController {
 
 	@Route(route = "/API/logout", method = Route.RouteMethod.POST)
 	public static void logout(Request req, Response res) {
-		res.expireCookie("user");
+		HashMap<String, Object> data = new HashMap<String, Object>();
+
+		try {
+			res.expireCookie("user");
+			data.put("success", true);
+			res.json(data);
+		} catch (Exception e) {
+			data.put("success", false);
+			data.put("error", e.toString());
+			res.json(data);
+		}
+		
+		res.end();
+	}
+	
+	
+	@Route(route = "/API/find/user", method = Route.RouteMethod.GET)
+	public static void findUser(Request req, Response res) {
+		user.connect();
+		
+		HashMap<String, Object> data = new HashMap<String, Object>();
+		data.put("items", user.findAll());
+		res.json(data);
 		res.end();
 	}
 
