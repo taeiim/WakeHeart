@@ -11,7 +11,7 @@
   * id: String
   * Password: String
 * 동작
-  * 로그인 성공 시, 쿠키 (키값 "user")에 사용자 아이디를 저장한다.
+  * 로그인 성공 시 메인페이지로 이동하며, 쿠키 (키값 "user")에 사용자 아이디를 저장한다.
 * 반환값
   * `{"success": false}` - 실패
   * `{"error": e.printStackTrace(), "success": false} `- 예외가 발생할 경우 실패
@@ -35,7 +35,7 @@
     * 1: 여자
   * age: int
 * 동작
-  * 로그인 성공 시, 쿠키 (키값 "user")에 사용자 아이디를 저장한다.
+  * 회원가입 성공 시 메인페이지로 이동하며,  쿠키 (키값 "user")에 사용자 아이디를 저장한다.
 * 반환값
   * `{"error": e.printStackTrace(), "success": false} `- 예외가 발생할 경우 실패
   * `{"success": true}` - 성공
