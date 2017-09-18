@@ -19,13 +19,17 @@ public class User implements Model {
 		connector.insertQuery(collection, new Document("index", ""));
 		connector.insertQuery(collection, new Document("id", ""));
 		connector.insertQuery(collection, new Document("password", ""));
-		connector.insertQuery(collection, new Document("nickname", ""));
 	}
 
 	
 	public String find(String fleid, String data) {
         return connector.findQuery(collection, new Document(fleid, data));
 	}
+	
+	public String findAll() {
+    	return connector.findAllQuery(collection).toString();
+    }
+
 	
 	@Override
 	public String find(String id) {
@@ -58,12 +62,11 @@ public class User implements Model {
 		
 	}
 
-	public void insertAll(String id, String password, String nickname, int gender, int age) {
+	public void insertAll(String id, String password, int gender, int age) {
     	Document document = new Document();
 
     	document.put("id", id);
     	document.put("password", password);
-    	document.put("nickname", nickname);
     	document.put("gender", gender);
     	document.put("age", age);
     	
