@@ -1,12 +1,14 @@
 package com.dsm.wakeheart;
 
 import com.dsm.wakeheart.Model.UserDTO;
+import com.google.gson.JsonObject;
 
 import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
 
@@ -15,9 +17,9 @@ import retrofit2.http.POST;
  */
 
 public interface RestAPI {
+    @FormUrlEncoded
     @POST("/API/register")
-//    Call<Boolean> signUp(@Field("id") String id ,@Field("password") String password, @Field("gender") int gender, @Field("age") int age);    Call<Boolean> signUp(@Field("id") String id ,@Field("password") String password, @Field("gender") int gender, @Field("age") int age);
-    Call<Boolean> signUp(@Body String id, String password, int gender, int age);
+    Call<JsonObject> signUp(@Field("id") String id ,@Field("password") String password, @Field("gender") int gender, @Field("age") int age);
 
 
 }

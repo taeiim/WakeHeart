@@ -15,7 +15,7 @@ public class RestRequestHelper {
             .addConverterFactory(GsonConverterFactory.create())
             .build();
 
-    public RestAPI getRetrofit(){
-        return this.retrofit.create(RestAPI.class);
+    public static RestAPI getRetrofit(){
+        return retrofit.create(RestAPI.class);
     }
 }

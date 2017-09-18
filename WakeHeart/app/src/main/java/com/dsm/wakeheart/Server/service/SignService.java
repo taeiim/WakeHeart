@@ -5,6 +5,7 @@ import android.content.Context;
 import com.dsm.wakeheart.Server.core.APIAdapter;
 import com.dsm.wakeheart.Server.resource.APIUrl;
 import com.dsm.wakeheart.Server.response.ResData;
+import com.google.gson.JsonObject;
 
 import retrofit2.Call;
 import retrofit2.http.Field;
@@ -34,8 +35,8 @@ public class SignService extends APIAdapter{
          */
         @FormUrlEncoded
         @POST(APIUrl.SIGN_UP_URL)
-        Call<ResData> up(
-                @Field("id") String id,
+        Call<JsonObject> up(
+                @Field("id") String id,   // 변수 이름 , 보낼 변수
                 @Field("pw") String pw,
                 @Field("gender") int gender,
                 @Field("age") int age
