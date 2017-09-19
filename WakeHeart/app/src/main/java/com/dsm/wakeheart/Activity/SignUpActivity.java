@@ -52,6 +52,17 @@ public class SignUpActivity extends AppCompatActivity {
 
         final RestAPI restAPI = new RestRequestHelper().getRetrofit();
 
+        // 성별 체크 한 값 가져와서 gender에 저장 (0:남자, 1:여자)
+        genderButtonGroup.setOnClickedButtonListener(new RadioRealButtonGroup.OnClickedButtonListener() {
+            @Override
+            public void onClickedButton(RadioRealButton button, int position) {
+                        if(position == 0)  {
+                            gender = 0;
+                        }else if(position == 1){
+                            gender = 1;
+                        }
+            }
+        });
         signupBtn.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -62,21 +73,19 @@ public class SignUpActivity extends AppCompatActivity {
                 String pwCheck = pwCheckEditText.getText().toString();
 
 
-                // 성별 체크 한 값 가져와서 gender에 저장 (0:남자, 1:여자)
-                genderButtonGroup.setOnClickedButtonListener(new RadioRealButtonGroup.OnClickedButtonListener() {
-                    @Override
-                    public void onClickedButton(RadioRealButton button, int position) {
-                        if(position == 0)  {
-                            gender = 0;
-                        }else if(position == 1){
-                            gender = 1;
-                        }
-                    }
-                });
 
-                //edittext에 id나 pw칸이 비어있으면 토스트 띄워줌.
-                if(id==null || id.length() ==0 || pw == null || pw.length()==0 || pwCheck == null || pwCheck.length() ==0 || gender==2){
-                    Toast.makeText(SignUpActivity.this,"다시 작성해주세요!",Toast.LENGTH_SHORT).show();
+                //edittext에 id나 pw,pwcheck가 비어있거나 성별이 선택되지 않았을때 토스트 띄워줌.
+                if(id==null || id.length() ==0 ){
+                    Toast.makeText(SignUpActivity.this,"아이디가 없어요!",Toast.LENGTH_SHORT).show();
+                    return;
+                }else if(pw == null || pw.length()==0){
+                    Toast.makeText(SignUpActivity.this,"비밀번호가 비었어요!",Toast.LENGTH_SHORT).show();
+                    return;
+                }else if(pwCheck == null || pwCheck.length() ==0){
+                    Toast.makeText(SignUpActivity.this,"비밀번호를 한번 더 체크해주세요!",Toast.LENGTH_SHORT).show();
+                    return;
+                }else if(gender==2){
+                    Toast.makeText(SignUpActivity.this,"성별을 선택해 주세요 !",Toast.LENGTH_SHORT).show();
                     return;
                 }
 
@@ -92,10 +101,14 @@ public class SignUpActivity extends AppCompatActivity {
                             .build();
                     RestAPI restAPI = builder.create(RestAPI.class);
                     Call<JsonObject> call = restAPI.signUp(id,pw,gender,age);
+
+                    Intent intent = new Intent(SignUpActivity.this,SignUpSuccessActivity.class);
+                    startActivity(intent);
+
                     call.enqueue(new Callback<JsonObject>() {
                         @Override
                         public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
-                            
+
                         }
 
                         @Override

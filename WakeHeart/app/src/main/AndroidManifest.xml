@@ -30,6 +30,7 @@
         <activity android:name=".Activity.MusicManageActivity"/>
         <activity android:name=".Activity.AccountManageActivity"/>
         <activity android:name=".Activity.ChangePasswordActivity"/>
+        <activity android:name=".Activity.SignUpSuccessActivity"></activity>
     </application>
 
 
