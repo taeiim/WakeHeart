@@ -34,7 +34,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 
 public class SignUpActivity extends AppCompatActivity {
-    int gender;
+    int gender=2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,11 +61,6 @@ public class SignUpActivity extends AppCompatActivity {
                 String pw = pwEditText.getText().toString();
                 String pwCheck = pwCheckEditText.getText().toString();
 
-                //edittext에 id나 pw칸이 비어있으면 토스트 띄워줌.
-                if(id==null || id.length() ==0 || pw == null || pw.length()==0 || pwCheck == null || pwCheck.length() ==0){
-                    Toast.makeText(SignUpActivity.this,"다시 작성해주세요!",Toast.LENGTH_SHORT).show();
-                    return;
-                }
 
                 // 성별 체크 한 값 가져와서 gender에 저장 (0:남자, 1:여자)
                 genderButtonGroup.setOnClickedButtonListener(new RadioRealButtonGroup.OnClickedButtonListener() {
@@ -78,11 +73,18 @@ public class SignUpActivity extends AppCompatActivity {
                         }
                     }
                 });
+
+                //edittext에 id나 pw칸이 비어있으면 토스트 띄워줌.
+                if(id==null || id.length() ==0 || pw == null || pw.length()==0 || pwCheck == null || pwCheck.length() ==0 || gender==2){
+                    Toast.makeText(SignUpActivity.this,"다시 작성해주세요!",Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
                 //나이 값 age 에 저장
                 int age = agePick.getValue();
 
                 //비밀번호와 비밀번호 체크 값이 같으면
-                if(pw==pwCheck){
+                if(pw.equals(pwCheck)){
                     //Retrofit
                     Retrofit builder = new Retrofit.Builder()
                             .baseUrl(APIUrl.API_BASE_URL)
@@ -93,7 +95,7 @@ public class SignUpActivity extends AppCompatActivity {
                     call.enqueue(new Callback<JsonObject>() {
                         @Override
                         public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
-
+                            
                         }
 
                         @Override
@@ -101,8 +103,9 @@ public class SignUpActivity extends AppCompatActivity {
 
                         }
                     });
-                } else if(pw != pwCheck){
+                } else{
                     Toast.makeText(SignUpActivity.this,"비밀번호와 비밀번호 체크 값이 다릅니다.", Toast.LENGTH_SHORT).show();
+                    return;
                 }
 
             }
