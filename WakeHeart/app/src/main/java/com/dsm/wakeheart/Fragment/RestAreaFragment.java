@@ -1,132 +1,60 @@
 package com.dsm.wakeheart.Fragment;
 
-import android.app.Service;
-import android.content.Intent;
-import android.graphics.Rect;
-import android.graphics.drawable.Drawable;
-import android.location.LocationManager;
-import android.os.Bundle;
-import android.provider.Settings;
+import android.content.Context;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
+import android.support.v4.app.FragmentActivity;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
-import android.widget.Toast;
-
-import com.dsm.wakeheart.GPSinfo;
-import com.nhn.android.maps.NMapActivity;
-import com.nhn.android.maps.NMapCompassManager;
-import com.nhn.android.maps.NMapContext;
-import com.nhn.android.maps.NMapController;
-import com.nhn.android.maps.NMapLocationManager;
-import com.nhn.android.maps.NMapOverlay;
-import com.nhn.android.maps.NMapOverlayItem;
-import com.nhn.android.maps.NMapView;
 
 import com.dsm.wakeheart.R;
-import com.nhn.android.maps.maplib.NGeoPoint;
-import com.nhn.android.maps.nmapmodel.NMapError;
-import com.nhn.android.maps.nmapmodel.NMapPlacemark;
-import com.nhn.android.mapviewer.overlay.NMapCalloutOverlay;
-import com.nhn.android.mapviewer.overlay.NMapMyLocationOverlay;
-import com.nhn.android.mapviewer.overlay.NMapOverlayManager;
-import com.nhn.android.mapviewer.overlay.NMapPOIdataOverlay;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 
-/**
- * Created by parktaeim on 2017. 9. 5..
- */
+public class RestAreaFragment extends Fragment implements OnMapReadyCallback {
 
-public class RestAreaFragment extends Fragment{
-    private NMapContext nMapContext;
-    private static final String CLIENT_ID = "oPDj1y9Xk6B_IakJkQ0J";
+    private GoogleMap mMap;
 
-    private GPSinfo gps;
-    NMapView mapView;
-
-    NMapController mMapController = null;
-
-    NMapMyLocationOverlay.ResourceProvider resourceProvider = null;
-    NMapOverlayManager mMapOverlayManager;
-    NMapPOIdataOverlay.OnStateChangeListener onPOIdataStateChangeListener = null;
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_helper_restarea,container,false);
+        SupportMapFragment mapFragment = ((SupportMapFragment)getChildFragmentManager().findFragmentById(R.id.mapView));
+        mapFragment.getMapAsync(this);
 
         return rootView;
     }
 
+
+    /**
+     * Manipulates the map once available.
+     * This callback is triggered when the map is ready to be used.
+     * This is where we can add markers or lines, add listeners or move the camera. In this case,
+     * we just add a marker near Sydney, Australia.
+     * If Google Play services is not installed on the device, the user will be prompted to install
+     * it inside the SupportMapFragment. This method will only be triggered once the user has
+     * installed Google Play services and returned to the app.
+     */
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        nMapContext = new NMapContext(super.getActivity());
-        nMapContext.onCreate();
-    }
+    public void onMapReady(GoogleMap googleMap) {
+        mMap = googleMap;
 
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        mapView = (NMapView) getView().findViewById(R.id.mapView);
-        mapView.setClientId(CLIENT_ID);
-        mapView.setClickable(true);
-        mapView.setEnabled(true);
-        mapView.setFocusable(true);
-        mapView.setFocusableInTouchMode(true);
-        mapView.requestFocus();
-        nMapContext.setupMapView(mapView);
-        currentGPSMarker();
-    }
-
-    private void currentGPSMarker() {
-        gps = new GPSinfo(getActivity());
-        if(gps.isGetLocation()){
-            double latitude = gps.getLatitude();   // 위도
-            double longitude = gps.getLongitude(); // 경도
-
-            System.out.println("위도 : "+latitude+"  경도: "+longitude);
-        }else{
-            gps.showSettingsAlert();
-        }
-    }
-
-
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        nMapContext.onStart();
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        nMapContext.onResume();
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        nMapContext.onPause();
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        nMapContext.onStop();
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-    }
-
-    @Override
-    public void onDestroy() {
-        nMapContext.onDestroy();
-        super.onDestroy();
+        //Latitude(위도), Longitude(경도)
+        LatLng latLng = new LatLng(37, 126);
+        MarkerOptions marker = new MarkerOptions().position(latLng);
+        mMap.addMarker(marker);
+        //mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
     }
 }
