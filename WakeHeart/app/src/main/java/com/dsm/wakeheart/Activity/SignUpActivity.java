@@ -16,7 +16,6 @@ import com.dsm.wakeheart.R;
 import com.dsm.wakeheart.RestAPI;
 import com.dsm.wakeheart.RestRequestHelper;
 import com.dsm.wakeheart.Server.resource.APIUrl;
-import com.dsm.wakeheart.Server.response.ResData;
 import com.dsm.wakeheart.Server.service.SignService;
 import com.google.gson.JsonObject;
 
@@ -43,6 +42,7 @@ public class SignUpActivity extends AppCompatActivity {
 
         final EditText idEditText = (EditText) findViewById(R.id.idEditText);
         final EditText pwEditText = (EditText) findViewById(R.id.pwEditText);
+        final EditText pwCheckEditText = (EditText) findViewById(R.id.pwCheckEditText);
         final RadioRealButtonGroup genderButtonGroup = (RadioRealButtonGroup) findViewById(R.id.genderBtnGroup);
         RadioRealButton genderMan = (RadioRealButton) findViewById(R.id.genderManBtn);
         RadioRealButton genderWoman = (RadioRealButton) findViewById(R.id.genderWomanBtn);
@@ -56,9 +56,18 @@ public class SignUpActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View view) {
+                //edittext에 작성한 id,pw,pwcheck 값 가져오기
                 String id = idEditText.getText().toString();
                 String pw = pwEditText.getText().toString();
+                String pwCheck = pwCheckEditText.getText().toString();
 
+                //edittext에 id나 pw칸이 비어있으면 토스트 띄워줌.
+                if(id==null || id.length() ==0 || pw == null || pw.length()==0 || pwCheck == null || pwCheck.length() ==0){
+                    Toast.makeText(SignUpActivity.this,"다시 작성해주세요!",Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                // 성별 체크 한 값 가져와서 gender에 저장 (0:남자, 1:여자)
                 genderButtonGroup.setOnClickedButtonListener(new RadioRealButtonGroup.OnClickedButtonListener() {
                     @Override
                     public void onClickedButton(RadioRealButton button, int position) {
@@ -69,24 +78,33 @@ public class SignUpActivity extends AppCompatActivity {
                         }
                     }
                 });
+                //나이 값 age 에 저장
                 int age = agePick.getValue();
-                Retrofit builder = new Retrofit.Builder()
-                        .baseUrl(APIUrl.API_BASE_URL)
-                        .addConverterFactory(GsonConverterFactory.create())
-                        .build();
-                RestAPI restAPI = builder.create(RestAPI.class);
-                Call<JsonObject> call = restAPI.signUp(id,pw,gender,age);
-                call.enqueue(new Callback<JsonObject>() {
-                    @Override
-                    public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
 
-                    }
+                //비밀번호와 비밀번호 체크 값이 같으면
+                if(pw==pwCheck){
+                    //Retrofit
+                    Retrofit builder = new Retrofit.Builder()
+                            .baseUrl(APIUrl.API_BASE_URL)
+                            .addConverterFactory(GsonConverterFactory.create())
+                            .build();
+                    RestAPI restAPI = builder.create(RestAPI.class);
+                    Call<JsonObject> call = restAPI.signUp(id,pw,gender,age);
+                    call.enqueue(new Callback<JsonObject>() {
+                        @Override
+                        public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
 
-                    @Override
-                    public void onFailure(Call<JsonObject> call, Throwable t) {
+                        }
 
-                    }
-                });
+                        @Override
+                        public void onFailure(Call<JsonObject> call, Throwable t) {
+
+                        }
+                    });
+                } else if(pw != pwCheck){
+                    Toast.makeText(SignUpActivity.this,"비밀번호와 비밀번호 체크 값이 다릅니다.", Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
 

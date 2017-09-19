@@ -4,7 +4,6 @@ import android.content.Context;
 
 import com.dsm.wakeheart.Server.core.APIAdapter;
 import com.dsm.wakeheart.Server.resource.APIUrl;
-import com.dsm.wakeheart.Server.response.ResData;
 import com.google.gson.JsonObject;
 
 import retrofit2.Call;
@@ -51,7 +50,7 @@ public class SignService extends APIAdapter{
          */
         @FormUrlEncoded
         @POST(APIUrl.SIGN_IN_URL)
-        Call<ResData> in(
+        Call<Boolean> in(
                 @Field("id") String id,
                 @Field("pw") String pw
         );
