@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
@@ -21,25 +23,234 @@
                 android:id="@+id/back_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/back_icon"
+                android:layout_alignParentStart="true"
                 android:layout_centerVertical="true"
-                android:layout_alignParentStart="true"/>
+                android:src="@drawable/back_icon" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginLeft="20dp"
+                android:layout_toRightOf="@+id/back_icon"
                 android:text="내 정보"
                 android:textColor="@color/colorAccent"
-                android:layout_toRightOf="@+id/back_icon"
                 android:textSize="16dp"
-                android:layout_marginLeft="20dp"
-                android:layout_centerInParent="true"
-                android:textStyle="bold"/>
+                android:textStyle="bold" />
         </RelativeLayout>
     </android.support.v7.widget.Toolbar>
 
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/infoView"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="아이디"/>
-</LinearLayout>
+        android:layout_below="@+id/toolbar"
+        android:orientation="vertical"
+        android:padding="30dp">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="아이디 : "
+                android:textColor="#000000"
+                android:textSize="16dp" />
+
+            <TextView
+                android:id="@+id/idTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="abc123"
+                android:textColor="#000000"
+                android:textSize="16dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="나이 : "
+                android:textColor="#000000"
+                android:textSize="16dp" />
+
+            <TextView
+                android:id="@+id/ageTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="18"
+                android:textColor="#000000"
+                android:textSize="16dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="성별 : "
+                android:textColor="#000000"
+                android:textSize="16dp" />
+
+            <TextView
+                android:id="@+id/genderTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="여자"
+                android:textColor="#000000"
+                android:textSize="16dp" />
+
+        </LinearLayout>
+
+        <info.hoang8f.widget.FButton
+            android:id="@+id/changeButton"
+            android:layout_width="150dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="40dp"
+            android:text="수정하기"
+            app:buttonColor="#F2F2F2"
+            app:shadowColor="#D8D8D8"
+            app:shadowHeight="2dp" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/changeInfoView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/toolbar"
+        android:padding="30dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="아이디 : "
+                android:textColor="#000000"
+                android:textSize="16dp" />
+
+            <TextView
+                android:id="@+id/idTextView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="abc123"
+                android:textColor="#000000"
+                android:textSize="16dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="나이 : "
+                android:textColor="#000000"
+                android:textSize="16dp" />
+
+            <com.jaredrummler.materialspinner.MaterialSpinner
+                android:id="@+id/ageSpinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="성별 : "
+                android:textColor="#000000"
+                android:textSize="16dp" />
+
+            <co.ceryle.radiorealbutton.RadioRealButtonGroup
+                android:id="@+id/genderBtnGroup"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                app:rrbg_animateDrawables_enter="overshoot"
+                app:rrbg_dividerColor="@color/colorPrimaryDark"
+                app:rrbg_dividerSize="1dp"
+                app:rrbg_radius="10dp"
+                app:rrbg_selectorColor="@color/colorPrimary"
+                app:rrbg_selectorSize="6dp">
+
+                <co.ceryle.radiorealbutton.RadioRealButton
+                    android:id="@+id/genderManBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:rrb_drawable="@drawable/boy_icon"
+                    app:rrb_drawableHeight="36dp"
+                    app:rrb_drawablePadding="10dp"
+                    app:rrb_drawableWidth="36dp"
+                    app:rrb_ripple="true"
+                    app:rrb_rippleColor="@color/colorPrimary"
+                    app:rrb_text="남자"
+                    app:rrb_textColor="#000000">
+
+                </co.ceryle.radiorealbutton.RadioRealButton>
+
+                <co.ceryle.radiorealbutton.RadioRealButton
+                    android:id="@+id/genderWomanBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:rrb_drawable="@drawable/girl_icon"
+                    app:rrb_drawableHeight="36dp"
+                    app:rrb_drawablePadding="10dp"
+                    app:rrb_drawableWidth="36dp"
+                    app:rrb_ripple="true"
+                    app:rrb_rippleColor="@color/colorPrimary"
+                    app:rrb_text="여자"
+                    app:rrb_textColor="#000000">
+
+                </co.ceryle.radiorealbutton.RadioRealButton>
+            </co.ceryle.radiorealbutton.RadioRealButtonGroup>
+
+
+        </LinearLayout>
+
+        <info.hoang8f.widget.FButton
+            android:id="@+id/okButton"
+            android:layout_width="150dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="40dp"
+            android:text="완료"
+            app:buttonColor="#F2F2F2"
+            app:shadowColor="#D8D8D8"
+            app:shadowHeight="2dp" />
+
+
+    </LinearLayout>
+
+</RelativeLayout>
