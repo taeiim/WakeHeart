@@ -2,13 +2,13 @@ package com.dsm.wakeheart.Fragment;
 
 import android.content.Context;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.dsm.wakeheart.GPSinfo;
 import com.dsm.wakeheart.R;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -20,6 +20,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 public class RestAreaFragment extends Fragment implements OnMapReadyCallback {
 
     private GoogleMap mMap;
+    private GPSinfo gps;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -36,22 +37,25 @@ public class RestAreaFragment extends Fragment implements OnMapReadyCallback {
         return rootView;
     }
 
-
-    /**
-     * Manipulates the map once available.
-     * This callback is triggered when the map is ready to be used.
-     * This is where we can add markers or lines, add listeners or move the camera. In this case,
-     * we just add a marker near Sydney, Australia.
-     * If Google Play services is not installed on the device, the user will be prompted to install
-     * it inside the SupportMapFragment. This method will only be triggered once the user has
-     * installed Google Play services and returned to the app.
-     */
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+        mMap.setMinZoomPreference(5.0f);
+
+        double latitude =37;
+        double longitude=126;
+        gps = new GPSinfo(getActivity());
+        if(gps.isGetLocation()){
+            latitude = gps.getLatitude();
+            longitude = gps.getLongitude();
+            System.out.println("위도 : "+latitude+ " 경도 : "+longitude);
+        }else{
+            gps.showSettingsAlert();
+        }
 
         //Latitude(위도), Longitude(경도)
-        LatLng latLng = new LatLng(37, 126);
+        LatLng latLng = new LatLng(latitude, longitude);
+        CameraUpdateFactory.newLatLngZoom(latLng,20.0f);
         MarkerOptions marker = new MarkerOptions().position(latLng);
         mMap.addMarker(marker);
         //mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
