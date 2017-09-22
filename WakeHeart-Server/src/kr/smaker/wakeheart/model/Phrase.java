@@ -15,15 +15,35 @@ public class Phrase implements Model {
     }
     
     @Override
+	public void insert(String arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+    
+    @Override
     public void init() {
-        connector.insertQuery(collection, new Document("id", ""));
-        connector.insertQuery(collection, new Document("name", ""));
-        connector.insertQuery(collection, new Document("description", ""));
+        connector.insertQuery(collection, new Document("description", "공부 열심히 하자1"));
+        connector.insertQuery(collection, new Document("description", "공부 열심히 하자2"));
+        connector.insertQuery(collection, new Document("description", "공부 열심히 하자3"));
+        connector.insertQuery(collection, new Document("description", "공부 열심히 하자4"));
+        connector.insertQuery(collection, new Document("description", "공부 열심히 하자5"));
+        connector.insertQuery(collection, new Document("description", "공부 열심히 하자6"));
+        connector.insertQuery(collection, new Document("description", "공부 열심히 하자7"));
+        connector.insertQuery(collection, new Document("description", "공부 열심히 하자8"));
+        connector.insertQuery(collection, new Document("description", "공부 열심히 하자9"));
+        connector.insertQuery(collection, new Document("description", "공부 열심히 하자10"));
     }
 
-    @Override
-    public void insert(String name) {
-        connector.insertQuery(collection, new Document("name", name));
+    public void insertAll(String name, String description) {
+    	Document doc = new Document();
+    	doc.put("name", name);
+    	doc.put("description", description);
+    	
+        connector.insertQuery(collection, doc);
+    }
+    
+    public String findAll() {
+    	return connector.findAllQuery(collection);
     }
 
     @Override
