@@ -22,10 +22,16 @@ public class Phrase implements Model {
     
     @Override
     public void init() {
-    	
-    	
-        connector.insertQuery(collection, new Document("name", ""));
-        connector.insertQuery(collection, new Document("description", ""));
+        connector.insertQuery(collection, new Document("description", "공부 열심히 하자1"));
+        connector.insertQuery(collection, new Document("description", "공부 열심히 하자2"));
+        connector.insertQuery(collection, new Document("description", "공부 열심히 하자3"));
+        connector.insertQuery(collection, new Document("description", "공부 열심히 하자4"));
+        connector.insertQuery(collection, new Document("description", "공부 열심히 하자5"));
+        connector.insertQuery(collection, new Document("description", "공부 열심히 하자6"));
+        connector.insertQuery(collection, new Document("description", "공부 열심히 하자7"));
+        connector.insertQuery(collection, new Document("description", "공부 열심히 하자8"));
+        connector.insertQuery(collection, new Document("description", "공부 열심히 하자9"));
+        connector.insertQuery(collection, new Document("description", "공부 열심히 하자10"));
     }
 
     public void insertAll(String name, String description) {
