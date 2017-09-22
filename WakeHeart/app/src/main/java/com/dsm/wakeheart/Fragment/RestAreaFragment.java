@@ -10,10 +10,12 @@ import android.view.ViewGroup;
 
 import com.dsm.wakeheart.GPSinfo;
 import com.dsm.wakeheart.R;
+import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
@@ -40,11 +42,12 @@ public class RestAreaFragment extends Fragment implements OnMapReadyCallback {
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-        mMap.setMinZoomPreference(5.0f);
 
         double latitude =37;
         double longitude=126;
         gps = new GPSinfo(getActivity());
+
+        //현재 위도, 경도 가져오기
         if(gps.isGetLocation()){
             latitude = gps.getLatitude();
             longitude = gps.getLongitude();
@@ -53,12 +56,16 @@ public class RestAreaFragment extends Fragment implements OnMapReadyCallback {
             gps.showSettingsAlert();
         }
 
-        //Latitude(위도), Longitude(경도)
-        LatLng latLng = new LatLng(latitude, longitude);
-        CameraUpdateFactory.newLatLngZoom(latLng,20.0f);
-        MarkerOptions marker = new MarkerOptions().position(latLng);
-        mMap.addMarker(marker);
-        //mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
+                new LatLng(latitude,longitude),15));  //Latitude(위도), Longitude(경도)
+
+
+        mMap.addMarker(new MarkerOptions()
+            .icon(BitmapDescriptorFactory.fromResource(R.drawable.current_car_icon))
+            .anchor(0.5f,0.5f)
+            .position(new LatLng(latitude,longitude))
+            .title("현재 위치")
+            .snippet("주변 휴게소를 탐색합니다."));
+
     }
 }

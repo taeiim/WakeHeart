@@ -104,6 +104,7 @@ public class SignUpActivity extends AppCompatActivity {
 
                     Intent intent = new Intent(SignUpActivity.this,SignUpSuccessActivity.class);
                     startActivity(intent);
+                    finish();
 
                     call.enqueue(new Callback<JsonObject>() {
                         @Override
