@@ -20,15 +20,23 @@ public class UserController {
 		int age = Integer.parseInt(req.getParameter("age"));
 
 		user.insertAll(id, password, gender, age);
+		res.setHeader("Content-Type", "application/json");
 
 		HashMap<String, Object> data = new HashMap<String, Object>();
 
 		try {
-			data.put("success", true);
-			data.put("id", id);
+			if (user.find(id) != null) {
+				data.put("success", true);
+				data.put("id", id);
 
-			res.cookie("user", id);
-			res.json(data);
+				res.cookie("user", id);
+				res.json(data);
+
+			} else {
+				data.put("success", false);
+				data.put("error", "중복된 아이디입니다.");
+				res.json(data);
+			}
 		} catch (Exception e) {
 			data.put("success", false);
 			data.put("error", e.toString());
@@ -45,6 +53,7 @@ public class UserController {
 		String password = req.getParameter("password");
 
 		HashMap<String, Object> data = new HashMap<String, Object>();
+		res.setHeader("Content-Type", "application/json");
 
 		try {
 			if (user.auth(id, password) == true) {
@@ -79,15 +88,14 @@ public class UserController {
 			data.put("error", e.toString());
 			res.json(data);
 		}
-		
+
 		res.end();
 	}
-	
-	
+
 	@Route(route = "/API/find/user", method = Route.RouteMethod.GET)
 	public static void findUser(Request req, Response res) {
 		user.connect();
-		
+
 		HashMap<String, Object> data = new HashMap<String, Object>();
 		data.put("items", user.findAll());
 		res.json(data);
