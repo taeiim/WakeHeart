@@ -72,13 +72,13 @@
 
 ### 명언 데이터 가져오기
 
-* `/API/phrases/:number`
+* `/API/phrase/all`
 
 
 * 요청
   * GET
 * 인자
-  * number: 명언 가져올 갯수
+  * 없음
 
 
 
