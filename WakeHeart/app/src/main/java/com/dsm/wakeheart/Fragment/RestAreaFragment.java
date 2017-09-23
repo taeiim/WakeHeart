@@ -65,7 +65,7 @@ public class RestAreaFragment extends Fragment implements OnMapReadyCallback {
             .anchor(0.5f,0.5f)
             .position(new LatLng(latitude,longitude))
             .title("현재 위치")
-            .snippet("주변 휴게소를 탐색합니다."));
+            .snippet("나는 지금 여기에!"));
 
     }
 }

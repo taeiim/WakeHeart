@@ -33,6 +33,7 @@
         <activity android:name=".Activity.AccountManageActivity" />
         <activity android:name=".Activity.ChangePasswordActivity" />
         <activity android:name=".Activity.SignUpSuccessActivity" />
+        <activity android:name=".AlarmCustomDialog"></activity>
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").

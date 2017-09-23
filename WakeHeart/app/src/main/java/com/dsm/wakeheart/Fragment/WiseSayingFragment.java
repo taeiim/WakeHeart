@@ -1,5 +1,6 @@
 package com.dsm.wakeheart.Fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -12,12 +13,22 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 
+import com.dsm.wakeheart.Activity.SignUpActivity;
+import com.dsm.wakeheart.Activity.SignUpSuccessActivity;
 import com.dsm.wakeheart.Adapter.RecyclerViewAdapter;
 import com.dsm.wakeheart.Model.WiseSayingItem;
 import com.dsm.wakeheart.R;
+import com.dsm.wakeheart.RestAPI;
+import com.dsm.wakeheart.Server.resource.APIUrl;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * Created by parktaeim on 2017. 9. 5..
@@ -60,6 +71,42 @@ public class WiseSayingFragment extends Fragment {
     }
 
     private void addData() {
+
+//        Retrofit builder = new Retrofit.Builder()
+//                .baseUrl(APIUrl.API_BASE_URL)
+//                .addConverterFactory(GsonConverterFactory.create())
+//                .build();
+//        RestAPI restAPI = builder.create(RestAPI.class);
+//        Call<Boolean> call = restAPI.signUp(id,pw,gender,age);
+//
+//        Intent intent = new Intent(SignUpActivity.this,SignUpSuccessActivity.class);
+//        startActivity(intent);
+//        finish();
+//
+//        call.enqueue(new Callback<Boolean>() {
+//            @Override
+//            public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+//
+//            }
+//
+//            @Override
+//            public void onFailure(Call<Boolean> call, Throwable t) {
+//
+//            }
+//        });
+
+
+
+//        Retrofit builder = new Retrofit.Builder()
+//                .baseUrl(APIUrl.WISE_SAYING_URL)
+//                .addConverterFactory(GsonConverterFactory.create())
+//                .build();
+//
+//        RestAPI restAPI = builder.create(RestAPI.class);
+//        Call<Void> call = restAPI.wiseSaying()
+
+
+
 //        ArrayList<WiseSayingItem> wiseSayingItems = new ArrayList<>();
         wiseSayingItems.add(new WiseSayingItem("인간은 스스로 믿는대로 된다","- 안톤 체호프"));
         wiseSayingItems.add(new WiseSayingItem("그저 살려고 태어난 게 아니다 의미 있는 인생을 만들려고 태어난 것이다","- 헬리스 브릿지스"));

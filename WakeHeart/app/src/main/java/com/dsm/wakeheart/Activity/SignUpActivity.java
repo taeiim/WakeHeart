@@ -2,24 +2,16 @@ package com.dsm.wakeheart.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.annotation.RestrictTo;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.NumberPicker;
 import android.widget.Toast;
 
-import com.dsm.wakeheart.Model.UserDTO;
 import com.dsm.wakeheart.R;
 import com.dsm.wakeheart.RestAPI;
 import com.dsm.wakeheart.RestRequestHelper;
 import com.dsm.wakeheart.Server.resource.APIUrl;
-import com.dsm.wakeheart.Server.service.SignService;
-import com.google.gson.JsonObject;
-
-import java.util.Map;
 
 import co.ceryle.radiorealbutton.RadioRealButton;
 import co.ceryle.radiorealbutton.RadioRealButtonGroup;
@@ -100,20 +92,20 @@ public class SignUpActivity extends AppCompatActivity {
                             .addConverterFactory(GsonConverterFactory.create())
                             .build();
                     RestAPI restAPI = builder.create(RestAPI.class);
-                    Call<JsonObject> call = restAPI.signUp(id,pw,gender,age);
+                    Call<Boolean> call = restAPI.signUp(id,pw,gender,age);
 
                     Intent intent = new Intent(SignUpActivity.this,SignUpSuccessActivity.class);
                     startActivity(intent);
                     finish();
 
-                    call.enqueue(new Callback<JsonObject>() {
+                    call.enqueue(new Callback<Boolean>() {
                         @Override
-                        public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                        public void onResponse(Call<Boolean> call, Response<Boolean> response) {
 
                         }
 
                         @Override
-                        public void onFailure(Call<JsonObject> call, Throwable t) {
+                        public void onFailure(Call<Boolean> call, Throwable t) {
 
                         }
                     });
