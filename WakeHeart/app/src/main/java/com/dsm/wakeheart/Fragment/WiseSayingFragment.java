@@ -36,6 +36,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class WiseSayingFragment extends Fragment {
 
+    Retrofit retrofit;
+    RestAPI restAPI;
+
     private RecyclerView recyclerView;
     private RecyclerViewAdapter adapter;
     private RecyclerView.LayoutManager layoutManager;
@@ -105,6 +108,9 @@ public class WiseSayingFragment extends Fragment {
 //        RestAPI restAPI = builder.create(RestAPI.class);
 //        Call<Void> call = restAPI.wiseSaying()
 
+
+        retrofit = new Retrofit.Builder().baseUrl(APIUrl.API_BASE_URL).build();
+        restAPI = retrofit.create(RestAPI.class);
 
 
 //        ArrayList<WiseSayingItem> wiseSayingItems = new ArrayList<>();

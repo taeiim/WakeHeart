@@ -30,7 +30,7 @@ public class AlarmCustomDialog extends Activity {
         rippleBackground.startRippleAnimation();
 
         final MediaPlayer mediaPlayer = MediaPlayer.create(this,R.raw.music);
-        mediaPlayer.setLooping(true);
+        mediaPlayer.setLooping(true);  //음악 무한 재생 
         mediaPlayer.start();  // 음악 재생
 
 

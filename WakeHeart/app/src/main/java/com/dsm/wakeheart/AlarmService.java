@@ -26,8 +26,6 @@ public class AlarmService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
 
-        Toast.makeText(this, "나는야 토스트", Toast.LENGTH_SHORT).show();
-
         Intent dialogIntent = new Intent(this, AlarmCustomDialog.class);
         dialogIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         this.startActivity(dialogIntent);

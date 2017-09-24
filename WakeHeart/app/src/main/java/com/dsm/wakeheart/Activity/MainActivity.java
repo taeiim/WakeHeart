@@ -76,7 +76,6 @@ public class MainActivity extends AppCompatActivity implements AHBottomNavigatio
         } else if (position == 2) {
             MainFragment mainFragment = new MainFragment();
             getSupportFragmentManager().beginTransaction().replace(R.id.content_id, mainFragment).commit();
-            Toast.makeText(getApplicationContext(),"button onclick",Toast.LENGTH_SHORT).show();
         } else if (position == 3) {
             HealthFragment healthFragment = new HealthFragment();
             getSupportFragmentManager().beginTransaction().replace(R.id.content_id, healthFragment).commit();
