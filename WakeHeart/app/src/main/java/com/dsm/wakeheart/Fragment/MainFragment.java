@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.dsm.wakeheart.Activity.SettingsActivity;
+import com.dsm.wakeheart.AlarmService;
 import com.dsm.wakeheart.R;
 import com.txusballesteros.SnakeView;
 
@@ -25,6 +26,7 @@ public class MainFragment extends android.support.v4.app.Fragment {
     Button onOff_Btn;
     RelativeLayout offLayout;
     RelativeLayout onLayout;
+    Boolean sleep;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -80,8 +82,18 @@ public class MainFragment extends android.support.v4.app.Fragment {
         snakeView.addValue(55);
         snakeView.addValue(75);
 
-
+        sleep();
 
         return rootView;
     }
+
+    private void sleep() {
+        sleep = true;
+        if(sleep==true){
+            getActivity().startService(new Intent(getActivity(),AlarmService.class));
+
+        }
+    }
+
+
 }

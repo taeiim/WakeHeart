@@ -2,12 +2,15 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center">
+    android:gravity="center"
+    android:background="#99000000">
 
     <LinearLayout
-        android:layout_width="300dp"
-        android:layout_height="370dp"
-        android:orientation="vertical">
+        android:layout_width="320dp"
+        android:layout_height="410dp"
+        android:orientation="vertical"
+        android:background="@drawable/rounded">
+
         <com.skyfishjy.library.RippleBackground
             xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -15,6 +18,7 @@
             android:layout_height="250dp"
             android:layout_gravity="center"
             android:id="@+id/content"
+            android:layout_marginTop="30dp"
             app:rb_color="@color/colorPrimary"
             app:rb_radius="30dp"
             app:rb_rippleAmount="4"
@@ -32,7 +36,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="졸지말고 일어나세요!!!"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="15dp"
             android:textSize="18dp"
             android:gravity="center"
             android:textColor="@color/colorPrimaryDark"
@@ -44,9 +48,9 @@
             android:layout_height="40dp"
             android:text="확인"
             android:textColor="@color/colorPrimaryDark"
-            android:layout_marginTop="25dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
             android:layout_marginBottom="10dp"
             android:background="@color/bottom_section_color"/>
     </LinearLayout>
