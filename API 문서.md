@@ -79,6 +79,8 @@
   * GET
 * 인자
   * 없음
+* 반환값
+  * `{"phrase":{"description":"공부열심히하자1"}, {"description":"공부열심히하자2"}}`
 
 
 
