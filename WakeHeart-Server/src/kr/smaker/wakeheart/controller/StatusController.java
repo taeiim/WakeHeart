@@ -13,7 +13,6 @@ public class StatusController {
 	@Route(route = "/status/add", method = Route.RouteMethod.GET)
     public static void addStatus(Request req, Response res) {
 		status.connect();
-		
 		if (status.count() == 0) {
 			status.init();
 		}

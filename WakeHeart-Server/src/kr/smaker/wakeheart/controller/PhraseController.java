@@ -25,7 +25,6 @@ public class PhraseController {
 	@Route(route = "/API/phrase/set", method = Route.RouteMethod.GET)
     public static void setPhrase(Request req, Response res) {
 		phrase.connect();
-		
 		try {
 			if (phrase.findAll() == null) {
 				phrase.init();

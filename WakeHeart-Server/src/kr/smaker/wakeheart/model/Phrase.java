@@ -22,9 +22,9 @@ public class Phrase implements Model {
     
     @Override
     public void init() {
-        connector.insertQuery(collection, new Document("description", "공부 열심히 하자1"));
-        connector.insertQuery(collection, new Document("description", "공부 열심히 하자2"));
-        connector.insertQuery(collection, new Document("description", "공부 열심히 하자3"));
+        connector.insertQuery(collection, new Document("description", "같은 실수를 두려워 하되, 새로운 실수를 두려워하지 말라"));
+        connector.insertQuery(collection, new Document("description", "교육의 위대한 목표는 앎이 아니라 행동이다"));
+        connector.insertQuery(collection, new Document("description", "강력한 이유는 강력한 행동을 낳는다."));
         connector.insertQuery(collection, new Document("description", "공부 열심히 하자4"));
         connector.insertQuery(collection, new Document("description", "공부 열심히 하자5"));
         connector.insertQuery(collection, new Document("description", "공부 열심히 하자6"));
