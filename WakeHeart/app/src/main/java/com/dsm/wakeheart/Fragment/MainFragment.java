@@ -82,6 +82,8 @@ public class MainFragment extends android.support.v4.app.Fragment {
         snakeView.addValue(55);
         snakeView.addValue(75);
 
+
+
         sleep();
 
         return rootView;

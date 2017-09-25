@@ -1,12 +1,11 @@
 package com.dsm.wakeheart;
 
-import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.os.IBinder;
-import android.support.annotation.IntDef;
-import android.widget.Toast;
+
+import com.dsm.wakeheart.Activity.AlarmCustomDialog;
 
 public class AlarmService extends Service {
     private Context context;

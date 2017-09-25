@@ -1,4 +1,4 @@
-package com.dsm.wakeheart;
+package com.dsm.wakeheart.Activity;
 
 import android.app.Activity;
 import android.media.MediaPlayer;
@@ -10,6 +10,7 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import com.dsm.wakeheart.R;
 import com.skyfishjy.library.RippleBackground;
 
 /**
