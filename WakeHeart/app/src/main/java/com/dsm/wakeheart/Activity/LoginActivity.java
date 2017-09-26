@@ -68,6 +68,10 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+        //SplashActivity 종료
+        SplashActivity splashActivity = (SplashActivity) SplashActivity.splashActiviity;
+        splashActivity.finish();
+
     }
 
     private void login() {

@@ -14,6 +14,7 @@ import com.dsm.wakeheart.R;
  */
 
 public class SplashActivity extends Activity {
+    public static Activity splashActiviity;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,5 +27,8 @@ public class SplashActivity extends Activity {
                 startActivity(intent);
             }
         },5000);
+
+        splashActiviity = SplashActivity.this;
+
     }
 }
