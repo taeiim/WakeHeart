@@ -75,80 +75,8 @@ public class MainFragment extends android.support.v4.app.Fragment {
             }
         });
 
-        final SnakeView snakeView = (SnakeView) rootView.findViewById(R.id.snake);
-        snakeView.setMinValue(0);
-        snakeView.setMaxValue(200);
-        snakeView.addValue(100);
-        snakeView.addValue(50);
-        snakeView.addValue(80);
-        snakeView.addValue(20);
-        snakeView.addValue(40);
-        snakeView.addValue(130);
-        snakeView.addValue(140);
-        snakeView.addValue(90);
-        snakeView.addValue(60);
-        snakeView.addValue(70);
-        snakeView.addValue(55);
-        snakeView.addValue(75);
-
-
-
-        sleep();
 
         return rootView;
-    }
-
-    Thread thread;
-    private boolean threadOn = true;
-    BluetoothControl bluetoothControl;
-
-
-    private void startService(final Context context){
-        final Handler handler = new Handler();
-        thread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                while (threadOn){
-                    Log.d("xxx", "hello");
-                    Log.d("xxx", ""+bluetoothControl.getInputStream());
-                    if(bluetoothControl.getInputStream() != null){
-                        handler.post(new Runnable() {
-                            @Override
-                            public void run() {
-                                getPreferences().edit().remove("isOn");
-                                getPreferences().edit().commit();
-                                getPreferences().edit().putBoolean("isOn",true);
-                                Log.d("xxx", "run: " + getPreferences().edit().commit());
-                                SetAndGetClass.getInstance().setBlutoothControl(bluetoothControl);
-                                Intent intent = new Intent(context, MainService.class);
-                                getActivity().startService(intent);
-                            }
-                        });
-                        break;
-                    }
-                    try {
-                        Thread.sleep(1000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        });
-
-        thread.start();
-    }
-
-    private SharedPreferences getPreferences(){
-        SharedPreferences pref = getActivity().getSharedPreferences("pref", MODE_PRIVATE);
-        return pref;
-    }
-
-    private void sleep() {
-        sleep = true;
-        if(sleep==true){
-            getActivity().startService(new Intent(getActivity(),AlarmService.class));
-
-        }
     }
 
 

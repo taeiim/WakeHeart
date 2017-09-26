@@ -1,10 +1,14 @@
 package com.dsm.wakeheart.Model;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
  * Created by parktaeim on 2017. 9. 5..
  */
 
 public class WiseSayingItem {
+
+    @SerializedName("description")
     public String wiseSaying;
     public String author;
 

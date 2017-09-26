@@ -3,6 +3,7 @@ package com.dsm.wakeheart.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -12,6 +13,8 @@ import com.dsm.wakeheart.R;
 import com.dsm.wakeheart.RestAPI;
 import com.dsm.wakeheart.RestRequestHelper;
 import com.dsm.wakeheart.Server.resource.APIUrl;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 
 import co.ceryle.radiorealbutton.RadioRealButton;
 import co.ceryle.radiorealbutton.RadioRealButtonGroup;
@@ -92,23 +95,26 @@ public class SignUpActivity extends AppCompatActivity {
                             .addConverterFactory(GsonConverterFactory.create())
                             .build();
                     RestAPI restAPI = builder.create(RestAPI.class);
-                    Call<Boolean> call = restAPI.signUp(id,pw,gender,age);
+                    Call<JsonObject> call = restAPI.signUp(id,pw,gender,age);
 
-                    Intent intent = new Intent(SignUpActivity.this,SignUpSuccessActivity.class);
-                    startActivity(intent);
-                    finish();
-
-                    call.enqueue(new Callback<Boolean>() {
+                    call.enqueue(new Callback<JsonObject>() {
                         @Override
-                        public void onResponse(Call<Boolean> call, Response<Boolean> response) {
-
+                        public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                            JsonElement jsonElement = response.body().getAsJsonPrimitive("success");
+                            Log.d("JsonElement ----------",jsonElement.toString());
+                            if(jsonElement.toString().equals("true")){
+                                Intent intent = new Intent(SignUpActivity.this,SignUpSuccessActivity.class);
+                                startActivity(intent);
+                                finish();
+                            }
                         }
 
                         @Override
-                        public void onFailure(Call<Boolean> call, Throwable t) {
+                        public void onFailure(Call<JsonObject> call, Throwable t) {
 
                         }
                     });
+
                 } else{
                     Toast.makeText(SignUpActivity.this,"비밀번호와 비밀번호 체크 값이 다릅니다.", Toast.LENGTH_SHORT).show();
                     return;

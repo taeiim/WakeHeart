@@ -10,6 +10,14 @@ import android.util.Log;
 import android.widget.TextView;
 
 import com.dsm.wakeheart.R;
+import com.txusballesteros.SnakeView;
+
+import org.w3c.dom.Text;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 
 
 public class ActivityMain extends AppCompatActivity {
@@ -20,13 +28,53 @@ public class ActivityMain extends AppCompatActivity {
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.fragment_main);
         Log.d("xxx", "onCreate: " + getPreferences().getBoolean("isOn", false));
         if(!getPreferences().getBoolean("isOn", false)){ //isOn이름을 가진 bool값을 받아온다. 기본값 false
             blutoothControl = new BluetoothControl(this, ActivityMain.this);
             threadOn = true;
             startService(this);
         }
+
+        TextView textview = (TextView) findViewById(R.id.bpmTextView);
+        textview.setText("" + blutoothControl.getInputStream());
+        final SnakeView snakeView = (SnakeView) findViewById(R.id.snake);
+        snakeView.setMinValue(30);
+        snakeView.setMaxValue(100);
+
+        InputStream inputStream= blutoothControl.getInputStream();
+        String bpmString = getStringFromInputStream(inputStream);
+        int bpmNum = Integer.parseInt(bpmString);
+        snakeView.addValue(bpmNum);
+    }
+
+    //InputStream으로 온 BPM String으로 변환
+    private static String getStringFromInputStream(InputStream inputStream) {
+
+        BufferedReader br = null;
+        StringBuilder sb = new StringBuilder();
+
+        String line;
+        try {
+
+            br = new BufferedReader(new InputStreamReader(inputStream));
+            while ((line = br.readLine()) != null) {
+                sb.append(line);
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (br != null) {
+                try {
+                    br.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        return sb.toString();
     }
 
     Thread thread;

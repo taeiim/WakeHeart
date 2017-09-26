@@ -26,7 +26,7 @@ import retrofit2.http.POST;
 public interface RestAPI {
     @FormUrlEncoded
     @POST(APIUrl.SIGN_UP_URL)
-    Call<Boolean> signUp(@Field("id") String id ,@Field("password") String password, @Field("gender") int gender, @Field("age") int age);
+    Call<JsonObject> signUp(@Field("id") String id ,@Field("password") String password, @Field("gender") int gender, @Field("age") int age);
 
     @GET(APIUrl.WISE_SAYING_URL)
     Call<JsonObject> wiseSaying();

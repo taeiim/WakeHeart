@@ -75,7 +75,7 @@
                 android:id="@+id/bpmTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="85"
+                android:text="0"
                 android:textSize="70dp" />
 
             <ImageView
