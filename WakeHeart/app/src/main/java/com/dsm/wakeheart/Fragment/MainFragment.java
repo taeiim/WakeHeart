@@ -1,9 +1,13 @@
 package com.dsm.wakeheart.Fragment;
 
 import android.app.Fragment;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,8 +17,13 @@ import android.widget.RelativeLayout;
 
 import com.dsm.wakeheart.Activity.SettingsActivity;
 import com.dsm.wakeheart.AlarmService;
+import com.dsm.wakeheart.Arduino.BluetoothControl;
+import com.dsm.wakeheart.Arduino.MainService;
+import com.dsm.wakeheart.Arduino.SetAndGetClass;
 import com.dsm.wakeheart.R;
 import com.txusballesteros.SnakeView;
+
+import static android.content.Context.MODE_PRIVATE;
 
 /**
  * Created by parktaeim on 2017. 8. 25..
@@ -87,6 +96,51 @@ public class MainFragment extends android.support.v4.app.Fragment {
         sleep();
 
         return rootView;
+    }
+
+    Thread thread;
+    private boolean threadOn = true;
+    BluetoothControl bluetoothControl;
+
+
+    private void startService(final Context context){
+        final Handler handler = new Handler();
+        thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while (threadOn){
+                    Log.d("xxx", "hello");
+                    Log.d("xxx", ""+bluetoothControl.getInputStream());
+                    if(bluetoothControl.getInputStream() != null){
+                        handler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                getPreferences().edit().remove("isOn");
+                                getPreferences().edit().commit();
+                                getPreferences().edit().putBoolean("isOn",true);
+                                Log.d("xxx", "run: " + getPreferences().edit().commit());
+                                SetAndGetClass.getInstance().setBlutoothControl(bluetoothControl);
+                                Intent intent = new Intent(context, MainService.class);
+                                getActivity().startService(intent);
+                            }
+                        });
+                        break;
+                    }
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
+
+        thread.start();
+    }
+
+    private SharedPreferences getPreferences(){
+        SharedPreferences pref = getActivity().getSharedPreferences("pref", MODE_PRIVATE);
+        return pref;
     }
 
     private void sleep() {

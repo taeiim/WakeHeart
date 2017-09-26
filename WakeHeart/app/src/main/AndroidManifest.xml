@@ -20,9 +20,16 @@
         android:largeHeap="true"
         android:theme="@style/AppTheme">
         <activity android:name=".Activity.MainActivity" />
-        <activity android:name=".Activity.LoginActivity">
+        <activity android:name=".Activity.SplashActivity"
+            android:theme="@style/SplashTheme"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
+        <activity android:name=".Activity.LoginActivity"></activity>
         <activity android:name=".Activity.SignUpActivity" />
         <activity android:name=".Activity.SettingsActivity" />
         <activity android:name=".Activity.MusicManageActivity" />
@@ -31,13 +38,7 @@
         <activity android:name=".Activity.SignUpSuccessActivity" />
         <activity android:name=".Activity.AlarmCustomDialog"
             android:theme="@android:style/Theme.Translucent"></activity>
-        <activity android:name=".Arduino.ActivityMain">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".Arduino.ActivityMain"></activity>
         <service android:name=".Arduino.MainService"/>
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
