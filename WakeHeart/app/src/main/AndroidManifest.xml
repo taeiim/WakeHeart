@@ -19,7 +19,9 @@
         android:supportsRtl="true"
         android:largeHeap="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activity.MainActivity" />
+        <activity android:name=".Activity.MainActivity" >
+
+        </activity>
         <activity android:name=".Activity.SplashActivity"
             android:theme="@style/SplashTheme"
             android:screenOrientation="portrait">
