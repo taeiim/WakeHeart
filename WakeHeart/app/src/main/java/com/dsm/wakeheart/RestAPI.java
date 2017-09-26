@@ -4,6 +4,7 @@ import com.dsm.wakeheart.Model.LoginItem;
 import com.dsm.wakeheart.Model.UserDTO;
 import com.dsm.wakeheart.Model.WiseSayingItem;
 import com.dsm.wakeheart.Server.resource.APIUrl;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
 import java.util.List;
@@ -28,7 +29,7 @@ public interface RestAPI {
     Call<Boolean> signUp(@Field("id") String id ,@Field("password") String password, @Field("gender") int gender, @Field("age") int age);
 
     @GET(APIUrl.WISE_SAYING_URL)
-    Call<List<WiseSayingItem>> wiseSaying();
+    Call<JsonObject> wiseSaying();
 
     @POST(APIUrl.LOGIN_URL)
     Call<ResponseBody> logIn(@Body LoginItem data);

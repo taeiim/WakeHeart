@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.dsm.wakeheart.Activity.SignUpActivity;
 import com.dsm.wakeheart.Activity.SignUpSuccessActivity;
@@ -21,6 +22,10 @@ import com.dsm.wakeheart.Model.WiseSayingItem;
 import com.dsm.wakeheart.R;
 import com.dsm.wakeheart.RestAPI;
 import com.dsm.wakeheart.Server.resource.APIUrl;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonPrimitive;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,7 +48,7 @@ public class WiseSayingFragment extends Fragment {
     private RecyclerView recyclerView;
     private RecyclerViewAdapter adapter;
     private RecyclerView.LayoutManager layoutManager;
-    private ArrayList<WiseSayingItem> wiseSayingItems = new ArrayList<>();
+    private ArrayList<WiseSayingItem> arrayList = new ArrayList<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater,ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -56,7 +61,7 @@ public class WiseSayingFragment extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.scrollToPosition(0);
 
-        adapter = new RecyclerViewAdapter(getActivity(),wiseSayingItems);
+        adapter = new RecyclerViewAdapter(getActivity(),arrayList);
         recyclerView.setAdapter(adapter);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
@@ -76,58 +81,31 @@ public class WiseSayingFragment extends Fragment {
 
     private void addData() {
 
-//        Retrofit builder = new Retrofit.Builder()
-//                .baseUrl(APIUrl.API_BASE_URL)
-//                .addConverterFactory(GsonConverterFactory.create())
-//                .build();
-//        RestAPI restAPI = builder.create(RestAPI.class);
-//        Call<Boolean> call = restAPI.signUp(id,pw,gender,age);
+        retrofit = new Retrofit.Builder().baseUrl(APIUrl.API_BASE_URL).addConverterFactory(GsonConverterFactory.create()).build();
+        restAPI = retrofit.create(RestAPI.class);
 //
-//        Intent intent = new Intent(SignUpActivity.this,SignUpSuccessActivity.class);
-//        startActivity(intent);
-//        finish();
-//
-//        call.enqueue(new Callback<Boolean>() {
+//        Call<JsonObject> call = restAPI.wiseSaying();
+//        call.enqueue(new Callback<JsonObject>() {
 //            @Override
-//            public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+//            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+////                Log.d("json-------------------",response.body().getAsJsonArray("pharse").toString());
+//                JsonArray jsonObject =response.body().getAsJsonArray("phrase");
+//                JsonArray jsonElements = jsonObject.getAsJsonArray();
+//                arrayList = getArrayList(jsonElements);
+////                adapter = new RecyclerViewAdapter(getActivity(),arrayList);
+////                recyclerView.setAdapter(adapter);
 //
+//                Log.d(jsonObject.toString(), "jsonArrayGet---------");
 //            }
 //
 //            @Override
-//            public void onFailure(Call<Boolean> call, Throwable t) {
+//            public void onFailure(Call<JsonObject> call, Throwable t) {
 //
 //            }
 //        });
-
-
-
-//        Retrofit builder = new Retrofit.Builder()
-//                .baseUrl(APIUrl.WISE_SAYING_URL)
-//                .addConverterFactory(GsonConverterFactory.create())
-//                .build();
 //
-//        RestAPI restAPI = builder.create(RestAPI.class);
-//        Call<Void> call = restAPI.wiseSaying()
 
 
-        retrofit = new Retrofit.Builder().baseUrl(APIUrl.API_BASE_URL).build();
-        restAPI = retrofit.create(RestAPI.class);
-
-        Call<List<WiseSayingItem>> call = restAPI.wiseSaying();
-
-        call.enqueue(new Callback<List<WiseSayingItem>>() {
-            @Override
-            public void onResponse(Call<List<WiseSayingItem>> call, Response<List<WiseSayingItem>> response) {
-                List<WiseSayingItem> wiseSaying = response.body();
-
-                Log.i("명언 : ",response.body().toString());
-            }
-
-            @Override
-            public void onFailure(Call<List<WiseSayingItem>> call, Throwable t) {
-
-            }
-        });
 
 //        ArrayList<WiseSayingItem> wiseSayingItems = new ArrayList<>();
 //        wiseSayingItems.add(new WiseSayingItem("인간은 스스로 믿는대로 된다","- 안톤 체호프"));
@@ -146,4 +124,18 @@ public class WiseSayingFragment extends Fragment {
 
 
     }
+
+    private ArrayList<WiseSayingItem> getArrayList(JsonArray jsonElements) {
+        ArrayList<WiseSayingItem> arrayList = new ArrayList<>();
+        for(int i=0;i<jsonElements.size();i++){
+            JsonObject jsonObject = (JsonObject) jsonElements.get(i);
+            String wiseSaying = jsonObject.getAsJsonPrimitive("wiseSaying").getAsString();
+            String author = jsonObject.getAsJsonPrimitive("author").getAsString();
+
+            arrayList.add(new WiseSayingItem(wiseSaying,author));
+        }
+        return arrayList;
+    }
+
+
 }

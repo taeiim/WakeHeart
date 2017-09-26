@@ -4,7 +4,10 @@ package com.dsm.wakeheart.Activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
+
+import com.dsm.wakeheart.R;
 
 /**
  * Created by parktaeim on 2017. 9. 26..
@@ -14,14 +17,14 @@ public class SplashActivity extends Activity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_splash);
 
-        try{
-            Thread.sleep(2000);
-        }catch (InterruptedException e){
-            e.printStackTrace();
-        }
-
-        startActivity(new Intent(this,LoginActivity.class));
-        finish();
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Intent intent = new Intent(SplashActivity.this,LoginActivity.class);
+                startActivity(intent);
+            }
+        },5000);
     }
 }
