@@ -24,78 +24,98 @@ public class ActivityMain extends AppCompatActivity {
 
     TextView textView;
     BluetoothControl blutoothControl;
+
     @Override
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_main);
         Log.d("xxx", "onCreate: " + getPreferences().getBoolean("isOn", false));
-        if(!getPreferences().getBoolean("isOn", false)){ //isOn이름을 가진 bool값을 받아온다. 기본값 false
+        if (!getPreferences().getBoolean("isOn", false)) { //isOn이름을 가진 bool값을 받아온다. 기본값 false
             blutoothControl = new BluetoothControl(this, ActivityMain.this);
             threadOn = true;
             startService(this);
         }
 
         TextView textview = (TextView) findViewById(R.id.bpmTextView);
-        textview.setText("" + blutoothControl.getInputStream());
         final SnakeView snakeView = (SnakeView) findViewById(R.id.snake);
+
+        startListenForData(blutoothControl.getInputStream(),textview,snakeView);
+
+//        textview.setText("" + blutoothControl.getInputStream());
+
         snakeView.setMinValue(30);
         snakeView.setMaxValue(100);
 
-        InputStream inputStream= blutoothControl.getInputStream();
-        String bpmString = getStringFromInputStream(inputStream);
-        int bpmNum = Integer.parseInt(bpmString);
-        snakeView.addValue(bpmNum);
+//        InputStream inputStream = blutoothControl.getInputStream();
+//        String bpmString = getStringFromInputStream(inputStream);
+//        int bpmNum = Integer.parseInt(bpmString);
+//        snakeView.addValue(bpmNum);
     }
 
-    //InputStream으로 온 BPM String으로 변환
-    private static String getStringFromInputStream(InputStream inputStream) {
 
-        BufferedReader br = null;
-        StringBuilder sb = new StringBuilder();
+    int readBufferPosition=0;
 
-        String line;
-        try {
-
-            br = new BufferedReader(new InputStreamReader(inputStream));
-            while ((line = br.readLine()) != null) {
-                sb.append(line);
-            }
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (br != null) {
-                try {
-                    br.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
+    private void startListenForData(final InputStream inputStream, final TextView textView,final SnakeView snakeView) {
+        final Handler handler = new Handler();
+        final byte[] readBuffer = new byte[1024];
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while (!Thread.currentThread().isInterrupted()) {
+                    try {
+                        int byteAvailable = inputStream.available();
+                        if (byteAvailable > 0) {
+                            byte[] packetBytes = new byte[byteAvailable];
+                            inputStream.read(packetBytes);
+                            for (int i = 0; i < byteAvailable; i++) {
+                                byte b = packetBytes[i];
+                                if (b == 'e') {
+                                    byte[] encodeBytes = new byte[readBufferPosition];
+                                    System.arraycopy(readBuffer, 0, encodeBytes, 0, encodeBytes.length);
+                                    final String data = new String(encodeBytes);
+                                    readBufferPosition = 0;
+                                    handler.post(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            Log.d("xxx", data);
+                                            textView.setText(data);
+                                            int dataInt = Integer.parseInt(data);
+                                            snakeView.addValue(dataInt);
+                                        }
+                                    });
+                                } else {
+                                    readBuffer[readBufferPosition++] = b;
+                                }
+                            }
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
             }
-        }
-
-        return sb.toString();
+        }).start();
     }
 
     Thread thread;
 
     private boolean threadOn = true;
 
-    private void startService(final Context context){
+    private void startService(final Context context) {
         final Handler handler = new Handler();
         thread = new Thread(new Runnable() {
             @Override
             public void run() {
-                while (threadOn){
+                while (threadOn) {
                     Log.d("xxx", "hello");
-                    Log.d("xxx", ""+blutoothControl.getInputStream());
-                    if(blutoothControl.getInputStream() != null){
+                    Log.d("xxx", "" + blutoothControl.getInputStream());
+                    if (blutoothControl.getInputStream() != null) {
                         handler.post(new Runnable() {
                             @Override
                             public void run() {
                                 getPreferences().edit().remove("isOn");
                                 getPreferences().edit().commit();
-                                getPreferences().edit().putBoolean("isOn",true);
+                                getPreferences().edit().putBoolean("isOn", true);
                                 Log.d("xxx", "run: " + getPreferences().edit().commit());
                                 SetAndGetClass.getInstance().setBlutoothControl(blutoothControl);
                                 Intent intent = new Intent(context, MainService.class);
@@ -116,7 +136,7 @@ public class ActivityMain extends AppCompatActivity {
         thread.start();
     }
 
-    private SharedPreferences getPreferences(){
+    private SharedPreferences getPreferences() {
         SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
         return pref;
     }
