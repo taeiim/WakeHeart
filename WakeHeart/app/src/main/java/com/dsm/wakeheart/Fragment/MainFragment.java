@@ -229,7 +229,7 @@ public class MainFragment extends android.support.v4.app.Fragment {
     }
 
     private void sleep() {
-        sleep = true;
+        sleep = false;
         if(sleep == true){
             getActivity().startService(new Intent(getActivity(),AlarmService.class));
         }

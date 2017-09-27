@@ -33,7 +33,7 @@ public class BluetoothControl {
     public BluetoothControl(Activity activity, Context context) {
         this.activity = activity;
         this.context = context;
-        checkEnableBluetooth();
+//        checkEnableBluetooth();
     }
 
     public void checkEnableBluetooth() {

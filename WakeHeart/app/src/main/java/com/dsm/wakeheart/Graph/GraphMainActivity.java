@@ -1,31 +1,23 @@
-package com.dsm.wakeheart.Fragment;
+package com.dsm.wakeheart.Graph;
+
 
 import android.app.DatePickerDialog;
-import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.text.InputType;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 
-import com.dsm.wakeheart.Activity.SettingsActivity;
-import com.dsm.wakeheart.Graph.Axis;
-import com.dsm.wakeheart.Graph.Mode;
 import com.dsm.wakeheart.R;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.AxisBase;
@@ -56,49 +48,11 @@ import java.util.Locale;
 import static com.dsm.wakeheart.Graph.Mode.DAY;
 import static com.dsm.wakeheart.Graph.Mode.MONTH;
 import static com.dsm.wakeheart.Graph.Mode.WEEK;
-
-/**
- * Created by parktaeim on 2017. 8. 25..
- */
-
-public class Graph2Fragment extends Fragment implements View.OnClickListener, OnChartGestureListener, OnChartValueSelectedListener{
-
-    ImageView settingsBtn;
-    View rootView;
-
-    @Nullable
-    @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        rootView = inflater.inflate(R.layout.fragment_graph2,container,false);
-
-        getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT); //편의상 세로 고정
-        dateFormatter = new SimpleDateFormat("yyyy-MM-dd", Locale.US); //날짜 표시 포맷
-        DialogDatePicker(); // 미완된 직접지정 알림창
-        dateSel = (LinearLayout) rootView.findViewById(R.id.dateSel); //직접지정용 레이아웃
-        dateSel.setVisibility(View.GONE);
-
-        lineChart = (LineChart) rootView.findViewById(R.id.lineChart);
-        initSegmentbuttons(); //단위(일,주,월) 선택할 버튼 초기화
-        setChartData(DAY, IWEEK); // 차트 세팅
-
-        //설정 버튼 누르면 설정 액티비티로 넘어감
-        settingsBtn = (ImageView) rootView.findViewById(R.id.setting_icon);
-        settingsBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), SettingsActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        return rootView;
-    }
-
-
 //y값은 Entry형, x값은 String형
 // 현재 코드에서는 x값은 xVals
 // y값은 heartVals를 거쳐 Entry형인 yVals로 추가함
 
+public class GraphMainActivity extends AppCompatActivity implements View.OnClickListener, OnChartGestureListener, OnChartValueSelectedListener {
     private EditText fromDateEtxt;
     private EditText toDateEtxt;
     private DatePickerDialog FromDialog;
@@ -132,6 +86,21 @@ public class Graph2Fragment extends Fragment implements View.OnClickListener, On
     ArrayList<Integer> weekInterval = new ArrayList<>();
     ArrayList<Integer> monthInterval = new ArrayList<>();
 
+    // 모든 세팅 후 초기화
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT); //편의상 세로 고정
+        dateFormatter = new SimpleDateFormat("yyyy-MM-dd", Locale.US); //날짜 표시 포맷
+        DialogDatePicker(); // 미완된 직접지정 알림창
+        dateSel = (LinearLayout) findViewById(R.id.dateSel); //직접지정용 레이아웃
+        dateSel.setVisibility(View.GONE);
+
+        lineChart = (LineChart) findViewById(R.id.lineChart);
+        initSegmentbuttons(); //단위(일,주,월) 선택할 버튼 초기화
+        setChartData(DAY, IWEEK); // 차트 세팅
+    }
 
     //setAxisData 실행 및 chart 세팅
     public void setChartData(Mode mode, int cnt) { //매개변수는 setAxisData 위함
@@ -202,7 +171,7 @@ public class Graph2Fragment extends Fragment implements View.OnClickListener, On
         lineChart.getAxisRight().setEnabled(false);
         lineChart.getLegend().setEnabled(true); // 범례 표시
 //        lineChart.animateXY(2000, 2000); //애니메이션 효과
-//        lineChart.animateY(1000);
+        lineChart.animateY(2000);
         lineChart.setBackgroundColor(Color.WHITE);
         lineChart.getDescription().setEnabled(false); //우측 하단에 나오는 문구 제거
         lineChart.setTouchEnabled(true); //터치 가능
@@ -233,7 +202,7 @@ public class Graph2Fragment extends Fragment implements View.OnClickListener, On
             lineDataSet.setDrawCircleHole(false);
             lineDataSet.setLineWidth(1.8f);
             lineDataSet.setCircleRadius(4f);
-            lineDataSet.setCircleColor(ContextCompat.getColor(getActivity(), R.color.colorPrimary));
+            lineDataSet.setCircleColor(ContextCompat.getColor(this, R.color.colorPrimary));
             lineDataSet.setHighLightColor(Color.rgb(244, 117, 117)); //연분홍
             lineDataSet.setColor(Color.BLACK);
             lineDataSet.setFillColor(Color.WHITE);
@@ -334,10 +303,10 @@ public class Graph2Fragment extends Fragment implements View.OnClickListener, On
     private void initSegmentbuttons() {
         buttonList = new ArrayList<>();
 
-        Button btnWeek = (Button) rootView.findViewById(R.id.buttonAnWeek);
-        Button btn1Month = (Button) rootView.findViewById(R.id.button1Month);
-        Button btn6Month = (Button) rootView.findViewById(R.id.button6Month);
-        Button btnAssign = (Button) rootView.findViewById(R.id.buttonAssign);
+        Button btnWeek = (Button) findViewById(R.id.buttonAnWeek);
+        Button btn1Month = (Button) findViewById(R.id.button1Month);
+        Button btn6Month = (Button) findViewById(R.id.button6Month);
+        Button btnAssign = (Button) findViewById(R.id.buttonAssign);
 
         btnWeek.setOnClickListener(this);
         btn1Month.setOnClickListener(this);
@@ -384,10 +353,10 @@ public class Graph2Fragment extends Fragment implements View.OnClickListener, On
     //직접 지정에서 사용될 datepickerDialog
     //확인 버튼 - 날짜값 차이 계산하기
     private void DialogDatePicker() {
-        fromDateEtxt = (EditText) rootView.findViewById(R.id.fromDateEtxt);
+        fromDateEtxt = (EditText) findViewById(R.id.fromDateEtxt);
         fromDateEtxt.setInputType(InputType.TYPE_NULL);
         fromDateEtxt.requestFocus();
-        toDateEtxt = (EditText) rootView.findViewById(R.id.toDateEtxt);
+        toDateEtxt = (EditText) findViewById(R.id.toDateEtxt);
         toDateEtxt.setInputType(InputType.TYPE_NULL);
         fromDateEtxt.setOnClickListener(this);
         toDateEtxt.setOnClickListener(this);
@@ -403,7 +372,7 @@ public class Graph2Fragment extends Fragment implements View.OnClickListener, On
                     }
                 };
         Calendar baseCalendar = Calendar.getInstance();
-        FromDialog = new DatePickerDialog(getActivity(), R.style.AppTheme, mDateSetListener,
+        FromDialog = new DatePickerDialog(this, R.style.AppTheme, mDateSetListener,
                 baseCalendar.get(Calendar.YEAR), baseCalendar.get(Calendar.MONTH), baseCalendar.get(Calendar.DATE));
 
         FromDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.WHITE));
@@ -428,7 +397,7 @@ public class Graph2Fragment extends Fragment implements View.OnClickListener, On
                     }
                 };
 
-        ToDialog = new DatePickerDialog(getActivity(), R.style.AppTheme, mDateSetListener2,
+        ToDialog = new DatePickerDialog(GraphMainActivity.this, R.style.AppTheme, mDateSetListener2,
                 baseCalendar.get(Calendar.YEAR), baseCalendar.get(Calendar.MONTH), baseCalendar.get(Calendar.DATE));
 
         ToDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.WHITE));
