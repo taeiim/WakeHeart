@@ -90,7 +90,8 @@
                         android:layout_height="wrap_content"
                         android:text="0"
                         android:textColor="#FFFFFF"
-                        android:textSize="70dp" />
+                        android:textSize="70dp"
+                        android:layout_marginBottom="30dp"/>
 
                     <ImageView
                         android:id="@+id/heart_icon"

@@ -1,6 +1,5 @@
 package com.dsm.wakeheart.Fragment;
 
-import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -16,6 +15,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.dsm.wakeheart.Activity.SettingsActivity;
 import com.dsm.wakeheart.AlarmService;
@@ -24,6 +24,9 @@ import com.dsm.wakeheart.Arduino.MainService;
 import com.dsm.wakeheart.Arduino.SetAndGetClass;
 import com.dsm.wakeheart.R;
 import com.txusballesteros.SnakeView;
+
+
+import java.io.InputStream;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -41,6 +44,12 @@ public class MainFragment extends android.support.v4.app.Fragment {
     LinearLayout container;
     View rootView;
     AnimationDrawable animation;
+    TextView textView;
+    BluetoothControl blutoothControl;
+    SnakeView snakeView;
+    int readBufferPosition=0;
+
+
 
     @Nullable
     @Override
@@ -82,18 +91,125 @@ public class MainFragment extends android.support.v4.app.Fragment {
             }
         });
 
+        Log.d("xxx", "onCreate: " + getPreferences().getBoolean("isOn", false));
+        if (!getPreferences().getBoolean("isOn", false)) { //isOn이름을 가진 bool값을 받아온다. 기본값 false
+            blutoothControl = new BluetoothControl(getActivity(), getContext());
+            threadOn = true;
+            startService(getActivity());
+        }
+
+        textView = (TextView) rootView.findViewById(R.id.bpmTextView);
+        snakeView = (SnakeView) rootView.findViewById(R.id.snake);
+
+
+        snakeView.setMinValue(30);
+        snakeView.setMaxValue(100);
+
         sleep();
         setBackgroundGradient();
 
         return rootView;
     }
 
+
+    private void startListenForData(final InputStream inputStream, final TextView textView, final SnakeView snakeView) {
+        final Handler handler = new Handler();
+        final byte[] readBuffer = new byte[1024];
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while (!Thread.currentThread().isInterrupted()) {
+                    try {
+                        int byteAvailable = inputStream.available();
+                        if (byteAvailable > 0) {
+                            byte[] packetBytes = new byte[byteAvailable];
+                            inputStream.read(packetBytes);
+                            for (int i = 0; i < byteAvailable; i++) {
+                                byte b = packetBytes[i];
+                                if (b == 'e') {
+                                    byte[] encodeBytes = new byte[readBufferPosition];
+                                    System.arraycopy(readBuffer, 0, encodeBytes, 0, encodeBytes.length);
+                                    final String data = new String(encodeBytes);
+                                    readBufferPosition = 0;
+                                    handler.post(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            Log.d("xxx", data);
+                                            textView.setText(data);
+                                            int dataInt = Integer.parseInt(data);
+                                            snakeView.addValue(dataInt);
+                                        }
+                                    });
+                                } else {
+                                    readBuffer[readBufferPosition++] = b;
+                                }
+                            }
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }).start();
+    }
+
+    Thread thread;
+
+    private boolean threadOn = true;
+
+    private void startService(final Context context) {
+        final Handler handler = new Handler();
+        thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while (threadOn) {
+                    Log.d("xxx", "hello");
+                    Log.d("xxx", "" + blutoothControl.getInputStream());
+                    if (blutoothControl.getInputStream() != null) {
+                        handler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                Log.d("xxx", "run: " + getPreferences().edit().commit());
+                                SetAndGetClass.getInstance().setBlutoothControl(blutoothControl);
+                                Intent intent = new Intent(context, MainService.class);
+                                //startService(intent);
+
+                                startListenForData(blutoothControl.getInputStream(),textView,snakeView);
+                            }
+                        });
+                        break;
+                    }
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
+
+        thread.start();
+    }
+
+    private SharedPreferences getPreferences() {
+        SharedPreferences pref = getActivity().getSharedPreferences("pref", MODE_PRIVATE);
+        return pref;
+    }
+
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Log.d("xxx", "onDestroy: ");
+        threadOn = false;
+    }
+
     private void setBackgroundGradient() {
         container = (LinearLayout) rootView.findViewById(R.id.container);
 
          animation = (AnimationDrawable) container.getBackground();
-        animation.setEnterFadeDuration(6000);
-        animation.setExitFadeDuration(2000);
+        animation.setEnterFadeDuration(5000);
+        animation.setExitFadeDuration(1000);
 
     }
     // Starting animation:- start the animation on onResume.

@@ -22,9 +22,6 @@
         <activity android:name=".Activity.MainActivity">
 
         </activity>
-        <activity android:name=".Arduino.BluetoothMain" >
-
-        </activity>
         <activity android:name=".Activity.SplashActivity"
             android:theme="@style/SplashTheme"
             android:screenOrientation="portrait">
