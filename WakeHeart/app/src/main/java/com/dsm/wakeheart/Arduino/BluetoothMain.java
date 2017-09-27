@@ -20,10 +20,11 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 
 
-public class ActivityMain extends AppCompatActivity {
+public class BluetoothMain extends AppCompatActivity {
 
     TextView textView;
     BluetoothControl blutoothControl;
+    SnakeView snakeView;
 
     @Override
 
@@ -32,15 +33,15 @@ public class ActivityMain extends AppCompatActivity {
         setContentView(R.layout.fragment_main);
         Log.d("xxx", "onCreate: " + getPreferences().getBoolean("isOn", false));
         if (!getPreferences().getBoolean("isOn", false)) { //isOn이름을 가진 bool값을 받아온다. 기본값 false
-            blutoothControl = new BluetoothControl(this, ActivityMain.this);
+            blutoothControl = new BluetoothControl(this, BluetoothMain.this);
             threadOn = true;
             startService(this);
         }
 
-        TextView textview = (TextView) findViewById(R.id.bpmTextView);
-        final SnakeView snakeView = (SnakeView) findViewById(R.id.snake);
+        textView = (TextView) findViewById(R.id.bpmTextView);
+        snakeView = (SnakeView) findViewById(R.id.snake);
 
-        startListenForData(blutoothControl.getInputStream(),textview,snakeView);
+
 
 //        textview.setText("" + blutoothControl.getInputStream());
 
@@ -113,13 +114,12 @@ public class ActivityMain extends AppCompatActivity {
                         handler.post(new Runnable() {
                             @Override
                             public void run() {
-                                getPreferences().edit().remove("isOn");
-                                getPreferences().edit().commit();
-                                getPreferences().edit().putBoolean("isOn", true);
                                 Log.d("xxx", "run: " + getPreferences().edit().commit());
                                 SetAndGetClass.getInstance().setBlutoothControl(blutoothControl);
                                 Intent intent = new Intent(context, MainService.class);
-                                startService(intent);
+                                //startService(intent);
+
+                                startListenForData(blutoothControl.getInputStream(),textView,snakeView);
                             }
                         });
                         break;

@@ -116,6 +116,28 @@
 
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="포지션 : "
+                android:textColor="#000000"
+                android:textSize="16dp" />
+
+            <TextView
+                android:id="@+id/positionTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="학생"
+                android:textColor="#000000"
+                android:textSize="16dp" />
+
+        </LinearLayout>
         <info.hoang8f.widget.FButton
             android:id="@+id/changeButton"
             android:layout_width="150dp"
@@ -184,19 +206,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
-            android:orientation="horizontal">
+            android:orientation="vertical">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="성별 : "
+                android:text="성별 "
                 android:textColor="#000000"
                 android:textSize="16dp" />
 
             <co.ceryle.radiorealbutton.RadioRealButtonGroup
                 android:id="@+id/genderBtnGroup"
-                android:layout_width="300dp"
-                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
                 android:layout_gravity="center"
                 app:rrbg_animateDrawables_enter="overshoot"
                 app:rrbg_dividerColor="@color/colorPrimaryDark"
@@ -210,7 +232,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:rrb_drawable="@drawable/boy_icon"
-                    app:rrb_drawableHeight="36dp"
+                    app:rrb_drawableHeight="31dp"
                     app:rrb_drawablePadding="10dp"
                     app:rrb_drawableWidth="36dp"
                     app:rrb_ripple="true"
@@ -225,7 +247,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:rrb_drawable="@drawable/girl_icon"
-                    app:rrb_drawableHeight="36dp"
+                    app:rrb_drawableHeight="30dp"
                     app:rrb_drawablePadding="10dp"
                     app:rrb_drawableWidth="36dp"
                     app:rrb_ripple="true"
@@ -239,6 +261,80 @@
 
         </LinearLayout>
 
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="포지션 "
+                android:textColor="#000000"
+                android:textSize="16dp" />
+
+            <co.ceryle.radiorealbutton.RadioRealButtonGroup
+                android:id="@+id/positionrBtnGroup"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                app:rrbg_animateDrawables_enter="overshoot"
+                app:rrbg_dividerColor="@color/colorPrimaryDark"
+                app:rrbg_dividerSize="1dp"
+                app:rrbg_radius="10dp"
+                app:rrbg_selectorColor="@color/colorPrimary"
+                app:rrbg_selectorSize="6dp">
+
+                <co.ceryle.radiorealbutton.RadioRealButton
+                    android:id="@+id/studentBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:rrb_drawable="@drawable/student_icon"
+                    app:rrb_drawableHeight="36dp"
+                    app:rrb_drawablePadding="10dp"
+                    app:rrb_drawableWidth="36dp"
+                    app:rrb_ripple="true"
+                    app:rrb_rippleColor="@color/colorPrimary"
+                    app:rrb_text="학생"
+                    app:rrb_textColor="#000000">
+
+                </co.ceryle.radiorealbutton.RadioRealButton>
+
+                <co.ceryle.radiorealbutton.RadioRealButton
+                android:id="@+id/driverBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:rrb_drawable="@drawable/driver_icon"
+                app:rrb_drawableHeight="36dp"
+                app:rrb_drawablePadding="10dp"
+                app:rrb_drawableWidth="36dp"
+                app:rrb_ripple="true"
+                app:rrb_rippleColor="@color/colorPrimary"
+                app:rrb_text="운전자"
+                app:rrb_textColor="#000000">
+
+            </co.ceryle.radiorealbutton.RadioRealButton>
+
+                <co.ceryle.radiorealbutton.RadioRealButton
+                    android:id="@+id/normalBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:rrb_drawable="@drawable/normal_icon"
+                    app:rrb_drawableHeight="30dp"
+                    app:rrb_drawablePadding="10dp"
+                    app:rrb_drawableWidth="36dp"
+                    app:rrb_ripple="true"
+                    app:rrb_rippleColor="@color/colorPrimary"
+                    app:rrb_text="일반"
+                    app:rrb_textColor="#000000">
+
+                </co.ceryle.radiorealbutton.RadioRealButton>
+            </co.ceryle.radiorealbutton.RadioRealButtonGroup>
+
+
+        </LinearLayout>
         <info.hoang8f.widget.FButton
             android:id="@+id/okButton"
             android:layout_width="150dp"

@@ -25,6 +25,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.dsm.wakeheart.Arduino.BluetoothMain;
 import com.dsm.wakeheart.Model.LoginItem;
 import com.dsm.wakeheart.R;
 import com.dsm.wakeheart.RestAPI;
@@ -109,6 +110,8 @@ public class LoginActivity extends AppCompatActivity {
                         Log.i("response--------- ",response.body().toString());
                         Intent intent = new Intent(LoginActivity.this,MainActivity.class);
                         startActivity(intent);
+                        Intent bluetoothIntent = new Intent(LoginActivity.this, BluetoothMain.class);
+                        startActivity(bluetoothIntent);
                         finish();
                     }
 

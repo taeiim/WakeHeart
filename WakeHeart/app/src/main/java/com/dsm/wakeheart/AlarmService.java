@@ -29,14 +29,6 @@ public class AlarmService extends Service {
         dialogIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         this.startActivity(dialogIntent);
 
-//        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, dialogIntent, PendingIntent.FLAG_ONE_SHOT);
-//        try {
-//            pendingIntent.send();
-//        } catch (Exception e) {
-//
-//
-//        }
-
         return super.onStartCommand(intent, flags, startId);
     }
 
