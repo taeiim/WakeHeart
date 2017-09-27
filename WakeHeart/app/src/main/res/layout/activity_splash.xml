@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary">
+
+    <ImageView
+        android:layout_width="210dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="140dp"
+        android:src="@drawable/logo_yellow_img"/>
+
+    <com.github.glomadrian.grav.GravView
+        android:id="@+id/grav"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        app:colorGenerator="com.github.glomadrian.grav.generator.paint.ArrayColorGenerator"
+        app:array_colors="@array/bubble"
+        app:pointGenerator="com.github.glomadrian.grav.generator.point.RegularPointGenerator"
+        app:regular_cell_size="210"
+        app:regular_variance="50"
+        app:gravGenerator="com.github.glomadrian.grav.generator.grav.BallGenerator"
+        app:ball_from_size="10dp"
+        app:ball_to_size="18dp"
+        app:animationGenerators="@array/BubbleAnimations"
+        app:side_to_side_min_duration="1800"
+        app:side_to_side_max_duration="2000"
+        app:side_to_side_direction="downToUp"
+        app:shake_direction="vertical"
+        app:shake_min_duration="1800"
+        app:shake_max_duration="2000"
+        app:shake_variance="50dp"
+        />
+
+    <!--<com.github.glomadrian.grav.GravView-->
+        <!--android:id="@+id/grav"-->
+        <!--android:layout_width="300dp"-->
+        <!--android:layout_height="250dp"-->
+        <!--android:layout_centerHorizontal="true"-->
+        <!--android:layout_marginTop="100dp"-->
+        <!--app:colorGenerator="com.github.glomadrian.grav.generator.paint.OneColorGenerator"-->
+        <!--app:single_color="#FFF"-->
+        <!--app:pointGenerator="com.github.glomadrian.grav.generator.point.PercentPointGenerator"-->
+        <!--app:ball_from_size="3dp"-->
+        <!--app:ball_to_size="6dp"-->
+        <!--app:animationGenerators="@array/WallaIcon"-->
+        <!--app:alpha_from="100"-->
+        <!--app:alpha_to="150"-->
+        <!--app:alpha_min_duration="1600"-->
+        <!--app:alpha_max_duration="3000"-->
+        <!--app:shake_direction="vertical"-->
+        <!--app:shake_variance="3dp"-->
+        <!--app:shake_min_duration="1100"-->
+        <!--app:shake_max_duration="3500"-->
+        <!--app:percent_points_array="@array/walla_points_percent_points"-->
+        <!--app:gravGenerator="com.github.glomadrian.grav.generator.grav.BallGenerator"-->
+        <!--/>-->
+</RelativeLayout>

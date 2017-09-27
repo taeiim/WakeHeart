@@ -1,132 +1,104 @@
 package com.dsm.wakeheart.Fragment;
 
-import android.app.Service;
-import android.content.Intent;
-import android.graphics.Rect;
-import android.graphics.drawable.Drawable;
-import android.location.LocationManager;
-import android.os.Bundle;
-import android.provider.Settings;
 import android.support.annotation.Nullable;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
-import android.widget.Toast;
 
+import com.dsm.wakeheart.Adapter.RecyclerViewAdapter;
+import com.dsm.wakeheart.Adapter.RestAreaRecyclerViewAdapter;
 import com.dsm.wakeheart.GPSinfo;
-import com.nhn.android.maps.NMapActivity;
-import com.nhn.android.maps.NMapCompassManager;
-import com.nhn.android.maps.NMapContext;
-import com.nhn.android.maps.NMapController;
-import com.nhn.android.maps.NMapLocationManager;
-import com.nhn.android.maps.NMapOverlay;
-import com.nhn.android.maps.NMapOverlayItem;
-import com.nhn.android.maps.NMapView;
-
+import com.dsm.wakeheart.Model.RestAreaItem;
 import com.dsm.wakeheart.R;
-import com.nhn.android.maps.maplib.NGeoPoint;
-import com.nhn.android.maps.nmapmodel.NMapError;
-import com.nhn.android.maps.nmapmodel.NMapPlacemark;
-import com.nhn.android.mapviewer.overlay.NMapCalloutOverlay;
-import com.nhn.android.mapviewer.overlay.NMapMyLocationOverlay;
-import com.nhn.android.mapviewer.overlay.NMapOverlayManager;
-import com.nhn.android.mapviewer.overlay.NMapPOIdataOverlay;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 
-/**
- * Created by parktaeim on 2017. 9. 5..
- */
+import java.util.ArrayList;
 
-public class RestAreaFragment extends Fragment{
-    private NMapContext nMapContext;
-    private static final String CLIENT_ID = "oPDj1y9Xk6B_IakJkQ0J";
+public class RestAreaFragment extends Fragment implements OnMapReadyCallback {
 
+    private GoogleMap mMap;
     private GPSinfo gps;
-    NMapView mapView;
 
-    NMapController mMapController = null;
+    private RecyclerView recyclerView;
+    private RestAreaRecyclerViewAdapter adapter;
+    private RecyclerView.LayoutManager layoutManager;
+    private ArrayList<RestAreaItem> restAreaItemArrayList = new ArrayList<>();
 
-    NMapMyLocationOverlay.ResourceProvider resourceProvider = null;
-    NMapOverlayManager mMapOverlayManager;
-    NMapPOIdataOverlay.OnStateChangeListener onPOIdataStateChangeListener = null;
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        addRestAreaData();
+    }
+
+    private void addRestAreaData() {
+        restAreaItemArrayList.add(new RestAreaItem("대전 휴게소","대전"));
+        restAreaItemArrayList.add(new RestAreaItem("대전 휴게소","대전"));
+        restAreaItemArrayList.add(new RestAreaItem("대전 휴게소","대전"));
+
+    }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_helper_restarea,container,false);
 
+        //지도
+        SupportMapFragment mapFragment = ((SupportMapFragment)getChildFragmentManager().findFragmentById(R.id.mapView));
+        mapFragment.getMapAsync(this);
+
+        //Setting RecyclerView
+        recyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerView);
+        recyclerView.setHasFixedSize(true);
+
+        layoutManager = new LinearLayoutManager(getActivity());
+        recyclerView.setLayoutManager(layoutManager);
+
+        recyclerView.scrollToPosition(0);
+        adapter = new RestAreaRecyclerViewAdapter(getActivity(), restAreaItemArrayList);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+
         return rootView;
     }
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        nMapContext = new NMapContext(super.getActivity());
-        nMapContext.onCreate();
-    }
+    public void onMapReady(GoogleMap googleMap) {
+        mMap = googleMap;
 
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        mapView = (NMapView) getView().findViewById(R.id.mapView);
-        mapView.setClientId(CLIENT_ID);
-        mapView.setClickable(true);
-        mapView.setEnabled(true);
-        mapView.setFocusable(true);
-        mapView.setFocusableInTouchMode(true);
-        mapView.requestFocus();
-        nMapContext.setupMapView(mapView);
-        currentGPSMarker();
-    }
-
-    private void currentGPSMarker() {
+        double latitude =37;
+        double longitude=126;
         gps = new GPSinfo(getActivity());
-        if(gps.isGetLocation()){
-            double latitude = gps.getLatitude();   // 위도
-            double longitude = gps.getLongitude(); // 경도
 
-            System.out.println("위도 : "+latitude+"  경도: "+longitude);
+        //현재 위도, 경도 가져오기
+        if(gps.isGetLocation()){
+            latitude = gps.getLatitude();
+            longitude = gps.getLongitude();
+            System.out.println("위도 : "+latitude+ " 경도 : "+longitude);
         }else{
             gps.showSettingsAlert();
         }
-    }
+
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
+                new LatLng(latitude,longitude),15));  //Latitude(위도), Longitude(경도)
 
 
+        mMap.addMarker(new MarkerOptions()
+            .icon(BitmapDescriptorFactory.fromResource(R.drawable.current_car_icon))
+            .anchor(0.5f,0.5f)
+            .position(new LatLng(latitude,longitude))
+            .title("현재 위치")
+            .snippet("나는 지금 여기에!"));
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        nMapContext.onStart();
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        nMapContext.onResume();
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        nMapContext.onPause();
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        nMapContext.onStop();
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-    }
-
-    @Override
-    public void onDestroy() {
-        nMapContext.onDestroy();
-        super.onDestroy();
     }
 }

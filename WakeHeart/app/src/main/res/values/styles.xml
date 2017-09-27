@@ -28,5 +28,9 @@
         <item name="android:textSize">20sp</item>
     </style>
 
+    <style name="SplashTheme" parent="AppTheme">
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+    </style>
 
 </resources>

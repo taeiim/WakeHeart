@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:fbutton="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:layout_marginBottom="?attr/actionBarSize"
+    android:background="@drawable/gradient_animation_list"
+    android:id="@+id/container">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
@@ -21,92 +24,104 @@
                 android:layout_width="160dp"
                 android:layout_height="40dp"
                 android:layout_centerInParent="true"
-                android:src="@drawable/logo_yellow_img"
-                />
+                android:src="@drawable/logo_yellow_img" />
 
             <ImageView
                 android:id="@+id/setting_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/setting_icon"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:paddingRight="15dp"/>
+                android:paddingRight="15dp"
+                android:src="@drawable/setting_icon" />
         </RelativeLayout>
     </android.support.v7.widget.Toolbar>
 
     <RelativeLayout
-        android:id="@+id/offLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center">
+        android:layout_height="match_parent">
 
-        <info.hoang8f.widget.FButton
-            android:id="@+id/OnOffButton"
-            android:layout_width="170dp"
-            android:layout_height="170dp"
-            android:layout_gravity="center"
-            android:layout_marginBottom="50dp"
-            android:text="OFF"
-            android:textColor="#FFFFFF"
-            android:textSize="35dp"
-            fbutton:buttonColor="@color/colorPrimary"
-            fbutton:cornerRadius="100dp"
-            fbutton:shadowColor="@color/colorPrimaryDark"
-            fbutton:shadowEnabled="true"
-            fbutton:shadowHeight="8dp" />
+
+
+
+            <RelativeLayout
+                android:id="@+id/offLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center">
+
+
+                <info.hoang8f.widget.FButton
+                    android:id="@+id/OnOffButton"
+                    android:layout_width="170dp"
+                    android:layout_height="170dp"
+                    android:layout_marginBottom="50dp"
+                    android:text="Start"
+                    android:textColor="#FFFFFF"
+                    android:textSize="20dp"
+                    app:buttonColor="@color/colorPrimary"
+                    app:cornerRadius="100dp"
+                    app:shadowColor="@color/colorPrimaryDark"
+                    app:shadowEnabled="true"
+                    app:shadowHeight="8dp" />
+
+
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:id="@+id/onLayout"
+                android:layout_width="match_parent"
+                android:layout_height="400dp"
+                android:layout_gravity="center"
+                android:layout_below="@+id/offLayout"
+                android:gravity="center"
+                android:padding="15dp">
+
+                <RelativeLayout
+                    android:id="@+id/bpmLayout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true">
+
+                    <TextView
+                        android:id="@+id/bpmTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0"
+                        android:textColor="#FFFFFF"
+                        android:textSize="70dp"
+                        android:layout_marginBottom="30dp"/>
+
+                    <ImageView
+                        android:id="@+id/heart_icon"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_toRightOf="@id/bpmTextView"
+                        android:src="@drawable/heart_icon" />
+
+                    <TextView
+                        android:id="@+id/textView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="40dp"
+                        android:layout_toRightOf="@+id/bpmTextView"
+                        android:text="bpm"
+                        android:textSize="20dp" />
+
+                </RelativeLayout>
+
+                <com.txusballesteros.SnakeView
+                    android:id="@+id/snake"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:layout_below="@+id/bpmLayout"
+                    app:strokeColor="@color/colorPrimaryDark"/>
+
+
+            </RelativeLayout>
     </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/onLayout"
-        android:layout_width="match_parent"
-        android:layout_height="400dp"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:padding="15dp">
-
-        <RelativeLayout
-            android:id="@+id/bpmLayout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true">
-
-            <TextView
-                android:id="@+id/bpmTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="85"
-                android:textSize="70dp" />
-
-            <ImageView
-                android:id="@+id/heart_icon"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:src="@drawable/heart_icon"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="10dp"
-                android:layout_toRightOf="@id/bpmTextView"/>
-
-            <TextView
-                android:id="@+id/textView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
-                android:layout_marginTop="40dp"
-                android:layout_toRightOf="@+id/bpmTextView"
-                android:text="bpm"
-                android:textSize="20dp" />
-
-        </RelativeLayout>
-
-        <com.txusballesteros.SnakeView
-            android:id="@+id/snake"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:layout_below="@+id/bpmLayout" />
-
-
-    </RelativeLayout>
-
-
 </LinearLayout>

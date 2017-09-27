@@ -37,6 +37,7 @@
                 android:text="박태임"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentBottom="true"
+                android:layout_marginRight="8dp"
                 android:textStyle="italic"/>
 
         </RelativeLayout>
