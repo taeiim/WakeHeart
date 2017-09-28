@@ -46,7 +46,6 @@ public class Graph1Fragment extends android.support.v4.app.Fragment {
     ArrayList<Entry> yVals = new ArrayList<>();
 
     int cnt = 6;
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -113,7 +112,7 @@ public class Graph1Fragment extends android.support.v4.app.Fragment {
         YAxis y = lineChart.getAxisLeft();
         y.setLabelCount(6, false); //y축 레이블을 6개 생성함
         y.setTextColor(Color.BLACK);
-        y.setPosition(YAxis.YAxisLabelPosition.INSIDE_CHART);
+        y.setPosition(YAxis.YAxisLabelPosition.OUTSIDE_CHART);
         y.setDrawGridLines(true);
         y.setGridColor(Color.LTGRAY);
         y.setAxisLineColor(Color.BLACK);

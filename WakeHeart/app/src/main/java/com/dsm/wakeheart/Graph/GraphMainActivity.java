@@ -17,6 +17,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.dsm.wakeheart.R;
 import com.github.mikephil.charting.charts.LineChart;
@@ -75,16 +76,21 @@ public class GraphMainActivity extends AppCompatActivity implements View.OnClick
     private final int ISIXMONTH = 6; //6개월
     private final int IFIVEWEEK = 5; //5주
     private final int ANMONTH = 30;
-    Mode mode = DAY;
+    Mode mode = Mode.DAY;
     int cnt = IWEEK;
     // 지정에서 사용하는 캘린더
-    Calendar calendar = Calendar.getInstance();
+    Calendar calendar;
 
+    //데이터 처리에 사용할 ArrayList
     public ArrayList<Integer> threeSecInterval = new ArrayList<>();
     ArrayList<Integer> hourInterval = new ArrayList<>();
     ArrayList<Integer> dayInterval = new ArrayList<>();
     ArrayList<Integer> weekInterval = new ArrayList<>();
     ArrayList<Integer> monthInterval = new ArrayList<>();
+
+    //직접 지정에 사용할 클래스 생성
+    DateData fromDateData = new DateData(0, 0);
+    DateData toDateData = new DateData(0, 0);
 
     // 모든 세팅 후 초기화
     @Override
@@ -99,18 +105,18 @@ public class GraphMainActivity extends AppCompatActivity implements View.OnClick
 
         lineChart = (LineChart) findViewById(R.id.lineChart);
         initSegmentbuttons(); //단위(일,주,월) 선택할 버튼 초기화
-        setChartData(DAY, IWEEK); // 차트 세팅
+        setChartData(DAY, IWEEK, IWEEK); // 차트 세팅
     }
 
     //setAxisData 실행 및 chart 세팅
-    public void setChartData(Mode mode, int cnt) { //매개변수는 setAxisData 위함
+    public void setChartData(Mode mode, int back, int duration) { //매개변수는 setAxisData 위함
         LineDataSet lineDataSet;
         float limitAround = 83f;
         String limitText = getString(R.string.limitText); // 특정 y값 라인으로 표시할 문자열
 //        Typeface mTfLight = Typeface.createFromAsset(getAssets(), "OpenSans-Light.ttf");
 
         //X축(날짜), y축(심박수, Int) 값 추가
-        setAxisData(mode, cnt);
+        setAxisData(mode, back, duration);
 
         //y값(심박수, Entry) 추가
         yVals.clear();
@@ -148,7 +154,7 @@ public class GraphMainActivity extends AppCompatActivity implements View.OnClick
         YAxis y = lineChart.getAxisLeft(); //왼쪽에 y값 표시
         y.setLabelCount(6, false); //y축 레이블을 6개 생성함
         y.setTextColor(Color.BLACK);
-        y.setPosition(YAxis.YAxisLabelPosition.INSIDE_CHART); //
+        y.setPosition(YAxis.YAxisLabelPosition.OUTSIDE_CHART);
         y.setDrawGridLines(true);
         y.enableGridDashedLine(10f, 10f, 0f); // 점선
         y.setGridColor(Color.LTGRAY);
@@ -231,9 +237,8 @@ public class GraphMainActivity extends AppCompatActivity implements View.OnClick
     }
 
     //chart Data setting
-    public void setAxisData(Mode mode, int cnt) {
+    public void setAxisData(Mode mode, int back, int duration) {
         calendar = Calendar.getInstance();
-
         final String dateFormat = "MM/dd";
         final String monthFormat = "MM월";
         final String weekFormat = "MM/dd";
@@ -245,15 +250,15 @@ public class GraphMainActivity extends AppCompatActivity implements View.OnClick
         switch (mode) {
             case DAY:
                 //cnt - 1일 전으로 세팅
-                calendar.add(Calendar.DATE, -cnt + 1);
+                calendar.add(Calendar.DATE, -back + 1);
                 //오늘까지
-                for (int i = 0; i < cnt; i++) {
+                for (int i = 0; i < duration; i++) {
                     xVals.add(new SimpleDateFormat(dateFormat).format(calendar.getTime()));
                     calendar.add(Calendar.DATE, 1);
 //                    heartVals.add(new Axis(i, i));
                 }
 
-                for (int i = 0; i < cnt; i++)
+                for (int i = 0; i < duration + 1; i++)
                     heartVals.add(tempVals.get(i));
                 break;
 
@@ -271,28 +276,28 @@ public class GraphMainActivity extends AppCompatActivity implements View.OnClick
 //                break;
             case WEEK:
                 //  (cnt - 1) 주 전으로 세팅
-                calendar.add(Calendar.DATE, (-cnt + 1));
+                calendar.add(Calendar.DATE, (-back + 1));
                 //오늘까지, cnt개 만큼
-                for (int i = 0; i < cnt; i++) {
+                for (int i = 0; i < duration; i++) {
                     xVals.add(new SimpleDateFormat(weekFormat).format(calendar.getTime()));
 //                    heartVals.add(new Axis(i, i));
                     calendar.add(Calendar.DATE, 1);
                 }
-                for (int i = 0; i < cnt; i++) {
+                for (int i = 0; i < duration; i++) {
                     heartVals.add(tempVals.get(i));
                 }
 
                 break;
             case MONTH:
                 //cnt -1 월 전으로 세팅
-                calendar.add(Calendar.MONTH, (-cnt + 1));
+                calendar.add(Calendar.MONTH, (-back + 1));
                 //오늘까지, cnt개 만큼 값 추가
-                for (int i = 0; i < cnt; i++) {
+                for (int i = 0; i < duration; i++) {
                     xVals.add(new SimpleDateFormat(monthFormat).format(calendar.getTime()));
                     calendar.add(Calendar.MONTH, 1);
 //                    heartVals.add(new Axis(i, 72 + i * 2));
                 }
-                for (int i = 0; i < cnt; i++) {
+                for (int i = 0; i < duration; i++) {
                     heartVals.add(tempVals.get(i));
                 }
                 break;
@@ -307,11 +312,14 @@ public class GraphMainActivity extends AppCompatActivity implements View.OnClick
         Button btn1Month = (Button) findViewById(R.id.button1Month);
         Button btn6Month = (Button) findViewById(R.id.button6Month);
         Button btnAssign = (Button) findViewById(R.id.buttonAssign);
+        Button btnSubmit = (Button) findViewById(R.id.submitBtn);
 
         btnWeek.setOnClickListener(this);
         btn1Month.setOnClickListener(this);
         btn6Month.setOnClickListener(this);
         btnAssign.setOnClickListener(this);
+        btnSubmit.setOnClickListener(this);
+
         buttonList.add(btnWeek);
         buttonList.add(btn1Month);
         buttonList.add(btn6Month);
@@ -323,18 +331,18 @@ public class GraphMainActivity extends AppCompatActivity implements View.OnClick
         switch (view.getId()) {
             case R.id.buttonAnWeek:
                 dateSel.setVisibility(View.GONE);
-                setChartData(DAY, IWEEK);
+                setChartData(DAY, IWEEK, IWEEK);
                 break;
 
             case R.id.button1Month:
                 dateSel.setVisibility(View.GONE);
-                setChartData(WEEK, ANMONTH);
+                setChartData(WEEK, ANMONTH, ANMONTH);
 //                setChartData(DAY, ANMONTH);
                 break;
 
             case R.id.button6Month:
                 dateSel.setVisibility(View.GONE);
-                setChartData(MONTH, ISIXMONTH);
+                setChartData(MONTH, ISIXMONTH, ISIXMONTH);
                 break;
             //직접지정
             case R.id.buttonAssign:
@@ -347,6 +355,10 @@ public class GraphMainActivity extends AppCompatActivity implements View.OnClick
                 break;
             case R.id.toDateEtxt:
                 ToDialog.show();
+                break;
+            case R.id.submitBtn:
+                submitClicked();
+                break;
         }
     }
 
@@ -369,6 +381,7 @@ public class GraphMainActivity extends AppCompatActivity implements View.OnClick
                     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                         cal.set(year, monthOfYear, dayOfMonth);
                         fromDateEtxt.setText(dateFormatter.format(cal.getTime()));
+                        fromDateData.changeData(monthOfYear, dayOfMonth);
                     }
                 };
         Calendar baseCalendar = Calendar.getInstance();
@@ -393,7 +406,11 @@ public class GraphMainActivity extends AppCompatActivity implements View.OnClick
 
                     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                         cal.set(year, monthOfYear, dayOfMonth);
+                        //리스너에선 캘린더 최솟값 조정 못하는 것 고려해야됨
+//                        if(fromDateData.day == 0 || fromDateData.month == 0) { //to부터 설정하므로 그냥 추가함
                         toDateEtxt.setText(dateFormatter.format(cal.getTime()));
+                        toDateData.changeData(monthOfYear, dayOfMonth);
+//                        } else (year)
                     }
                 };
 
@@ -409,6 +426,55 @@ public class GraphMainActivity extends AppCompatActivity implements View.OnClick
         params2.width = ViewGroup.LayoutParams.WRAP_CONTENT;
         params2.height = ViewGroup.LayoutParams.MATCH_PARENT;
         ToDialog.getWindow().setAttributes((android.view.WindowManager.LayoutParams) params);
+    }
+
+    private void submitClicked() {
+        if (fromDateData.day == 0 || fromDateData.month == 0 //둘중 하나라도 값이 설정되어 있지 않을 때
+                || toDateData.day == 0 || toDateData.month == 0) {
+            Toast.makeText(getApplicationContext(), "시작일과 최종일을 설정해주세요", Toast.LENGTH_LONG).show();
+            return;
+        }
+        Calendar calendar = Calendar.getInstance(); // 현재 날짜
+        //실제 날에서의 차이
+        int Month = Integer.parseInt(new SimpleDateFormat("MM").format(System.currentTimeMillis()));
+        int day = Integer.parseInt(new SimpleDateFormat("HH").format(System.currentTimeMillis()));
+        int back_month = (Month + 1) - fromDateData.month;
+        int back_day = day - fromDateData.day;
+        //기준일로부터 카운팅, dif : difference
+        int monthDif = toDateData.month - fromDateData.month;
+        int dayDif = toDateData.day - fromDateData.day;
+        //올해에서 작년으로 갈 경우를 고려, 날짜간 차잇값 양수 설정
+        back_month = setDatePlus(back_month);
+        back_day = setDatePlus(back_day);
+        monthDif = setDatePlus(monthDif);
+        dayDif = setDatePlus(dayDif);
+        //편의상 단위별은 미지원허고 월 변경 시 월 단위로 줌
+        int day222 = 1;
+        if (monthDif != 0) { //월단위 지정
+            setChartData(MONTH, back_month, monthDif);
+        } else {
+            if (dayDif != 0) { //일 단위 지정
+                setChartData(DAY, back_day, dayDif);
+            } else { //같은 날짜
+                Toast.makeText(getApplicationContext(), "시작일과 최종일을 서로 다르게 설정해주세요.", Toast.LENGTH_LONG).show();
+            }
+        }
+
+        //4초 뒤 공지
+        try {
+            Thread.sleep(4000);
+        } catch (InterruptedException e) {
+        }
+        Toast.makeText(getApplicationContext(), "단위 지정은 추후 업데이트될 예정이며,\n현재는 바뀐 날짜 중 큰 단위 기준으로 표시됩니다", Toast.LENGTH_LONG).show();
+    }
+
+    private int setDatePlus(int i) {
+        if (i < 0) {
+            i = i + 12 + 1;
+        }else if(i > 0) {
+            i++;
+        }
+        return i;
     }
 
     //    void dateModeChanged (int month, int day) {

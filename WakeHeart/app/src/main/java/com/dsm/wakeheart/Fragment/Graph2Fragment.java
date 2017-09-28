@@ -25,6 +25,7 @@ import android.widget.LinearLayout;
 
 import com.dsm.wakeheart.Activity.SettingsActivity;
 import com.dsm.wakeheart.Graph.Axis;
+import com.dsm.wakeheart.Graph.DateData;
 import com.dsm.wakeheart.Graph.Mode;
 import com.dsm.wakeheart.R;
 import com.github.mikephil.charting.charts.LineChart;
@@ -133,6 +134,9 @@ public class Graph2Fragment extends Fragment implements View.OnClickListener, On
     ArrayList<Integer> monthInterval = new ArrayList<>();
 
 
+    DateData fromDateData = new DateData(0, 0);
+    DateData toDateData = new DateData(0, 0);
+
     //setAxisData 실행 및 chart 세팅
     public void setChartData(Mode mode, int cnt) { //매개변수는 setAxisData 위함
         LineDataSet lineDataSet;
@@ -179,7 +183,7 @@ public class Graph2Fragment extends Fragment implements View.OnClickListener, On
         YAxis y = lineChart.getAxisLeft(); //왼쪽에 y값 표시
         y.setLabelCount(6, false); //y축 레이블을 6개 생성함
         y.setTextColor(Color.BLACK);
-        y.setPosition(YAxis.YAxisLabelPosition.INSIDE_CHART); //
+        y.setPosition(YAxis.YAxisLabelPosition.OUTSIDE_CHART); //
         y.setDrawGridLines(true);
         y.enableGridDashedLine(10f, 10f, 0f); // 점선
         y.setGridColor(Color.LTGRAY);
@@ -378,6 +382,7 @@ public class Graph2Fragment extends Fragment implements View.OnClickListener, On
                 break;
             case R.id.toDateEtxt:
                 ToDialog.show();
+                break;
         }
     }
 
@@ -400,6 +405,8 @@ public class Graph2Fragment extends Fragment implements View.OnClickListener, On
                     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                         cal.set(year, monthOfYear, dayOfMonth);
                         fromDateEtxt.setText(dateFormatter.format(cal.getTime()));
+                        fromDateData.changeData(monthOfYear, dayOfMonth);
+
                     }
                 };
         Calendar baseCalendar = Calendar.getInstance();
@@ -425,6 +432,7 @@ public class Graph2Fragment extends Fragment implements View.OnClickListener, On
                     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                         cal.set(year, monthOfYear, dayOfMonth);
                         toDateEtxt.setText(dateFormatter.format(cal.getTime()));
+                        toDateData.changeData(monthOfYear, dayOfMonth);
                     }
                 };
 
@@ -438,7 +446,7 @@ public class Graph2Fragment extends Fragment implements View.OnClickListener, On
 
         ViewGroup.LayoutParams params2 = ToDialog.getWindow().getAttributes();
         params2.width = ViewGroup.LayoutParams.WRAP_CONTENT;
-        params2.height = ViewGroup.LayoutParams.MATCH_PARENT;
+        params2.height = ViewGroup.LayoutParams.WRAP_CONTENT;
         ToDialog.getWindow().setAttributes((android.view.WindowManager.LayoutParams) params);
     }
 

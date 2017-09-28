@@ -33,7 +33,7 @@ public class BluetoothControl {
     public BluetoothControl(Activity activity, Context context) {
         this.activity = activity;
         this.context = context;
-//        checkEnableBluetooth();
+        checkEnableBluetooth();
     }
 
     public void checkEnableBluetooth() {
@@ -43,7 +43,7 @@ public class BluetoothControl {
             checkOnOffBlutooth();
         } else {
             Toast.makeText(activity.getApplicationContext(), "기기가 블루투스를 지원하지 않습니다", Toast.LENGTH_LONG).show();
-            activity.finish();
+//            activity.finish();
         }
     }
 
@@ -51,6 +51,7 @@ public class BluetoothControl {
         if (!bluetoothAdapter.isEnabled()) {
             Intent enableBlutoothIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
             activity.startActivityForResult(enableBlutoothIntent, REQUEST_ENABLE_BT);
+            selectDevice();
         } else {
             selectDevice();
         }
@@ -98,7 +99,7 @@ public class BluetoothControl {
             //startListenForData(inputStream);
         } catch (Exception e) {
             Toast.makeText(activity.getApplicationContext(), "블루투스 연결 중 오류가 발생했습니다.", Toast.LENGTH_LONG).show();
-            activity.finish();
+//            activity.finish();
         }
     }
 
