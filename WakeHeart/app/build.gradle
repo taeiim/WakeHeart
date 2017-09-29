@@ -9,6 +9,7 @@ android {
         targetSdkVersion 26
         versionCode 1
         versionName "1.0"
+        multiDexEnabled  true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -32,6 +33,8 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
+
+
     compile 'com.android.support:appcompat-v7:26.+'
     compile 'com.android.support:design:26.+'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
@@ -49,7 +52,21 @@ dependencies {
     compile 'com.squareup.retrofit2:converter-gson:2.0.1'
     compile 'com.squareup.okhttp3:okhttp:3.8.0'
     compile 'nl.dionsegijn:konfetti:1.1.0'
+    compile 'com.google.android.gms:play-services:10.2.1'
+    compile 'com.google.android.gms:play-services-maps:10.2.1'
+    compile 'com.google.android.gms:play-services-drive:10.2.1'
+    compile 'com.google.android.gms:play-services-location:10.2.1'
+    compile 'com.google.android.gms:play-services-gcm:10.2.1'
+    compile 'com.android.support:multidex:1.0.1'
+    compile 'com.jaredrummler:material-spinner:1.1.0'
+    compile "com.hanks:htextview-base:0.1.1"
+    compile "com.hanks:htextview-scale:0.1.1"
+    compile 'com.skyfishjy.ripplebackground:library:1.0.1'
+    compile 'com.github.glomadrian:Grav:1.1'
+    compile 'com.dynamitechetan.flowinggradient:flowinggradient:1.1'
+    compile 'com.github.PhilJay:MPAndroidChart:v3.0.2'
+    compile 'com.android.support:design:26.0.0-alpha1'
+    compile 'info.hoang8f:android-segmented:1.0.6'
+
     testCompile 'junit:junit:4.12'
-
-
 }

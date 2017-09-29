@@ -34,9 +34,11 @@
                 android:id="@+id/authorTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_below="@id/wiseSayingTextView"
                 android:text="박태임"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentBottom="true"
+                android:layout_marginRight="8dp"
                 android:textStyle="italic"/>
 
         </RelativeLayout>
