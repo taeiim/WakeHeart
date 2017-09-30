@@ -1,6 +1,5 @@
 package com.dsm.wakeheart;
 
-import com.dsm.wakeheart.Model.LoginItem;
 import com.dsm.wakeheart.Model.UserDTO;
 import com.dsm.wakeheart.Model.WiseSayingItem;
 import com.dsm.wakeheart.Server.resource.APIUrl;
@@ -31,7 +30,8 @@ public interface RestAPI {
     @GET(APIUrl.WISE_SAYING_URL)
     Call<JsonObject> wiseSaying();
 
+    @FormUrlEncoded
     @POST(APIUrl.LOGIN_URL)
-    Call<ResponseBody> logIn(@Body LoginItem data);
+    Call<JsonObject> logIn(@Field("id") String id ,@Field("password") String password);
 
 }
