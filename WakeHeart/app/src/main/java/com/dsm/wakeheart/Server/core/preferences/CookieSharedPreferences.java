@@ -11,7 +11,7 @@ import java.util.HashSet;
  */
 
 public class CookieSharedPreferences {
-    public static final String COOKIE_SHARED_PREFERENCES_KEY = "new.devetude.www.cookie";
+    public static final String COOKIE_SHARED_PREFERENCES_KEY = "com.wakeheart.key.cookie";
 
     // 싱글톤 모델로 객체 초기화
     private static CookieSharedPreferences cookieSharedPreferences = null;
