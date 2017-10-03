@@ -84,6 +84,10 @@ public class RestAreaFragment extends Fragment implements OnMapReadyCallback {
         if(gps.isGetLocation()){
             latitude = gps.getLatitude();
             longitude = gps.getLongitude();
+            if(latitude==0 || longitude ==0){
+                latitude = 36.391603;
+                longitude= 127.363082;
+            }
             System.out.println("위도 : "+latitude+ " 경도 : "+longitude);
         }else{
             gps.showSettingsAlert();

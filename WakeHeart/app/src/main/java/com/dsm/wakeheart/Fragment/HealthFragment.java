@@ -80,8 +80,8 @@ public class HealthFragment extends android.support.v4.app.Fragment {
 
 
         gender = 0;
-        age = 18;
-        bpm = 52;
+        age = 48;
+        bpm = 78;
 
         // 남자일때
         if (gender == 0) {

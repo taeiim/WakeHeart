@@ -1,9 +1,12 @@
 package com.dsm.wakeheart.Activity;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
@@ -61,7 +64,23 @@ public class SettingsActivity extends AppCompatActivity{
                     Intent intent2 = new Intent(SettingsActivity.this,MusicManageActivity.class);
                     startActivity(intent2);
                 }else if(position == 3){  // 로그아웃
-                    //로그아웃
+                    new AlertDialog.Builder(SettingsActivity.this)
+                            .setTitle("로그아웃").setMessage("로그아웃 하시겠습니까?")
+                            .setPositiveButton("로그아웃", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int whichButton) {
+                                    Intent i = new Intent(SettingsActivity.this, LoginActivity.class);
+                                    i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                                    startActivity(i);
+                                }
+                            })
+                            .setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int whichButton) {
+
+                                }
+                            })
+                            .show();
+
+
                 }
             }
 

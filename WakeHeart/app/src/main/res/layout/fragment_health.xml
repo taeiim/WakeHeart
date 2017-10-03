@@ -82,7 +82,7 @@
                         android:layout_below="@+id/TextViewAvg"
                         android:layout_marginLeft="15dp"
                         android:layout_toRightOf="@+id/heart_icon"
-                        android:text="93"
+                        android:text="78"
                         android:textColor="@color/colorPrimary"
                         android:textSize="40dp" />
 
