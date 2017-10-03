@@ -43,7 +43,6 @@ public class BluetoothControl {
             checkOnOffBlutooth();
         } else {
             Toast.makeText(activity.getApplicationContext(), "기기가 블루투스를 지원하지 않습니다", Toast.LENGTH_LONG).show();
-            activity.finish();
         }
     }
 
@@ -58,6 +57,7 @@ public class BluetoothControl {
 
     public void selectDevice() {
         final Set<BluetoothDevice> bluetoothDevices = bluetoothAdapter.getBondedDevices();
+
 
         if (bluetoothDevices.size() == 0) {
             Toast.makeText(activity.getApplicationContext(), "페어링된 기기가 없습니다.", Toast.LENGTH_LONG).show();

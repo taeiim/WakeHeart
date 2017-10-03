@@ -60,7 +60,6 @@ public class MainActivity extends AppCompatActivity implements AHBottomNavigatio
         bottomNavigation.setTitleState(AHBottomNavigation.TitleState.ALWAYS_SHOW);
 
         bottomNavigation.setCurrentItem(2);  //처음 시작 화면 main
-
     }
 
 
@@ -69,7 +68,6 @@ public class MainActivity extends AppCompatActivity implements AHBottomNavigatio
         if (position == 0) {
             Graph1Fragment graph1Fragment = new Graph1Fragment();
             getSupportFragmentManager().beginTransaction().replace(R.id.content_id, graph1Fragment).commit();
-
         } else if (position == 1) {
             Graph2Fragment graph2Fragment = new Graph2Fragment();
             getSupportFragmentManager().beginTransaction().replace(R.id.content_id, graph2Fragment).commit();

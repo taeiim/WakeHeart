@@ -27,6 +27,9 @@ import com.txusballesteros.SnakeView;
 
 
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.LinkedList;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -48,7 +51,7 @@ public class MainFragment extends android.support.v4.app.Fragment {
     BluetoothControl blutoothControl;
     SnakeView snakeView;
     int readBufferPosition=0;
-
+    LinkedList<Integer> datas = new LinkedList<>();
 
 
     @Nullable
@@ -91,12 +94,8 @@ public class MainFragment extends android.support.v4.app.Fragment {
             }
         });
 
-        Log.d("xxx", "onCreate: " + getPreferences().getBoolean("isOn", false));
-        if (!getPreferences().getBoolean("isOn", false)) { //isOn이름을 가진 bool값을 받아온다. 기본값 false
-            blutoothControl = new BluetoothControl(getActivity(), getContext());
-            threadOn = true;
-            startService(getActivity());
-        }
+
+        Log.d("xxx", "data is" + SetAndGetClass.getInstance().getInputStream());
 
         textView = (TextView) rootView.findViewById(R.id.bpmTextView);
         snakeView = (SnakeView) rootView.findViewById(R.id.snake);
@@ -105,12 +104,22 @@ public class MainFragment extends android.support.v4.app.Fragment {
         snakeView.setMinValue(30);
         snakeView.setMaxValue(100);
 
+        if (SetAndGetClass.getInstance().getInputStream() == null) { //isOn이름을 가진 bool값을 받아온다. 기본값 false
+            blutoothControl = new BluetoothControl(getActivity(), getContext());
+            threadOn = true;
+            startService(getActivity());
+        }else{
+            ListenThread = true;
+            startListenForData(SetAndGetClass.getInstance().getInputStream(), textView, snakeView);
+        }
+
         sleep();
         setBackgroundGradient();
 
         return rootView;
     }
 
+    private boolean ListenThread = true;
 
     private void startListenForData(final InputStream inputStream, final TextView textView, final SnakeView snakeView) {
         final Handler handler = new Handler();
@@ -118,40 +127,67 @@ public class MainFragment extends android.support.v4.app.Fragment {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                while (!Thread.currentThread().isInterrupted()) {
-                    try {
-                        int byteAvailable = inputStream.available();
-                        if (byteAvailable > 0) {
-                            byte[] packetBytes = new byte[byteAvailable];
-                            inputStream.read(packetBytes);
-                            for (int i = 0; i < byteAvailable; i++) {
-                                byte b = packetBytes[i];
-                                if (b == 'e') {
-                                    byte[] encodeBytes = new byte[readBufferPosition];
-                                    System.arraycopy(readBuffer, 0, encodeBytes, 0, encodeBytes.length);
-                                    final String data = new String(encodeBytes);
-                                    readBufferPosition = 0;
-                                    handler.post(new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            Log.d("xxx", data);
-                                            textView.setText(data);
-                                            int dataInt = Integer.parseInt(data);
-                                            snakeView.addValue(dataInt);
+                while (ListenThread){
+                    while (!Thread.currentThread().isInterrupted()) {
+                        try {
+                            int byteAvailable = inputStream.available();
+                            if (byteAvailable > 0) {
+                                byte[] packetBytes = new byte[byteAvailable];
+                                inputStream.read(packetBytes);
+                                for (int i = 0; i < byteAvailable; i++) {
+                                    byte b = packetBytes[i];
+                                    if (b == 'e') {
+                                        byte[] encodeBytes = new byte[readBufferPosition];
+                                        System.arraycopy(readBuffer, 0, encodeBytes, 0, encodeBytes.length);
+                                        final String data = new String(encodeBytes);
+                                        int dataInt = 0;
+                                        dataInt = Integer.parseInt(data);
+                                        readBufferPosition = 0;
+                                        handler.post(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                Log.d("data is! : ", data);
+                                                Log.d("textView", "" + textView.toString() + snakeView.toString());
+                                                textView.setText(data);
+                                                int dataInt = 0;
+                                                try {
+
+
+                                                }catch (Exception e){
+                                                    e.printStackTrace();
+                                                }
+                                                if(dataInt >= 30 && dataInt <= 100){
+                                                    snakeView.addValue(dataInt);
+                                                }
+
+//                                                Calendar calendar = Calendar.getInstance();
+//                                                String strCal = calendar.getTime().toString();Log.d("date-----",strCal);
+//                                                if(strCal.equals("Wed Sep 27 23:33:00 GMT+09:00 2017")){
+//
+
+//                                                }
+                                            }
+                                        });
+                                        if(dataInt < 60){
+                                            datas.add(dataInt);
+                                            dataCals();
                                         }
-                                    });
-                                } else {
-                                    readBuffer[readBufferPosition++] = b;
+                                    } else {
+                                        readBuffer[readBufferPosition++] = b;
+                                    }
                                 }
                             }
+                        } catch (Exception e) {
+                            e.printStackTrace();
                         }
-                    } catch (Exception e) {
-                        e.printStackTrace();
                     }
                 }
-            }
+
+                }
         }).start();
+
     }
+
 
     Thread thread;
 
@@ -163,17 +199,12 @@ public class MainFragment extends android.support.v4.app.Fragment {
             @Override
             public void run() {
                 while (threadOn) {
-                    Log.d("xxx", "hello");
-                    Log.d("xxx", "" + blutoothControl.getInputStream());
                     if (blutoothControl.getInputStream() != null) {
                         handler.post(new Runnable() {
                             @Override
                             public void run() {
-                                Log.d("xxx", "run: " + getPreferences().edit().commit());
                                 SetAndGetClass.getInstance().setBlutoothControl(blutoothControl);
                                 Intent intent = new Intent(context, MainService.class);
-                                //startService(intent);
-
                                 startListenForData(blutoothControl.getInputStream(),textView,snakeView);
                             }
                         });
@@ -194,6 +225,28 @@ public class MainFragment extends android.support.v4.app.Fragment {
     private SharedPreferences getPreferences() {
         SharedPreferences pref = getActivity().getSharedPreferences("pref", MODE_PRIVATE);
         return pref;
+    }
+    
+    private void dataCals(){
+        if(datas.size() > 3 ){
+            if(datas.get(0) > datas.get(1)){
+                if(datas.get(1) > datas.get(2)){
+                  if(datas.get(2) > datas.get(3)){
+                      if(datas.get(3)> datas.get(4)){
+                          Intent intent = new Intent(getActivity(), AlarmService.class);
+                          getActivity().startService(intent);
+                          datas.clear();
+                      }
+                  }else {
+                      datas.clear();
+                  }
+                }else{
+                    datas.clear();
+                }
+            }else {
+                datas.clear();
+            }
+        }
     }
 
 
@@ -229,11 +282,16 @@ public class MainFragment extends android.support.v4.app.Fragment {
     }
 
     private void sleep() {
-        sleep = true;
-        if(sleep == true){
-            getActivity().startService(new Intent(getActivity(),AlarmService.class));
-        }
+//        sleep = true;
+//        if(sleep == true){
+//            getActivity().startService(new Intent(getActivity(),AlarmService.class));
+//        }
     }
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        ListenThread = false;
+    }
 
 }
