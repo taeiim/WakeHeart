@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,8 @@ import com.dsm.wakeheart.Adapter.RestAreaRecyclerViewAdapter;
 import com.dsm.wakeheart.GPSinfo;
 import com.dsm.wakeheart.Model.RestAreaItem;
 import com.dsm.wakeheart.R;
+import com.dsm.wakeheart.RestAPI;
+import com.dsm.wakeheart.Server.resource.APIUrl;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -22,13 +25,25 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonPrimitive;
 
 import java.util.ArrayList;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RestAreaFragment extends Fragment implements OnMapReadyCallback {
 
     private GoogleMap mMap;
     private GPSinfo gps;
+
+    private double latitude,longitude;
 
     private RecyclerView recyclerView;
     private RestAreaRecyclerViewAdapter adapter;
@@ -39,6 +54,34 @@ public class RestAreaFragment extends Fragment implements OnMapReadyCallback {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         addRestAreaData();
+
+        Gson gson = new GsonBuilder()
+                .setLenient()
+                .create();
+
+        Retrofit builder = new Retrofit.Builder()
+                .baseUrl(APIUrl.API_BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .build();
+        RestAPI restAPI = builder.create(RestAPI.class);
+        Call<JsonPrimitive> call = restAPI.restArea((float)latitude,(float)longitude);
+        call.enqueue(new Callback<JsonPrimitive>() {
+            @Override
+            public void onResponse(Call<JsonPrimitive> call, Response<JsonPrimitive> response) {
+                System.out.println("안뇽!");
+                Log.d("rest area response----",response.body().toString());
+                Log.d("rest area header----",response.headers().toString());
+                Log.d("rest area code----",String.valueOf(response.code()));
+                Log.d("rest area message----",response.message().toString());
+
+
+            }
+
+            @Override
+            public void onFailure(Call<JsonPrimitive> call, Throwable t) {
+                Log.d("실패ㅠㅠ----",t.toString());
+            }
+        });
     }
 
     private void addRestAreaData() {
@@ -76,8 +119,8 @@ public class RestAreaFragment extends Fragment implements OnMapReadyCallback {
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        double latitude =37;
-        double longitude=126;
+        latitude =37;
+        longitude=126;
         gps = new GPSinfo(getActivity());
 
         //현재 위도, 경도 가져오기

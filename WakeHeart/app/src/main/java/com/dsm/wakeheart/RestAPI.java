@@ -1,7 +1,9 @@
 package com.dsm.wakeheart;
 
 import com.dsm.wakeheart.Server.resource.APIUrl;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonPrimitive;
 
 import retrofit2.Call;
 import retrofit2.http.Field;
@@ -24,5 +26,9 @@ public interface RestAPI {
     @FormUrlEncoded
     @POST(APIUrl.LOGIN_URL)
     Call<JsonObject> logIn(@Field("id") String id ,@Field("password") String password);
+
+    @FormUrlEncoded
+    @POST(APIUrl.REST_AREA_URL)
+    Call<JsonPrimitive> restArea(@Field("latitude") float latitude, @Field("longitude") float longitude);
 
 }
