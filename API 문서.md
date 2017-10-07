@@ -45,11 +45,7 @@
 
 ### 로그아웃
 
-​	
-
 - `/API/logout`
-
-
 - 요청
   - POST
 - 인자
@@ -73,8 +69,6 @@
 ### 명언 데이터 가져오기
 
 * `/API/phrase/all`
-
-
 * 요청
   * GET
 * 인자
@@ -99,9 +93,9 @@
 
 * `/API/rests/`
 * 요청
-  * latitude: Float
-  * longitude: Float
-
+  * GET
+* 인자
+  * 없음
 
 
 ### 기기 등록
