@@ -3,8 +3,12 @@ package com.dsm.wakeheart.Server.core.preferences;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.preference.Preference;
+import android.util.Log;
 
+import java.util.Collection;
 import java.util.HashSet;
+import java.util.Map;
 
 /**
  * Created by parktaeim on 2017. 9. 13..
@@ -45,7 +49,12 @@ public class CookieSharedPreferences {
     public void putHashSet(String key, HashSet<String> hashSet){
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putStringSet(key, hashSet);
+        System.out.println("shared preferences login log");
+        Log.d(key,hashSet.toString());
+        Log.d("editor---------",editor.toString());
         editor.commit();
+
+
     }
 
     /**

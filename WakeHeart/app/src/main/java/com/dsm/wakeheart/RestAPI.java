@@ -23,12 +23,7 @@ public interface RestAPI {
     @GET(APIUrl.WISE_SAYING_URL)
     Call<JsonObject> wiseSaying();
 
-    @FormUrlEncoded
-    @POST(APIUrl.LOGIN_URL)
-    Call<JsonObject> logIn(@Field("id") String id ,@Field("password") String password);
-
-    @FormUrlEncoded
-    @POST(APIUrl.REST_AREA_URL)
-    Call<JsonPrimitive> restArea(@Field("latitude") float latitude, @Field("longitude") float longitude);
+    @GET(APIUrl.REST_AREA_URL)
+    Call<JsonObject> restArea();
 
 }

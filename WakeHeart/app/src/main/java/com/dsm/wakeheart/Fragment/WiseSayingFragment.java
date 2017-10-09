@@ -25,8 +25,13 @@ import com.dsm.wakeheart.Server.resource.APIUrl;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
+import com.google.gson.JsonIOException;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,9 +53,12 @@ public class WiseSayingFragment extends Fragment {
     private RecyclerView.LayoutManager layoutManager;
     private ArrayList<WiseSayingItem> wiseSayingItems = new ArrayList<>();
 
+    String result;
+    JsonArray jsonAr;
+
     @Override
-    public View onCreateView(LayoutInflater inflater,ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_helper_wisesaying,container,false);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View rootView = inflater.inflate(R.layout.fragment_helper_wisesaying, container, false);
 
         recyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
@@ -58,7 +66,7 @@ public class WiseSayingFragment extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.scrollToPosition(0);
 
-        adapter = new RecyclerViewAdapter(getActivity(),wiseSayingItems);
+        adapter = new RecyclerViewAdapter(getActivity(), wiseSayingItems);
         recyclerView.setAdapter(adapter);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
@@ -71,14 +79,24 @@ public class WiseSayingFragment extends Fragment {
         call.enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
-                JsonObject jsonObject = response.body().getAsJsonObject("phrase");
-                Log.d("jsonArray---------",jsonObject.toString());
+                Log.d("response----", response.body().toString());
 
+                JsonObject jsonObject= response.body();
+                try {
+                    jsonAr=jsonObject.getAsJsonArray("phrase");
+                }
+                catch (JsonIOException e) {
+                    e.printStackTrace();
+                }
+
+                Log.d("jsonArray-----",jsonAr.toString());
+
+//                JsonArray jsonArray = response.body().getAsJsonArray();
             }
 
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
-
+                Log.d("t",t.toString());
             }
         });
 
@@ -132,7 +150,7 @@ public class WiseSayingFragment extends Fragment {
 //        wiseSayingItems.add(new WiseSayingItem("내일 무엇을 해야 할지 모르는 사람은 불행하다.","- 고리키"));
 //        wiseSayingItems.add(new WiseSayingItem("시간은 목숨이고 우리는 그 목숨을 쓰면서 살아간다.","- 미상"));
 //        wiseSayingItems.add(new WiseSayingItem("짧은 인생은 시간의 낭비에 의해 더욱 짧아진다.","- 존슨"));
-        wiseSayingItems.add(new WiseSayingItem("나는 생각한다. 그러므로 존재한다.","- 르네 데카르트"));
+//        wiseSayingItems.add(new WiseSayingItem("나는 생각한다. 그러므로 존재한다.","- 르네 데카르트"));
 
     }
 

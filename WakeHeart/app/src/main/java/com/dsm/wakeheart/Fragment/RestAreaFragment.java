@@ -27,6 +27,9 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
 
@@ -64,10 +67,10 @@ public class RestAreaFragment extends Fragment implements OnMapReadyCallback {
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
         RestAPI restAPI = builder.create(RestAPI.class);
-        Call<JsonPrimitive> call = restAPI.restArea((float)latitude,(float)longitude);
-        call.enqueue(new Callback<JsonPrimitive>() {
+        Call<JsonObject> call = restAPI.restArea();
+        call.enqueue(new Callback<JsonObject>() {
             @Override
-            public void onResponse(Call<JsonPrimitive> call, Response<JsonPrimitive> response) {
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
                 System.out.println("안뇽!");
                 Log.d("rest area response----",response.body().toString());
                 Log.d("rest area header----",response.headers().toString());
@@ -75,10 +78,18 @@ public class RestAreaFragment extends Fragment implements OnMapReadyCallback {
                 Log.d("rest area message----",response.message().toString());
 
 
+                JsonPrimitive jsonObject = response.body().getAsJsonObject().getAsJsonPrimitive("list");
+                Log.d("list jsonObject----",jsonObject.toString());
+
+//                JsonObject jsonObject2 = jsonObject.getAsJsonObject();
+//                JsonPrimitive jsonPrimitive = jsonObject2.getAsJsonPrimitive("list");
+//                Log.d("jsonObject2--------",jsonObject2.toString());
+//                Log.d("jsonPrimitive--------",jsonPrimitive.toString());
+
             }
 
             @Override
-            public void onFailure(Call<JsonPrimitive> call, Throwable t) {
+            public void onFailure(Call<JsonObject> call, Throwable t) {
                 Log.d("실패ㅠㅠ----",t.toString());
             }
         });
