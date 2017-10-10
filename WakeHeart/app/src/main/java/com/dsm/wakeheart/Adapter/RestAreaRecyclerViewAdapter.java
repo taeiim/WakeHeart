@@ -36,6 +36,7 @@ public class RestAreaRecyclerViewAdapter extends RecyclerView.Adapter<RestAreaRe
     public void onBindViewHolder(ViewHolder holder, int position) {
         holder.restAreaName.setText(arrayList.get(position).getRestAreaName());
         holder.routeName.setText(arrayList.get(position).getRouteName());
+        holder.distance.setText(arrayList.get(position).getDistance());
     }
 
     @Override
@@ -46,10 +47,13 @@ public class RestAreaRecyclerViewAdapter extends RecyclerView.Adapter<RestAreaRe
     public class ViewHolder extends RecyclerView.ViewHolder{
         TextView restAreaName ;
         TextView routeName;
+        TextView distance;
+
         public ViewHolder(View itemView) {
             super(itemView);
             restAreaName = (TextView) itemView.findViewById(R.id.restAreaNameTextView);
             routeName = (TextView) itemView.findViewById(R.id.routeNameTextView);
+            distance = (TextView) itemView.findViewById(R.id.distanceTextView);
         }
     }
 }

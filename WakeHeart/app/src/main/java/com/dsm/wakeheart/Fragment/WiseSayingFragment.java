@@ -27,12 +27,14 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonIOException;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.google.gson.JsonPrimitive;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -81,16 +83,24 @@ public class WiseSayingFragment extends Fragment {
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
                 Log.d("response----", response.body().toString());
 
-                JsonObject jsonObject= response.body();
                 try {
-                    jsonAr=jsonObject.getAsJsonArray("phrase");
+//                    jsonAr=jsonObject.getAsJsonArray("phrase");
+                    JsonElement object = response.body().getAsJsonPrimitive("phrase");
+                    String tmp = object.getAsString();
+                    JSONArray array = new JSONArray(tmp);
+                    Log.d("fuck---------", array.toString());
+                    ArrayList<WiseSayingItem> arrayList = new ArrayList<>();
+                    arrayList = getArrayList(array);
+                    adapter = new RecyclerViewAdapter(getActivity(),arrayList);
+                    recyclerView.setAdapter(adapter);
+
+
                 }
                 catch (JsonIOException e) {
                     e.printStackTrace();
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
-
-                Log.d("jsonArray-----",jsonAr.toString());
-
 //                JsonArray jsonArray = response.body().getAsJsonArray();
             }
 
@@ -102,6 +112,23 @@ public class WiseSayingFragment extends Fragment {
 
 
         return rootView;
+    }
+
+    private ArrayList<WiseSayingItem> getArrayList(JSONArray array) {
+        ArrayList<WiseSayingItem> arrayList = new ArrayList<>();
+        try{
+            for(int i=0;i< array.length();i++){
+                JSONObject jsonObject = array.getJSONObject(i);
+                String author = jsonObject.get("author").toString();
+                String say = jsonObject.get("say").toString();
+
+                arrayList.add(new WiseSayingItem(say,author));
+
+                Log.d("arrayList",arrayList.toString());
+            }
+        }catch (Exception e){
+        }
+        return arrayList;
     }
 
     @Override
