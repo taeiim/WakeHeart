@@ -10,27 +10,16 @@ public class RestAreaItem {
     public String restAreaName;
     public String routeName;
     public String distance;
+    public Double latitude;
+    public Double longitude;
 
-    public RestAreaItem(String restAreaName, String routeName, String distance, String latitude, String longitude) {
+
+    public RestAreaItem(String restAreaName, String routeName, String distance, Double latitude, Double longitude) {
         this.restAreaName = restAreaName;
         this.routeName = routeName;
         this.distance = distance;
         this.latitude = latitude;
         this.longitude = longitude;
-    }
-
-    public RestAreaItem(String restAreaName, String routeName, String latitude, String longitude) {
-        this.restAreaName = restAreaName;
-        this.routeName = routeName;
-        this.latitude = latitude;
-        this.longitude = longitude;
-    }
-
-    public RestAreaItem(String restAreaName, String routeName, String distance) {
-        this.restAreaName = restAreaName;
-        this.routeName = routeName;
-
-
         double per2 = Double.valueOf(distance);
 //        double per = Double.parseDouble(String.format("%.2f",per2));
 
@@ -39,27 +28,45 @@ public class RestAreaItem {
         System.out.println("str = " + str);
         this.distance = str;
         Log.d("round dist",distance);
+    }
+
+    public RestAreaItem(String restAreaName, String routeName, Double latitude, Double longitude) {
+        this.restAreaName = restAreaName;
+        this.routeName = routeName;
+        this.latitude = latitude;
+        this.longitude = longitude;
+    }
+
+
+    public RestAreaItem(String restAreaName, String routeName, String distance) {
+        this.restAreaName = restAreaName;
+        this.routeName = routeName;
+        this.distance = distance;
+
+//        double per2 = Double.valueOf(distance);
+////        double per = Double.parseDouble(String.format("%.2f",per2));
+//
+//
+//        String str = String.format("%.2f", per2);
+//        System.out.println("str = " + str);
+//        this.distance = str;
+//        Log.d("round dist",distance);
 
     }
 
-    public String latitude;
-    public String longitude;
-
-
-
-    public String getLatitude() {
+    public Double getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(String latitude) {
+    public void setLatitude(Double latitude) {
         this.latitude = latitude;
     }
 
-    public String getLongitude() {
+    public Double getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(String longitude) {
+    public void setLongitude(Double longitude) {
         this.longitude = longitude;
     }
 

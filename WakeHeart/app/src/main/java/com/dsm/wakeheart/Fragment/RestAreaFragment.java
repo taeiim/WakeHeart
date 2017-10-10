@@ -25,6 +25,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -34,11 +35,13 @@ import com.google.gson.JsonIOException;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
+import com.nhn.android.maps.overlay.NMapPOIitem;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.nio.DoubleBuffer;
 import java.util.ArrayList;
 
 import retrofit2.Call;
@@ -108,7 +111,7 @@ public class RestAreaFragment extends Fragment implements OnMapReadyCallback {
                         lat = 36.391603;
                         lon = 127.363082;
                     }
-                    math(lat, lon, arrayList);
+                    calcRadius(lat, lon, arrayList);
 
 
                 } catch (JsonIOException e) {
@@ -132,12 +135,12 @@ public class RestAreaFragment extends Fragment implements OnMapReadyCallback {
     }
 
     private void setRecyclerView() {
-//        Log.d("setRecycler restList",String.valueOf(restAreaItemArrayList.size()));
-//        adapter = new RestAreaRecyclerViewAdapter(getActivity(), restAreaItemArrayList);
-//        recyclerView.setAdapter(adapter);
+        Log.d("setRecycler restList",String.valueOf(restAreaItemArrayList.size()));
+        adapter = new RestAreaRecyclerViewAdapter(getActivity(), restAreaItemArrayList);
+        recyclerView.setAdapter(adapter);
     }
 
-    private void math(Double lat, Double lon, ArrayList<RestAreaItem> arrayList) {
+    private void calcRadius(Double lat, Double lon, ArrayList<RestAreaItem> arrayList) {
         //반경 안에 있는 휴게소 들 restAreaItemArrayList에 저장
         //arrayList 안에는 휴게소, 노선명, 경도 , 위도
         //lat,lon(현재 위치), lat2,lon2(비교할 휴게소 위치)
@@ -157,7 +160,7 @@ public class RestAreaFragment extends Fragment implements OnMapReadyCallback {
                     break;
                 }
 
-//                double dist = 6371 * Math.acos(
+//                double dist = 6371 * calcRadius.acos(
 //                        Math.sin(lat) * Math.sin(lat2)
 //                                + Math.cos(lat) * Math.cos(lat2) * Math.cos(lon2 - lon));
 //
@@ -176,7 +179,7 @@ public class RestAreaFragment extends Fragment implements OnMapReadyCallback {
                 Log.d("km dist------",String.valueOf(dist));
 //        }
                 if(dist <= 20){  //20 km 안에 있는 휴게소들 restAreaItemArrayList에 저장
-                    restAreaItemArrayList.add(new RestAreaItem(arrayList.get(i).restAreaName,arrayList.get(i).getRouteName(),String.valueOf(dist)));
+                    restAreaItemArrayList.add(new RestAreaItem(arrayList.get(i).restAreaName,arrayList.get(i).getRouteName(),String.valueOf(dist),lat2,lon2));
                 }
             }catch (NumberFormatException e){
 
@@ -191,6 +194,7 @@ public class RestAreaFragment extends Fragment implements OnMapReadyCallback {
         Log.d("setRecycler restList",String.valueOf(restAreaItemArrayList.size()));
         adapter = new RestAreaRecyclerViewAdapter(getActivity(), restAreaItemArrayList);
         recyclerView.setAdapter(adapter);
+
 //        setRecyclerView();
     }
 
@@ -216,7 +220,7 @@ public class RestAreaFragment extends Fragment implements OnMapReadyCallback {
                 String longitude = jsonObject.get("xValue").toString();
 
 
-                arrayList.add(new RestAreaItem(restArea, route, latitude, longitude));
+                arrayList.add(new RestAreaItem(restArea, route, Double.valueOf(latitude), Double.valueOf(longitude)));
 
                 Log.i(arrayList.get(i).getRestAreaName(),arrayList.get(i).getLatitude().toString());
             }
@@ -225,12 +229,6 @@ public class RestAreaFragment extends Fragment implements OnMapReadyCallback {
         return arrayList;
     }
 
-//    private void addRestAreaData() {
-//        restAreaItemArrayList.add(new RestAreaItem("대전 휴게소","대전"));
-//        restAreaItemArrayList.add(new RestAreaItem("대전 휴게소","대전"));
-//        restAreaItemArrayList.add(new RestAreaItem("대전 휴게소","대전"));
-//
-//    }
 
     @Nullable
     @Override
@@ -277,7 +275,7 @@ public class RestAreaFragment extends Fragment implements OnMapReadyCallback {
         }
 
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
-                new LatLng(latitude, longitude), 15));  //Latitude(위도), Longitude(경도)
+                new LatLng(latitude, longitude), 12));  //Latitude(위도), Longitude(경도)
 
 
         mMap.addMarker(new MarkerOptions()
@@ -286,7 +284,16 @@ public class RestAreaFragment extends Fragment implements OnMapReadyCallback {
                 .position(new LatLng(latitude, longitude))
                 .title("현재 위치"));
 
-    }
+        Log.d("marker list size------", String.valueOf(restAreaItemArrayList.size()));
 
+        for (int i = 0; i < restAreaItemArrayList.size(); i++) {
+            mMap.addMarker(new MarkerOptions()
+                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE))
+                    .position(new LatLng(restAreaItemArrayList.get(i).getLatitude(), restAreaItemArrayList.get(i).getLongitude()))
+                    .title(restAreaItemArrayList.get(i).getRestAreaName()));
+            Log.d(String.valueOf(restAreaItemArrayList.get(i).getLatitude()),String.valueOf(restAreaItemArrayList.get(i).getLongitude()));
+        }
+
+    }
 
 }
