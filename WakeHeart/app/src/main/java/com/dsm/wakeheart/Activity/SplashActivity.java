@@ -3,11 +3,15 @@ package com.dsm.wakeheart.Activity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
+import android.util.Log;
 
 import com.dsm.wakeheart.R;
+
+import java.util.Collection;
 
 /**
  * Created by parktaeim on 2017. 9. 26..
@@ -24,8 +28,21 @@ public class SplashActivity extends Activity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent = new Intent(SplashActivity.this,LoginActivity.class);
-                startActivity(intent);
+                final String COOKIE_SHARED_PREFERENCE_NAME = getApplicationContext().getPackageName();
+
+                SharedPreferences pref = getSharedPreferences(COOKIE_SHARED_PREFERENCE_NAME, MODE_PRIVATE);
+                Collection<?> collection = pref.getAll().values();
+
+                Log.d("splash pref ----",collection.toString());
+
+                if(collection.toString().equals("[]") == false){
+                    Intent intent = new Intent(SplashActivity.this,MainActivity.class);
+                    startActivity(intent);
+                }else if(collection.toString().equals("[]")){
+                    Intent intent = new Intent(SplashActivity.this,LoginActivity.class);
+                    startActivity(intent);
+                }
+
             }
         },5000);
 

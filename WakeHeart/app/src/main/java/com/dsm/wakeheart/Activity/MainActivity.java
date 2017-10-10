@@ -1,5 +1,6 @@
 package com.dsm.wakeheart.Activity;
 
+import android.app.Activity;
 import android.support.v7.app.AppCompatActivity;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -31,6 +32,7 @@ import jp.wasabeef.blurry.Blurry;
 
 public class MainActivity extends AppCompatActivity implements AHBottomNavigation.OnTabSelectedListener {
     AHBottomNavigation bottomNavigation;
+    public static Activity mainActivity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +42,11 @@ public class MainActivity extends AppCompatActivity implements AHBottomNavigatio
         bottomNavigation = (AHBottomNavigation) findViewById(R.id.bottom_navigation);
         bottomNavigation.setOnTabSelectedListener(this);
         this.createNavItems();
+
+        SplashActivity splashActivity = (SplashActivity) SplashActivity.splashActiviity;
+        splashActivity.finish();
+
+        mainActivity = MainActivity.this;
     }
 
     private void createNavItems() {
