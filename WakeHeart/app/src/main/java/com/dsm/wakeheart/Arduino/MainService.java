@@ -75,6 +75,7 @@ public class MainService extends Service {
                                             Log.d("xxx", data);
                                         }
                                     });
+
                                 }else{
                                     readBuffer[readBufferPosition++] = b;
                                 }
