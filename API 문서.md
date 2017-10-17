@@ -2,28 +2,22 @@
 
 ### 로그인
 
-* `/API/login`
-
-
+*  `/API/login`
 * 요청
-  * POST
+  * POST 
 * 인자
   * id: String
-  * Password: String
+  * password: String
 * 동작
-  * 로그인 성공 시 메인페이지로 이동하며, 쿠키 (키값 "user")에 사용자 아이디를 저장한다.
+  * 로그인 성공 시 메인페이지로 이동하며, 쿠키 (키값 "user")에 사용자 아이디를 저장한다.
 * 반환값
   * `{"success": false}` - 실패
   * `{"error": e.printStackTrace(), "success": false} `- 예외가 발생할 경우 실패
   * `{"success": true}` - 성공
 
-
-
 ### 회원가입
 
 * `/API/register`
-
-
 * 요청
   * POST
 * 인자
@@ -35,21 +29,14 @@
     * 1: 여자
   * age: int
 * 동작
-  * 회원가입 성공 시 메인페이지로 이동하며,  쿠키 (키값 "user")에 사용자 아이디를 저장한다.
+  * 회원가입 성공 시 메인페이지로 이동하며,  쿠키 (키값 "user")에 사용자 아이디를 저장한다.
 * 반환값
   * `{"error": e.printStackTrace(), "success": false} `- 예외가 발생할 경우 실패
   * `{"success": true}` - 성공
 
-
-
-
 ### 로그아웃
 
-​	
-
 - `/API/logout`
-
-
 - 요청
   - POST
 - 인자
@@ -58,7 +45,6 @@
   - 로그아웃 성공 시, 쿠키 (키값 "user")을 삭제한다.
 - 반환값
   - 없음
-
 
 ### 비밀번호 변경
 
@@ -73,16 +59,12 @@
 ### 명언 데이터 가져오기
 
 * `/API/phrase/all`
-
-
 * 요청
   * GET
 * 인자
-  * 없음
+  * 없음
 * 반환값
-  * `{"phrase":{"description":"공부열심히하자1"}, {"description":"공부열심히하자2"}}`
-
-
+  * `{"phrase":{"description":"공부열심히하자1"}, {"description":"공부열심히하자2"}}`
 
 ### 상태 가져오기
 
@@ -93,16 +75,13 @@
   * user: String
   * status: Int
 
-
-
 ### 휴게소 가져오기
 
-* `/API/rests/`
+* `/API/rest/all`
 * 요청
-  * latitude: Float
-  * longitude: Float
-
-
+  * GET
+* 인자
+  * 없음
 
 ### 기기 등록
 
