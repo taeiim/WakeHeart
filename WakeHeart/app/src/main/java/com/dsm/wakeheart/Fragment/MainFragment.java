@@ -130,8 +130,10 @@ public class MainFragment extends android.support.v4.app.Fragment {
         this.activity = activity;
     }
 
+    Timer timer;
+
     private void listenBeats(){
-        final Timer timer = new Timer();
+        timer = new Timer();
         final Handler hadler = new Handler();
         timer.schedule(new TimerTask() {
             @Override
@@ -145,7 +147,7 @@ public class MainFragment extends android.support.v4.app.Fragment {
                             byte[] readBuffer = new byte[inputStream.available()];
                             inputStream.read(readBuffer);
                             final String data = new String(readBuffer);
-                            Log.e("data!", data);
+                            Log.e("activity data!", data);
                             final Float fData = Float.parseFloat(data);
                             if(fData >= 30 && fData <= 110){
                                 hadler.post(new Runnable() {
@@ -219,11 +221,10 @@ public class MainFragment extends android.support.v4.app.Fragment {
             animation.stop();
     }
 
-
-
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+        timer.cancel();
     }
 
 }

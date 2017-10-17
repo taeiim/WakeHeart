@@ -18,11 +18,14 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigation;
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem;
 import com.aurelhubert.ahbottomnavigation.notification.AHNotification;
+import com.dsm.wakeheart.Arduino.MainService;
+import com.dsm.wakeheart.DataManager;
 import com.dsm.wakeheart.Fragment.Graph1Fragment;
 import com.dsm.wakeheart.Fragment.Graph2Fragment;
 import com.dsm.wakeheart.Fragment.HealthFragment;
@@ -64,7 +67,27 @@ public class MainActivity extends AppCompatActivity implements AHBottomNavigatio
 
         mainActivity = MainActivity.this;
 
-        setOnBluetooth();
+        Intent intent = new Intent(this, MainService.class);
+        stopService(intent);
+
+
+        String deviceName = DataManager.getDataManager().getData(this, "device name");
+        if(DataManager.getDataManager().getData(this, "device name").isEmpty()){
+            setOnBluetooth();
+            try {
+                Thread.sleep(200);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }else{
+            bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+            for(BluetoothDevice device : bluetoothAdapter.getBondedDevices()){
+                if(device.getName().equals(deviceName)){
+                    connect(device, deviceName);
+                    break;
+                }
+            }
+        }
     }
     
     private BluetoothAdapter bluetoothAdapter;
@@ -91,6 +114,8 @@ public class MainActivity extends AppCompatActivity implements AHBottomNavigatio
         Intent intent = new Intent(Settings.ACTION_BLUETOOTH_SETTINGS);
         startActivityForResult(intent, 200);
     }
+
+    private String deviceName = "";
     
     private void selectDevice(){
         final Set<BluetoothDevice> devices = bluetoothAdapter.getBondedDevices();
@@ -112,7 +137,7 @@ public class MainActivity extends AppCompatActivity implements AHBottomNavigatio
                             String deviceName = list.get(i);
                             for(BluetoothDevice device : devices){
                                 if(device.getName().equals(deviceName)){
-                                    connect(device);
+                                    connect(device, deviceName);
                                     break;
                                 }
                             }
@@ -129,14 +154,16 @@ public class MainActivity extends AppCompatActivity implements AHBottomNavigatio
         return inputStream;
     }
 
-    private void connect(BluetoothDevice device){
+    private void connect(BluetoothDevice device, String deviceName){
         UUID uuid = java.util.UUID.fromString("00001101-0000-1000-8000-00805f9b34fb");
 
         try {
             BluetoothSocket socket = device.createInsecureRfcommSocketToServiceRecord(uuid);
             socket.connect();
             inputStream = socket.getInputStream();
-            //showToast("연결되었습니다.");
+
+            DataManager.getDataManager().saveData(this, "device name", deviceName);
+
         } catch (IOException e) {
             e.printStackTrace();
             showToast("연결 중 오류가 발생했습니다.");
@@ -181,6 +208,10 @@ public class MainActivity extends AppCompatActivity implements AHBottomNavigatio
         bottomNavigation.setCurrentItem(2);  //처음 시작 화면 main
     }
 
+    @Override
+    public void onBackPressed() {
+        finish();
+    }
 
     @Override
     public boolean onTabSelected(int position, boolean wasSelected) {
@@ -203,4 +234,25 @@ public class MainActivity extends AppCompatActivity implements AHBottomNavigatio
         return true;
 
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.e("xxx", "onDestroy: " + "check" );
+
+        Intent intent = new Intent(this, MainService.class);
+        startService(intent);
+
+        try {
+            if(inputStream != null){
+                inputStream.close();
+            }
+            Log.e("xxx", "onDestroy: " + "check2" );
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+
 }
