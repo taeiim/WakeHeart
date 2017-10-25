@@ -1,4 +1,4 @@
-package com.dsm.wakeheart.Server.resource;
+package com.dsm.wakeheart.Network;
 
 /**
  * Created by parktaeim on 2017. 9. 13..

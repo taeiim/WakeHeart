@@ -1,5 +1,7 @@
 package com.dsm.wakeheart;
 
+import com.dsm.wakeheart.Network.RestAPI;
+
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 

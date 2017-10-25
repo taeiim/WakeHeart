@@ -12,17 +12,16 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.dsm.wakeheart.LoginService;
+import com.dsm.wakeheart.Model.LoginObjectModel;
+import com.dsm.wakeheart.Network.APIUrl;
 import com.dsm.wakeheart.R;
-import com.dsm.wakeheart.RestAPI;
-import com.dsm.wakeheart.Server.resource.APIUrl;
+import com.dsm.wakeheart.Network.RestAPI;
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
 import java.util.Collection;
-import java.util.Iterator;
 
-import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -63,9 +62,6 @@ public class LoginActivity extends AppCompatActivity {
         SplashActivity splashActivity = (SplashActivity) SplashActivity.splashActiviity;
         splashActivity.finish();
 
-
-
-
     }
 
     private void login() {
@@ -77,9 +73,6 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                id = input_id.getText().toString();
-                pw = input_pw.getText().toString();
-
                 //id,pw가 입력되지 않았으면
                 if (input_id == null || input_id.length() == 0) {
                     Toast.makeText(LoginActivity.this, "아이디를 입력해주세요!", Toast.LENGTH_SHORT).show();
@@ -89,20 +82,44 @@ public class LoginActivity extends AppCompatActivity {
                     return;
                 }
 
-                LoginService.getRetrofit(getApplicationContext()).logIn(id, pw).enqueue(new Callback<JsonObject>() {
+                id = input_id.getText().toString();
+                pw = input_pw.getText().toString();
+
+
+                Retrofit builder = new Retrofit.Builder()
+                        .baseUrl(APIUrl.API_BASE_URL)
+                        .addConverterFactory(GsonConverterFactory.create())
+                        .build();
+
+
+                LoginObjectModel loginObject = new LoginObjectModel(id,pw);
+                RestAPI restAPI = builder.create(RestAPI.class);
+                Call<JsonObject> call = restAPI.logIn(loginObject);
+
+                call.enqueue(new Callback<JsonObject>() {
                     @Override
                     public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
-                        String stringResponse = response.body().toString();
-                        Log.i("response----------", stringResponse);
+                        Log.d("response code ====",String.valueOf(response.code()));
+                        if(response.code() == 200){
+                            Log.d("response==", response.body().toString());
+                            JsonElement token = response.body().getAsJsonPrimitive("access_token");
+                            Log.d("token === ", token.toString());
 
-                        JsonElement jsonElement = response.body().getAsJsonPrimitive("success");
-                        Log.d("jsonElement-----------", jsonElement.toString());
-                        if (jsonElement.toString().equals("true")) {
+                            SharedPreferences sharedPreferences = getSharedPreferences("token pref",MODE_PRIVATE);
+                            SharedPreferences.Editor editor = sharedPreferences.edit();
+                            editor.putString("token",token.toString());
+                            editor.commit();
+
+                            Collection<?> collection = sharedPreferences.getAll().values();
+                            Log.d("after login pref ----",collection.toString());
+
+
                             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                             startActivity(intent);
                             finish();
                             Toast.makeText(LoginActivity.this, id + "님 환영합니다!", Toast.LENGTH_LONG).show();
                         }
+
                     }
 
                     @Override

@@ -10,11 +10,9 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.dsm.wakeheart.R;
-import com.dsm.wakeheart.RestAPI;
+import com.dsm.wakeheart.Network.RestAPI;
 import com.dsm.wakeheart.RestRequestHelper;
-import com.dsm.wakeheart.Server.resource.APIUrl;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
+import com.dsm.wakeheart.Network.APIUrl;
 
 import co.ceryle.radiorealbutton.RadioRealButton;
 import co.ceryle.radiorealbutton.RadioRealButtonGroup;

@@ -28,9 +28,8 @@ public class SplashActivity extends Activity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                final String COOKIE_SHARED_PREFERENCE_NAME = getApplicationContext().getPackageName();
 
-                SharedPreferences pref = getSharedPreferences(COOKIE_SHARED_PREFERENCE_NAME, MODE_PRIVATE);
+                SharedPreferences pref = getSharedPreferences("token pref", MODE_PRIVATE);
                 Collection<?> collection = pref.getAll().values();
 
                 Log.d("splash pref ----",collection.toString());

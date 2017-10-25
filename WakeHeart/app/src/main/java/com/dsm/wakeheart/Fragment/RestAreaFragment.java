@@ -11,37 +11,29 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.dsm.wakeheart.Adapter.RecyclerViewAdapter;
 import com.dsm.wakeheart.Adapter.RestAreaRecyclerViewAdapter;
 import com.dsm.wakeheart.GPSinfo;
 import com.dsm.wakeheart.Model.RestAreaItem;
-import com.dsm.wakeheart.Model.RestAreaItem;
 import com.dsm.wakeheart.R;
-import com.dsm.wakeheart.RestAPI;
-import com.dsm.wakeheart.Server.resource.APIUrl;
+import com.dsm.wakeheart.Network.RestAPI;
+import com.dsm.wakeheart.Network.APIUrl;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonIOException;
 import com.google.gson.JsonObject;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonPrimitive;
-import com.nhn.android.maps.overlay.NMapPOIitem;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.nio.DoubleBuffer;
 import java.util.ArrayList;
 
 import retrofit2.Call;

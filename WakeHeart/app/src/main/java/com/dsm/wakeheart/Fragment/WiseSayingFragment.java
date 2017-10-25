@@ -1,6 +1,5 @@
 package com.dsm.wakeheart.Fragment;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -11,32 +10,22 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.LinearLayout;
-import android.widget.Toast;
 
-import com.dsm.wakeheart.Activity.SignUpActivity;
-import com.dsm.wakeheart.Activity.SignUpSuccessActivity;
 import com.dsm.wakeheart.Adapter.RecyclerViewAdapter;
 import com.dsm.wakeheart.Model.WiseSayingItem;
 import com.dsm.wakeheart.R;
-import com.dsm.wakeheart.RestAPI;
-import com.dsm.wakeheart.Server.resource.APIUrl;
-import com.google.gson.Gson;
+import com.dsm.wakeheart.Network.RestAPI;
+import com.dsm.wakeheart.Network.APIUrl;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonIOException;
 import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-import com.google.gson.JsonPrimitive;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
