@@ -38,4 +38,20 @@
         </RelativeLayout>
     </android.support.v7.widget.Toolbar>
 
+    <Switch
+        android:id="@+id/soundSwitch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="25dp"
+        android:text="음악"
+        android:checked="true"/>
+
+    <Switch
+        android:id="@+id/vibrateSwitch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="진동"
+        android:padding="25dp"
+        android:checked="true"/>
+
 </LinearLayout>

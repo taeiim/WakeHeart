@@ -57,14 +57,17 @@ public class SettingsActivity extends AppCompatActivity {
         recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(getApplicationContext(), recyclerView, new RecyclerItemClickListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-//                if (position == 0) {  //내 정보
-//                    Intent intent0 = new Intent(SettingsActivity.this, AccountManageActivity.class);
-//                    startActivity(intent0);
-//                } else if (position == 1) {  // 비밀번호 변경
-//                    Intent intent1 = new Intent(SettingsActivity.this, ChangePasswordActivity.class);
-//                    startActivity(intent1);
-//                }
-                if (position == 0) {  // 로그아웃
+                if (position == 0) {  //내 정보
+                    Intent intent0 = new Intent(SettingsActivity.this, AccountManageActivity.class);
+                    startActivity(intent0);
+                } else if (position == 1) {  // 비밀번호 변경
+                    Intent intent1 = new Intent(SettingsActivity.this, ChangePasswordActivity.class);
+                    startActivity(intent1);
+                }else if(position == 2){
+                    Intent intent2 = new Intent(SettingsActivity.this, AlarmManageActivity.class);
+                    startActivity(intent2);
+                }
+                else if (position == 3) {  // 로그아웃
                     new AlertDialog.Builder(SettingsActivity.this)
                             .setTitle("로그아웃").setMessage("로그아웃 하시겠습니까?")
                             .setPositiveButton("로그아웃", new DialogInterface.OnClickListener() {
@@ -111,9 +114,9 @@ public class SettingsActivity extends AppCompatActivity {
 
         ArrayList items = new ArrayList<>();
         //Setting item in RecyclerView
-//        items.add(new SettingsItem(R.drawable.person_icon, "내 정보"));
-//        items.add(new SettingsItem(R.drawable.password_icon, "비밀번호 변경"));
-//        items.add(new SettingsItem(R.drawable.music_icon,"음악설정"));
+        items.add(new SettingsItem(R.drawable.person_icon, "내 정보"));
+        items.add(new SettingsItem(R.drawable.password_icon, "비밀번호 변경"));
+        items.add(new SettingsItem(R.drawable.music_icon,"알람설정"));
         items.add(new SettingsItem(R.drawable.out_icon, "로그아웃"));
         layoutManager = new LinearLayoutManager(this);
 
