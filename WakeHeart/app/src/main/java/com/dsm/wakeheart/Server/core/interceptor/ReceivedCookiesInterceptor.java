@@ -1,6 +1,7 @@
 package com.dsm.wakeheart.Server.core.interceptor;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.dsm.wakeheart.Server.core.preferences.CookieSharedPreferences;
 
@@ -34,6 +35,7 @@ public class ReceivedCookiesInterceptor implements Interceptor{
     public Response intercept(Interceptor.Chain chain) throws IOException {
         // 가져온 chain으로 부터 리스폰스 객체를 생성
         Response response = chain.proceed(chain.request());
+        Log.d("intercept response----",response.toString());
 
         // 리스폰스의 헤더 영역에 Set-Cookie가 설정되어있는 경우
         if (!response.headers("Set-Cookie").isEmpty()) {

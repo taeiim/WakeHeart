@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -12,8 +12,9 @@
 
         <TextView
             android:id="@+id/restAreaNameTextView"
-            android:layout_width="wrap_content"
+            android:layout_width="75dp"
             android:layout_height="wrap_content"
+            android:layout_weight="2.7"
             android:text="남강휴게소"
             android:textColor="#000000" />
 
@@ -21,10 +22,33 @@
             android:id="@+id/routeNameTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
+            android:layout_toRightOf="@id/restAreaNameTextView"
+            android:layout_weight="2"
             android:text="남해선"
             android:textColor="#000000" />
 
-    </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="70dp"
+            android:layout_height="wrap_content">
+
+
+            <TextView
+                android:id="@+id/distanceTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toLeftOf="@+id/kmText"
+                android:gravity="right"
+                android:textColor="#000000"
+                android:text="10" />
+
+            <TextView
+                android:id="@+id/kmText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:text=" km" />
+        </RelativeLayout>
+
+    </LinearLayout>
 
 </LinearLayout>

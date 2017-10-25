@@ -1,5 +1,7 @@
 package com.dsm.wakeheart.Arduino;
 
+import java.io.InputStream;
+
 public class SetAndGetClass {
 
     private final static SetAndGetClass setAndGetClass = new SetAndGetClass();
@@ -7,6 +9,16 @@ public class SetAndGetClass {
     private SetAndGetClass(){}
 
     private BluetoothControl bluetoothControl;
+
+    private InputStream inputStream;
+
+    public InputStream getInputStream() {
+        return inputStream;
+    }
+
+    public void setInputStream(InputStream inputStream) {
+        this.inputStream = inputStream;
+    }
 
     public static SetAndGetClass getInstance(){
         return setAndGetClass;
@@ -18,5 +30,6 @@ public class SetAndGetClass {
 
     public void setBlutoothControl(BluetoothControl blutoothControl) {
         this.bluetoothControl = bluetoothControl;
+        inputStream = blutoothControl.getInputStream();
     }
 }

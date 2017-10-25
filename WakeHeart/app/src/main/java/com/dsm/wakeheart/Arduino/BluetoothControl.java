@@ -36,7 +36,7 @@ public class BluetoothControl {
         checkEnableBluetooth();
     }
 
-    public void checkEnableBluetooth() {
+    public void checkEnableBluetooth() {              //블루투스 지원여부 확인
         bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         if (bluetoothAdapter != null) {
             Toast.makeText(activity.getApplicationContext(), "기기가 블루투스를 지원합니다.", Toast.LENGTH_LONG).show();
@@ -57,8 +57,9 @@ public class BluetoothControl {
         }
     }
 
-    public void selectDevice() {
-        final Set<BluetoothDevice> bluetoothDevices = bluetoothAdapter.getBondedDevices();
+    public void selectDevice() {            //기기 연결부분
+        final Set<BluetoothDevice> bluetoothDevices = bluetoothAdapter.getBondedDevices();  //페어링된 디바이스 확인
+
 
         if (bluetoothDevices.size() == 0) {
             Toast.makeText(activity.getApplicationContext(), "페어링된 기기가 없습니다.", Toast.LENGTH_LONG).show();
@@ -85,7 +86,7 @@ public class BluetoothControl {
 
     }
 
-    private void connectToSelectedDevice(BluetoothDevice selectDevice) {
+    private void connectToSelectedDevice(BluetoothDevice selectDevice) {   //블루투스 연결부분
 
         UUID uuid = java.util.UUID.fromString("00001101-0000-1000-8000-00805f9b34fb");
 
