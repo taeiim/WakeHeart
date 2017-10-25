@@ -29,7 +29,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 
 public class SignUpActivity extends AppCompatActivity {
-    int gender=2;
+    String gender;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,11 +52,11 @@ public class SignUpActivity extends AppCompatActivity {
         genderButtonGroup.setOnClickedButtonListener(new RadioRealButtonGroup.OnClickedButtonListener() {
             @Override
             public void onClickedButton(RadioRealButton button, int position) {
-                        if(position == 0)  {
-                            gender = 0;
-                        }else if(position == 1){
-                            gender = 1;
-                        }
+                if (position == 0) {
+                    gender = "M";
+                } else if (position == 1) {
+                    gender = "F";
+                }
             }
         });
         signupBtn.setOnClickListener(new View.OnClickListener() {
@@ -68,19 +69,18 @@ public class SignUpActivity extends AppCompatActivity {
                 String pwCheck = pwCheckEditText.getText().toString();
 
 
-
                 //edittext에 id나 pw,pwcheck가 비어있거나 성별이 선택되지 않았을때 토스트 띄워줌.
-                if(id==null || id.length() ==0 ){
-                    Toast.makeText(SignUpActivity.this,"아이디가 없어요!",Toast.LENGTH_SHORT).show();
+                if (id == null || id.length() == 0) {
+                    Toast.makeText(SignUpActivity.this, "아이디가 없어요!", Toast.LENGTH_SHORT).show();
                     return;
-                }else if(pw == null || pw.length()==0){
-                    Toast.makeText(SignUpActivity.this,"비밀번호가 비었어요!",Toast.LENGTH_SHORT).show();
+                } else if (pw == null || pw.length() == 0) {
+                    Toast.makeText(SignUpActivity.this, "비밀번호가 비었어요!", Toast.LENGTH_SHORT).show();
                     return;
-                }else if(pwCheck == null || pwCheck.length() ==0){
-                    Toast.makeText(SignUpActivity.this,"비밀번호를 한번 더 체크해주세요!",Toast.LENGTH_SHORT).show();
+                } else if (pwCheck == null || pwCheck.length() == 0) {
+                    Toast.makeText(SignUpActivity.this, "비밀번호를 한번 더 체크해주세요!", Toast.LENGTH_SHORT).show();
                     return;
-                }else if(gender==2){
-                    Toast.makeText(SignUpActivity.this,"성별을 선택해 주세요 !",Toast.LENGTH_SHORT).show();
+                } else if (gender==null || gender.length() ==0) {
+                    Toast.makeText(SignUpActivity.this, "성별을 선택해 주세요 !", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
@@ -88,35 +88,39 @@ public class SignUpActivity extends AppCompatActivity {
                 int age = agePick.getValue();
 
                 //비밀번호와 비밀번호 체크 값이 같으면
-                if(pw.equals(pwCheck)){
+                if (pw.equals(pwCheck)) {
                     //Retrofit
                     Retrofit builder = new Retrofit.Builder()
                             .baseUrl(APIUrl.API_BASE_URL)
                             .addConverterFactory(GsonConverterFactory.create())
                             .build();
                     RestAPI restAPI = builder.create(RestAPI.class);
-                    Call<JsonObject> call = restAPI.signUp(id,pw,gender,age);
+                    Call<Void> call = restAPI.signUp(id, pw, 2, gender, age);
 
-                    call.enqueue(new Callback<JsonObject>() {
+                    call.enqueue(new Callback<Void>() {
                         @Override
-                        public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
-                            JsonElement jsonElement = response.body().getAsJsonPrimitive("success");
-                            Log.d("JsonElement ----------",jsonElement.toString());
-                            if(jsonElement.toString().equals("true")){
-                                Intent intent = new Intent(SignUpActivity.this,SignUpSuccessActivity.class);
+                        public void onResponse(Call<Void> call, Response<Void> response) {
+                            Log.d("response", String.valueOf(response.code()));
+
+                            if (response.code() == 201) {
+                                Intent intent = new Intent(SignUpActivity.this, SignUpSuccessActivity.class);
                                 startActivity(intent);
                                 finish();
+                            } else if (response.code() == 204) {
+                                Toast.makeText(SignUpActivity.this, "중복된 ID 입니다. 다시 입력해주세요.", Toast.LENGTH_LONG).show();
+                                return;
                             }
                         }
 
                         @Override
-                        public void onFailure(Call<JsonObject> call, Throwable t) {
+                        public void onFailure(Call<Void> call, Throwable t) {
+                            Toast.makeText(SignUpActivity.this, "Failure :" + t, Toast.LENGTH_SHORT).show();
 
                         }
                     });
 
-                } else{
-                    Toast.makeText(SignUpActivity.this,"비밀번호와 비밀번호 체크 값이 다릅니다.", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(SignUpActivity.this, "비밀번호와 비밀번호 체크 값이 다릅니다.", Toast.LENGTH_SHORT).show();
                     return;
                 }
 

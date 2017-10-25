@@ -25,18 +25,18 @@
         <activity android:exported="true" android:name=".Activity.SplashActivity"
             android:theme="@style/SplashTheme"
             android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity android:exported="true" android:name=".Activity.LoginActivity">
 
         </activity>
         <activity  android:exported="true" android:name=".Activity.SignUpActivity" />
         <activity android:exported="true"  android:name=".Activity.SettingsActivity" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:exported="true" android:name=".Activity.AlarmManageActivity" />
         <activity android:exported="true" android:name=".Activity.AccountManageActivity" />
