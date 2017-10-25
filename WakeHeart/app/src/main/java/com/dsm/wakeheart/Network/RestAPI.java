@@ -2,6 +2,7 @@ package com.dsm.wakeheart.Network;
 
 import com.dsm.wakeheart.Model.LoginObjectModel;
 import com.dsm.wakeheart.Network.APIUrl;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
 import retrofit2.Call;
@@ -24,7 +25,7 @@ public interface RestAPI {
     Call<JsonObject> logIn(@Body LoginObjectModel jsonObject);
 
     @GET(APIUrl.WISE_SAYING_URL)
-    Call<JsonObject> wiseSaying();
+    Call<JsonArray> wiseSaying();
 
     @GET(APIUrl.REST_AREA_URL)
     Call<JsonObject> restArea();

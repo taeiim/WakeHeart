@@ -22,6 +22,7 @@ public class AccountManageActivity extends AppCompatActivity {
     private LinearLayout changeInfoView;
     private MaterialSpinner ageSpinner;
     private int age;
+    public static int position = 0;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

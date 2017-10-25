@@ -65,36 +65,27 @@ public class WiseSayingFragment extends Fragment {
                 .baseUrl(APIUrl.API_BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
-        RestAPI restAPI = builder.create(RestAPI.class);
-        Call<JsonObject> call = restAPI.wiseSaying();
-        call.enqueue(new Callback<JsonObject>() {
-            @Override
-            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
-                Log.d("response----", response.body().toString());
 
-                try {
-//                    jsonAr=jsonObject.getAsJsonArray("phrase");
-                    JsonElement object = response.body().getAsJsonPrimitive("phrase");
-                    String tmp = object.getAsString();
-                    JSONArray array = new JSONArray(tmp);
-                    Log.d("fuck---------", array.toString());
+        RestAPI restAPI = builder.create(RestAPI.class);
+        Call<JsonArray> call = restAPI.wiseSaying();
+        call.enqueue(new Callback<JsonArray>() {
+            @Override
+            public void onResponse(Call<JsonArray> call, Response<JsonArray> response) {
+                Log.d("response----", response.body().toString());
+                Log.d("response code ====",String.valueOf(response.code()));
+
+                if(response.code() == 200){
+                    JsonArray jsonArray = response.body().getAsJsonArray();
+                    Log.d("jsonarray new ===",jsonArray.toString());
                     ArrayList<WiseSayingItem> arrayList = new ArrayList<>();
-                    arrayList = getArrayList(array);
+                    arrayList = getArrayList(jsonArray);
                     adapter = new RecyclerViewAdapter(getActivity(),arrayList);
                     recyclerView.setAdapter(adapter);
-
-
                 }
-                catch (JsonIOException e) {
-                    e.printStackTrace();
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-//                JsonArray jsonArray = response.body().getAsJsonArray();
             }
 
             @Override
-            public void onFailure(Call<JsonObject> call, Throwable t) {
+            public void onFailure(Call<JsonArray> call, Throwable t) {
                 Log.d("t",t.toString());
             }
         });
@@ -103,13 +94,13 @@ public class WiseSayingFragment extends Fragment {
         return rootView;
     }
 
-    private ArrayList<WiseSayingItem> getArrayList(JSONArray array) {
+    private ArrayList<WiseSayingItem> getArrayList(JsonArray array) {
         ArrayList<WiseSayingItem> arrayList = new ArrayList<>();
         try{
-            for(int i=0;i< array.length();i++){
-                JSONObject jsonObject = array.getJSONObject(i);
-                String author = jsonObject.get("author").toString();
-                String say = jsonObject.get("say").toString();
+            for(int i=0;i< array.size();i++){
+                JsonObject jsonObject = (JsonObject) array.get(i);
+                String author = jsonObject.getAsJsonPrimitive("author").getAsString();
+                String say = jsonObject.getAsJsonPrimitive("say").getAsString();
 
                 arrayList.add(new WiseSayingItem(say,author));
 

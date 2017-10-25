@@ -9,6 +9,7 @@
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.VIBRATE"/>
 
     <application
         android:name="android.support.multidex.MultiDexApplication"
@@ -43,7 +44,9 @@
         <activity android:exported="true" android:name=".Activity.ChangePasswordActivity" />
         <activity android:exported="true" android:name=".Activity.SignUpSuccessActivity" />
         <activity android:exported="true" android:name=".Activity.AlarmCustomDialog"
-            android:theme="@android:style/Theme.Translucent"></activity>
+            android:theme="@android:style/Theme.Translucent">
+
+        </activity>
 
         <service android:externalService="true" android:name=".Arduino.MainService"/>
 

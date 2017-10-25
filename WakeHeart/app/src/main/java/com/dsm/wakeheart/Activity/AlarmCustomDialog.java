@@ -1,16 +1,22 @@
 package com.dsm.wakeheart.Activity;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.support.annotation.Nullable;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import com.dsm.wakeheart.Fragment.HelperFragment;
+import com.dsm.wakeheart.Fragment.RestAreaFragment;
+import com.dsm.wakeheart.Fragment.WiseSayingFragment;
 import com.dsm.wakeheart.R;
 import com.skyfishjy.library.RippleBackground;
 
@@ -41,6 +47,8 @@ public class AlarmCustomDialog extends Activity {
         }
 
         if(AlarmManageActivity.isVibrateChecked == true){
+//            vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+//            vibrator.vibrate(500);
             vibrator.vibrate(new long[]{100,1000,100,500,100,500,100,1000}, 0);
         }
 
@@ -52,6 +60,16 @@ public class AlarmCustomDialog extends Activity {
                 finish();
                 mediaPlayer.stop();
                 vibrator.cancel();
+
+                if(AccountManageActivity.position == 0){
+                    Intent intent = new Intent(AlarmCustomDialog.this, MainActivity.class);
+                    intent.putExtra("position",0);
+                    startActivity(intent);
+                }else if(AccountManageActivity.position == 1){
+                    Intent intent = new Intent(AlarmCustomDialog.this, MainActivity.class);
+                    intent.putExtra("position",1);
+                    startActivity(intent);
+                }
             }
         });
 

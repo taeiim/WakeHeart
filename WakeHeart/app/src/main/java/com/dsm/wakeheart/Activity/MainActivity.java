@@ -70,6 +70,13 @@ public class MainActivity extends AppCompatActivity implements AHBottomNavigatio
         Intent intent = new Intent(this, MainService.class);
         stopService(intent);
 
+//        int p = 2;
+//        Intent i = getIntent();
+//        p = i.getExtras().getInt("position");
+//        if(p != 2){
+//
+//        }
+
 
         String deviceName = DataManager.getDataManager().getData(this, "device name");
         if(DataManager.getDataManager().getData(this, "device name").isEmpty()){
