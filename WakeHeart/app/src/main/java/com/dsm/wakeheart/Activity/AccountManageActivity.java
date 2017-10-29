@@ -22,7 +22,7 @@ public class AccountManageActivity extends AppCompatActivity {
     private LinearLayout changeInfoView;
     private MaterialSpinner ageSpinner;
     private int age;
-    public static int position = 0;
+    public static int position = 0;  // 0:학생 / 1:운전자 / 2:일반
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

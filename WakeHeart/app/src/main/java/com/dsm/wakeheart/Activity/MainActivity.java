@@ -9,6 +9,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.provider.Settings;
 import android.support.annotation.StringDef;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.graphics.Color;
@@ -52,6 +53,7 @@ import jp.wasabeef.blurry.Blurry;
 public class MainActivity extends AppCompatActivity implements AHBottomNavigation.OnTabSelectedListener {
     AHBottomNavigation bottomNavigation;
     public static Activity mainActivity;
+    public static int pos = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,20 +64,26 @@ public class MainActivity extends AppCompatActivity implements AHBottomNavigatio
         bottomNavigation.setOnTabSelectedListener(this);
         this.createNavItems();
 
-        SplashActivity splashActivity = (SplashActivity) SplashActivity.splashActiviity;
-        splashActivity.finish();
-
         mainActivity = MainActivity.this;
 
         Intent intent = new Intent(this, MainService.class);
         stopService(intent);
 
-//        int p = 2;
-//        Intent i = getIntent();
-//        p = i.getExtras().getInt("position");
-//        if(p != 2){
-//
-//        }
+        try{
+            Intent getIntent = getIntent();
+            String str = getIntent.getExtras().getString("helper");
+            String position = getIntent.getExtras().getString("position");
+            if(str.equals("helper")) {
+                bottomNavigation.setCurrentItem(4);  //처음 시작 화면 main
+                Log.d("position",position.toString());
+                if(position.equals("0")){
+                    pos = 0;
+
+                }
+            }
+        }catch (NullPointerException e){
+
+        }
 
 
         String deviceName = DataManager.getDataManager().getData(this, "device name");
@@ -213,6 +221,7 @@ public class MainActivity extends AppCompatActivity implements AHBottomNavigatio
         bottomNavigation.setTitleState(AHBottomNavigation.TitleState.ALWAYS_SHOW);
 
         bottomNavigation.setCurrentItem(2);  //처음 시작 화면 main
+
     }
 
     @Override

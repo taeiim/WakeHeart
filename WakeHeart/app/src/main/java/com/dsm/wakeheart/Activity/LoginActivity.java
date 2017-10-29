@@ -102,12 +102,12 @@ public class LoginActivity extends AppCompatActivity {
                         Log.d("response code ====",String.valueOf(response.code()));
                         if(response.code() == 200){
                             Log.d("response==", response.body().toString());
-                            JsonElement token = response.body().getAsJsonPrimitive("access_token");
+                            String token = response.body().getAsJsonPrimitive("access_token").getAsString();
                             Log.d("token === ", token.toString());
 
                             SharedPreferences sharedPreferences = getSharedPreferences("token pref",MODE_PRIVATE);
                             SharedPreferences.Editor editor = sharedPreferences.edit();
-                            editor.putString("token",token.toString());
+                            editor.putString("token",token);
                             editor.commit();
 
                             Collection<?> collection = sharedPreferences.getAll().values();

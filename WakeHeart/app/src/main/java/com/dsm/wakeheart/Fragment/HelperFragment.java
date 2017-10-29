@@ -18,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.TabHost;
 
 import com.dsm.wakeheart.Activity.LoginActivity;
+import com.dsm.wakeheart.Activity.MainActivity;
 import com.dsm.wakeheart.Activity.SettingsActivity;
 import com.nhn.android.maps.NMapView;
 
@@ -36,21 +37,25 @@ public class HelperFragment extends android.support.v4.app.Fragment {
 //    private NMapView mMapView;
 
     ImageView settingsBtn;
+    public static ViewPager viewPager;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_helper,container,false);
 
-        ViewPager viewPager = (ViewPager) rootView.findViewById(R.id.view_pager);
+        viewPager = (ViewPager) rootView.findViewById(R.id.view_pager);
         setupViewPager(viewPager);
 
         TabLayout tabs = (TabLayout) rootView.findViewById(R.id.result_tabs);
         tabs.setupWithViewPager(viewPager);
+
 
         //설정 버튼 누르면 설정 액티비티로 넘어감
         settingsBtn = (ImageView) rootView.findViewById(R.id.setting_icon);
@@ -61,6 +66,11 @@ public class HelperFragment extends android.support.v4.app.Fragment {
                 startActivity(intent);
             }
         });
+
+        if(MainActivity.pos == 0){
+            viewPager.setCurrentItem(1);
+            MainActivity.pos = 1;
+        }
 
         return rootView;
 
@@ -74,6 +84,7 @@ public class HelperFragment extends android.support.v4.app.Fragment {
         viewPager.setAdapter(adapter);
 
     }
+
 
     static class Adapter extends FragmentPagerAdapter {
         private final List<android.support.v4.app.Fragment> mFragmentList = new ArrayList<>();

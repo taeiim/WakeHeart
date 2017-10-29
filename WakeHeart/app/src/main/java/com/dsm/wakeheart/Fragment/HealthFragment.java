@@ -34,6 +34,8 @@ public class HealthFragment extends android.support.v4.app.Fragment {
 
     int bpm;
 
+
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {

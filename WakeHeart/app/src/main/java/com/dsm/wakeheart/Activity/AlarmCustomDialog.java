@@ -28,7 +28,7 @@ public class AlarmCustomDialog extends Activity {
 
     private Button okButton;
     private Vibrator vibrator;
-     MediaPlayer mediaPlayer;
+    MediaPlayer mediaPlayer;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -37,19 +37,21 @@ public class AlarmCustomDialog extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dialog_alarm);
 
-        final RippleBackground rippleBackground=(RippleBackground)findViewById(R.id.content);
+        final RippleBackground rippleBackground = (RippleBackground) findViewById(R.id.content);
         rippleBackground.startRippleAnimation();
 
-        if(AlarmManageActivity.isSoundChecked == true){
-            mediaPlayer = MediaPlayer.create(this,R.raw.music);
+        if (AlarmManageActivity.isSoundChecked == true) {
+            mediaPlayer = MediaPlayer.create(this, R.raw.music);
             mediaPlayer.setLooping(true);  //음악 무한 재생
             mediaPlayer.start();  // 음악 재생
         }
 
-        if(AlarmManageActivity.isVibrateChecked == true){
-//            vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+        if (AlarmManageActivity.isVibrateChecked == true) {
+            vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
 //            vibrator.vibrate(500);
-            vibrator.vibrate(new long[]{100,1000,100,500,100,500,100,1000}, 0);
+//            vibrator.vibrate(new long[]{100,1000,100,500,100,500,100,1000}, 0);
+            vibrator.vibrate(new long[]{1000,1000}, 0);
+
         }
 
         okButton = (Button) findViewById(R.id.okButton);
@@ -61,13 +63,18 @@ public class AlarmCustomDialog extends Activity {
                 mediaPlayer.stop();
                 vibrator.cancel();
 
-                if(AccountManageActivity.position == 0){
+                if (AccountManageActivity.position == 0) {  // 학생
                     Intent intent = new Intent(AlarmCustomDialog.this, MainActivity.class);
-                    intent.putExtra("position",0);
+                    intent.putExtra("helper","helper");
+                    intent.putExtra("position", "0");
                     startActivity(intent);
-                }else if(AccountManageActivity.position == 1){
+                } else if (AccountManageActivity.position == 1) {  //운전자
                     Intent intent = new Intent(AlarmCustomDialog.this, MainActivity.class);
-                    intent.putExtra("position",1);
+                    intent.putExtra("helper","helper");
+                    intent.putExtra("position", "1");
+                    startActivity(intent);
+                } else if(AccountManageActivity.position == 2){  //일반
+                    Intent intent = new Intent(AlarmCustomDialog.this, MainActivity.class);
                     startActivity(intent);
                 }
             }

@@ -10,6 +10,7 @@ import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.Header;
 import retrofit2.http.POST;
 
 /**
@@ -29,5 +30,10 @@ public interface RestAPI {
 
     @GET(APIUrl.REST_AREA_URL)
     Call<JsonObject> restArea();
+
+    @FormUrlEncoded
+    @POST(APIUrl.CHANGE_PW_URL)
+    Call<Void> changePw(@Header("Authorization") String Authorization , @Field("pw") String pw);
+
 
 }

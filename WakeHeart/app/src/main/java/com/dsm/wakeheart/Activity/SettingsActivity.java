@@ -17,6 +17,7 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.dsm.wakeheart.Adapter.SettingsRecyclerViewAdapter;
+import com.dsm.wakeheart.AlarmService;
 import com.dsm.wakeheart.Model.SettingsItem;
 import com.dsm.wakeheart.R;
 import com.dsm.wakeheart.RecyclerItemClickListener;
