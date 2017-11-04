@@ -5,7 +5,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.MediaPlayer;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Vibrator;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
@@ -19,6 +21,7 @@ import android.widget.ImageView;
 import com.dsm.wakeheart.Fragment.HelperFragment;
 import com.dsm.wakeheart.Fragment.RestAreaFragment;
 import com.dsm.wakeheart.Fragment.WiseSayingFragment;
+import com.dsm.wakeheart.NaverTTS;
 import com.dsm.wakeheart.R;
 import com.skyfishjy.library.RippleBackground;
 
@@ -45,6 +48,10 @@ public class AlarmCustomDialog extends Activity {
     private Vibrator vibrator;
     MediaPlayer mediaPlayer;
     File f;
+    MediaPlayer ttsPlayer;
+    String getTTStext;
+    String[] ttsText;
+    private NaverTTSTask naverTTSTask;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -56,39 +63,48 @@ public class AlarmCustomDialog extends Activity {
         final RippleBackground rippleBackground = (RippleBackground) findViewById(R.id.content);
         rippleBackground.startRippleAnimation();
 
-        SharedPreferences soundPref = getSharedPreferences("soundSwitch",MODE_PRIVATE);
-        boolean isSoundChecked = soundPref.getBoolean("soundSwitch",true);
-        SharedPreferences vibratePref = getSharedPreferences("vibrateSwitch",MODE_PRIVATE);
-        boolean isVibrateChecked = vibratePref.getBoolean("vibrateSwitch",true);
+        SharedPreferences soundPref = getSharedPreferences("soundSwitch", MODE_PRIVATE);
+        boolean isSoundChecked = soundPref.getBoolean("soundSwitch", true);
+        SharedPreferences vibratePref = getSharedPreferences("vibrateSwitch", MODE_PRIVATE);
+        boolean isVibrateChecked = vibratePref.getBoolean("vibrateSwitch", true);
+        SharedPreferences ttsPref = getSharedPreferences("ttsSwitch",MODE_PRIVATE);
 
-        Log.d("isShoundChecked",String.valueOf(isSoundChecked));
+        Log.d("isShoundChecked", String.valueOf(isSoundChecked));
         if (isSoundChecked) {
             mediaPlayer = MediaPlayer.create(this, R.raw.music);
             mediaPlayer.setLooping(true);  //음악 무한 재생
-            mediaPlayer.start();  // 음악 재생
+//            mediaPlayer.start();  // 음악 재생
 
         }
 
-        Log.d("isVibrateChecked",String.valueOf(isVibrateChecked));
+        Log.d("isVibrateChecked", String.valueOf(isVibrateChecked));
         if (isVibrateChecked) {
             vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
 //            vibrator.vibrate(500);
 //            vibrator.vibrate(new long[]{100,1000,100,500,100,500,100,1000}, 0);
-            vibrator.vibrate(new long[]{1000,1000}, 0);
+//            vibrator.vibrate(new long[]{1000, 1000}, 0);
 
         }
 
-        startTTS();
+        Log.d("ttsPref onclick======",String.valueOf(ttsPref.getBoolean("ttsSwitch",true)));
+        if(ttsPref.getBoolean("ttsSwitch",true)){
+            SharedPreferences ttsTextPref = getSharedPreferences("ttsEditText",MODE_PRIVATE);
+            getTTStext = ttsTextPref.getString("ttsEditText","null");
 
-        final MediaPlayer ttsPlayer = new MediaPlayer();
-        try {
-            ttsPlayer.setDataSource(f.getAbsolutePath());
-            ttsPlayer.prepare();
-            ttsPlayer.start();
+            Log.d("ttsText!!========",getTTStext);
 
-        } catch (IOException e) {
-            e.printStackTrace();
+            if(getTTStext.length() > 0){
+                ttsText = new String[] {getTTStext};
+
+                naverTTSTask = new NaverTTSTask();
+                naverTTSTask.execute(ttsText);
+            }else{
+                Log.d("text length is ======","0ㅠㅠ!");
+                return;
+            }
+
         }
+
 
         okButton = (Button) findViewById(R.id.okButton);
         //확인 버튼 눌러 다이얼로그 끄기, 음악재생도 함께 종료
@@ -96,29 +112,27 @@ public class AlarmCustomDialog extends Activity {
             @Override
             public void onClick(View view) {
                 finish();
-                if(mediaPlayer.isPlaying()){
-                    mediaPlayer.stop();
+                if (mediaPlayer.isPlaying()) {
+//                    mediaPlayer.stop();
 
                 }
-                if(vibrator.hasVibrator()){
-                    vibrator.cancel();
-                }
+//                if (vibrator.hasVibrator()) {
+//                    vibrator.cancel();
+//                }
 
-                if(ttsPlayer.isPlaying()){
-                    ttsPlayer.stop();
-                }
+                ttsPlayer.stop();
 
                 if (AccountManageActivity.position == 0) {  // 학생
                     Intent intent = new Intent(AlarmCustomDialog.this, MainActivity.class);
-                    intent.putExtra("helper","helper");
+                    intent.putExtra("helper", "helper");
                     intent.putExtra("position", "0");
                     startActivity(intent);
                 } else if (AccountManageActivity.position == 1) {  //운전자
                     Intent intent = new Intent(AlarmCustomDialog.this, MainActivity.class);
-                    intent.putExtra("helper","helper");
+                    intent.putExtra("helper", "helper");
                     intent.putExtra("position", "1");
                     startActivity(intent);
-                } else if(AccountManageActivity.position == 2){  //일반
+                } else if (AccountManageActivity.position == 2) {  //일반
                     Intent intent = new Intent(AlarmCustomDialog.this, MainActivity.class);
                     startActivity(intent);
                 }
@@ -127,58 +141,19 @@ public class AlarmCustomDialog extends Activity {
 
     }
 
-    private void startTTS(){
-        final String clientId = "oPDj1y9Xk6B_IakJkQ0J";//애플리케이션 클라이언트 아이디값";
-        final String clientSecret = "HYjkQGafvO";//애플리케이션 클라이언트 시크릿값";
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    String text = URLEncoder.encode("만나서 반갑습니다.", "UTF-8"); // 13자
-                    String apiURL = "https://openapi.naver.com/v1/voice/tts.bin";
-                    URL url = new URL(apiURL);
-                    HttpURLConnection con = (HttpURLConnection)url.openConnection();
-                    con.setRequestMethod("POST");
-                    con.setRequestProperty("X-Naver-Client-Id", clientId);
-                    con.setRequestProperty("X-Naver-Client-Secret", clientSecret);
-                    // post request
-                    String postParams = "speaker=mijin&speed=0&text=" + text;
-                    con.setDoOutput(true);
-                    DataOutputStream wr = new DataOutputStream(con.getOutputStream());
-                    wr.writeBytes(postParams);
-                    wr.flush();
-                    wr.close();
-                    int responseCode = con.getResponseCode();
-                    BufferedReader br;
-                    if(responseCode==200) { // 정상 호출
-                        InputStream is = con.getInputStream();
-                        int read = 0;
-                        byte[] bytes = new byte[1024];
-                        // 랜덤한 이름으로 mp3 파일 생성
-                        String tempname = Long.valueOf(new Date().getTime()).toString();
-                        f = new File(tempname + ".mp3");
-                        f.createNewFile();
-                        OutputStream outputStream = new FileOutputStream(f);
-                        while ((read =is.read(bytes)) != -1) {
-                            outputStream.write(bytes, 0, read);
-                        }
-                        is.close();
-                    } else {  // 에러 발생
-                        br = new BufferedReader(new InputStreamReader(con.getErrorStream()));
-                        String inputLine;
-                        StringBuffer response = new StringBuffer();
-                        while ((inputLine = br.readLine()) != null) {
-                            response.append(inputLine);
-                        }
-                        br.close();
-                        System.out.println(response.toString());
-                    }
-                } catch (Exception e) {
-                    System.out.println(e);
-                }
-            }
-        }).start();
+    private class NaverTTSTask extends AsyncTask<String[],Void ,String>{
 
+        @Override
+        protected String doInBackground(String[]... strings) {
+            Log.d("naverttstask start",ttsText[0].toString());
+            NaverTTS.main(ttsText);
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+        }
     }
 
 }

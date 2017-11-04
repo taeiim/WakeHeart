@@ -54,4 +54,23 @@
         android:padding="25dp"
         android:checked="true"/>
 
+    <Switch
+        android:id="@+id/ttsSwitch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="직접 음성 입력"
+        android:padding="25dp"
+        android:checked="false"/>
+
+    <EditText
+        android:id="@+id/ttsEditText"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:hint="음성으로 변환할 텍스트를 입력하세요."
+        android:textSize="15dp"
+        android:textColor="#000000"
+        android:visibility="gone"/>
+
 </LinearLayout>

@@ -115,20 +115,6 @@ public class AccountManageActivity extends AppCompatActivity {
                                 .addConverterFactory(GsonConverterFactory.create())
                                 .build();
 
-//                            OkHttpClient httpClient = new OkHttpClient.Builder()
-//                                    .addInterceptor(new Interceptor() {
-//                                        @Override
-//                                        public Response intercept(Chain chain) throws IOException {
-//                                            Request.Builder ongoing = chain.request().newBuilder();
-//                                            ongoing.addHeader("Accept", "application/json;versions=1");
-//                                            if (isUserLoggedIn()) {
-//                                                ongoing.addHeader("Authorization", getToken());
-//                                            }
-//                                            return chain.proceed(ongoing.build());
-//                                        }
-//                                    })
-//                                    .build();
-
                         Log.d("retrofit build ====", "yeah~");
 
                         SharedPreferences prefs = getSharedPreferences("token pref", MODE_PRIVATE);
@@ -163,7 +149,7 @@ public class AccountManageActivity extends AppCompatActivity {
                                 Log.d("response code ===", String.valueOf(response.code()));
                                 if (response.code() == 201) {
                                     new SweetAlertDialog(AccountManageActivity.this, SweetAlertDialog.SUCCESS_TYPE)
-                                            .setContentText("비밀번호가 변경되었습니다.")
+                                            .setContentText("내 정보가 변경되었습니다.")
                                             .setConfirmText("확인").setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
                                         @Override
                                         public void onClick(SweetAlertDialog sweetAlertDialog) {
