@@ -110,7 +110,7 @@ public class MainActivity extends AppCompatActivity implements AHBottomNavigatio
         bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         if(bluetoothAdapter == null){
             showToast("기기가 블루투스를 지원하지 않습니다");
-            finish();
+//            finish();
         }else{
             turnOnBlutooth();
         }
@@ -127,7 +127,12 @@ public class MainActivity extends AppCompatActivity implements AHBottomNavigatio
 
     private void setDevice(){
         Intent intent = new Intent(Settings.ACTION_BLUETOOTH_SETTINGS);
-        startActivityForResult(intent, 200);
+        try{
+            startActivityForResult(intent, 200);
+
+        }catch (SecurityException e){
+            e.printStackTrace();
+        }
     }
 
     private String deviceName = "";
@@ -136,7 +141,7 @@ public class MainActivity extends AppCompatActivity implements AHBottomNavigatio
         final Set<BluetoothDevice> devices = bluetoothAdapter.getBondedDevices();
         if(devices.size() == 0){
             showToast("등록된 기기가 없습니다.");
-            finish();
+//            finish();
         }else{
             final List<String> list = new ArrayList<>();
 
@@ -192,7 +197,7 @@ public class MainActivity extends AppCompatActivity implements AHBottomNavigatio
                 setDevice();
             }else{
                 showToast("블루투스를 실행하여야 어플을 사용 할 수 있습니다.");
-                finish();
+//                finish();
             }
         }else{
             selectDevice();

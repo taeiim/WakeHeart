@@ -138,6 +138,7 @@
                 android:textSize="16dp" />
 
         </LinearLayout>
+
         <info.hoang8f.widget.FButton
             android:id="@+id/changeButton"
             android:layout_width="150dp"
@@ -156,8 +157,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/toolbar"
-        android:padding="30dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="30dp">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -198,7 +199,7 @@
             <com.jaredrummler.materialspinner.MaterialSpinner
                 android:id="@+id/ageSpinner"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content" />
 
         </LinearLayout>
 
@@ -216,7 +217,7 @@
                 android:textSize="16dp" />
 
             <co.ceryle.radiorealbutton.RadioRealButtonGroup
-                android:id="@+id/genderBtnGroup"
+                android:id="@+id/account_genderBtnGroup"
                 android:layout_width="wrap_content"
                 android:layout_height="50dp"
                 android:layout_gravity="center"
@@ -303,19 +304,19 @@
                 </co.ceryle.radiorealbutton.RadioRealButton>
 
                 <co.ceryle.radiorealbutton.RadioRealButton
-                android:id="@+id/driverBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:rrb_drawable="@drawable/driver_icon"
-                app:rrb_drawableHeight="36dp"
-                app:rrb_drawablePadding="10dp"
-                app:rrb_drawableWidth="36dp"
-                app:rrb_ripple="true"
-                app:rrb_rippleColor="@color/colorPrimary"
-                app:rrb_text="운전자"
-                app:rrb_textColor="#000000">
+                    android:id="@+id/driverBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:rrb_drawable="@drawable/driver_icon"
+                    app:rrb_drawableHeight="36dp"
+                    app:rrb_drawablePadding="10dp"
+                    app:rrb_drawableWidth="36dp"
+                    app:rrb_ripple="true"
+                    app:rrb_rippleColor="@color/colorPrimary"
+                    app:rrb_text="운전자"
+                    app:rrb_textColor="#000000">
 
-            </co.ceryle.radiorealbutton.RadioRealButton>
+                </co.ceryle.radiorealbutton.RadioRealButton>
 
                 <co.ceryle.radiorealbutton.RadioRealButton
                     android:id="@+id/normalBtn"
@@ -335,6 +336,7 @@
 
 
         </LinearLayout>
+
         <info.hoang8f.widget.FButton
             android:id="@+id/okButton"
             android:layout_width="150dp"

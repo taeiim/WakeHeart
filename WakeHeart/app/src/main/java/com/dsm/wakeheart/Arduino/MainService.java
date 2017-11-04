@@ -47,21 +47,21 @@ public class MainService extends Service {
 
     }
 
-    @Override
-    public int onStartCommand(Intent intent, int flags, int startId) {
-
-        BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-        Set<BluetoothDevice> devices = bluetoothAdapter.getBondedDevices();
-        for(BluetoothDevice device : devices){
-            Log.d("xxx", "" + device.getName() + " : "+ DataManager.getDataManager().getData(this, "device name"));
-            if(device.getName().equals(DataManager.getDataManager().getData(this, "device name"))){
-                connect(device);
-                return START_REDELIVER_INTENT;
-            }
-        }
-
-        return START_REDELIVER_INTENT;
-    }
+//    @Override
+//    public int onStartCommand(Intent intent, int flags, int startId) {
+//
+//        BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+//        Set<BluetoothDevice> devices = bluetoothAdapter.getBondedDevices();
+//        for(BluetoothDevice device : devices){
+//            Log.d("xxx", "" + device.getName() + " : "+ DataManager.getDataManager().getData(this, "device name"));
+//            if(device.getName().equals(DataManager.getDataManager().getData(this, "device name"))){
+//                connect(device);
+//                return START_REDELIVER_INTENT;
+//            }
+//        }
+//
+//        return START_REDELIVER_INTENT;
+//    }
 
     private BluetoothSocket socket;
 
@@ -150,7 +150,7 @@ public class MainService extends Service {
 
     @Override
     public void onDestroy() {
-        timer.cancel();
+//        timer.cancel();
         try {
             if(inputStream != null){
                 inputStream.close();

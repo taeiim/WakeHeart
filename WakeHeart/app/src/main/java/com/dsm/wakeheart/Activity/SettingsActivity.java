@@ -73,7 +73,7 @@ public class SettingsActivity extends AppCompatActivity {
                             .setTitle("로그아웃").setMessage("로그아웃 하시겠습니까?")
                             .setPositiveButton("로그아웃", new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int whichButton) {
-                                    final String COOKIE_SHARED_PREFERENCE_NAME = getApplicationContext().getPackageName();
+                                    final String COOKIE_SHARED_PREFERENCE_NAME = "token pref";
 
                                     SharedPreferences pref = getSharedPreferences(COOKIE_SHARED_PREFERENCE_NAME, MODE_PRIVATE);
 

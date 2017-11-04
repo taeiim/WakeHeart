@@ -85,13 +85,14 @@ public class MainFragment extends android.support.v4.app.Fragment {
                 onLayout.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Toast.makeText(getContext(), "앱이 종료됩니다.", Toast.LENGTH_SHORT).show();
-                        new Handler().postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
-                                activity.finish();
-                            }
-                        },1000);
+                        offLayout.setVisibility(View.VISIBLE);
+//                        Toast.makeText(getContext(), "앱이 종료됩니다.", Toast.LENGTH_SHORT).show();
+//                        new Handler().postDelayed(new Runnable() {
+//                            @Override
+//                            public void run() {
+//                                activity.finish();
+//                            }
+//                        },1000);
                     }
                 });
                 onLayout.setVisibility(View.VISIBLE);

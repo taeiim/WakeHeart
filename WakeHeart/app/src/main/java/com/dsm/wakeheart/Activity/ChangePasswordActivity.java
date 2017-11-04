@@ -16,6 +16,7 @@ import com.dsm.wakeheart.R;
 import com.google.gson.JsonArray;
 
 import java.io.IOException;
+import java.util.Collection;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import info.hoang8f.widget.FButton;
@@ -104,7 +105,18 @@ public class ChangePasswordActivity extends AppCompatActivity {
                             Log.d("retrofit build ====","yeah~");
 
                             SharedPreferences prefs = getSharedPreferences("token pref", MODE_PRIVATE);
-                            String result = prefs.getString("token", "0"); //키값, 디폴트값
+                            Collection<?> collection = prefs.getAll().values();
+
+                            Log.d("pwAct pref ----",collection.toString());
+
+                            String result = collection.toString();
+                            Log.d("result ----",result);
+
+                            result = result.substring(1);
+                            result = result.substring(0,result.length()-1);
+                            Log.d("result substring ----",result);
+
+//                            String result = prefs.getString("a", "0"); //키값, 디폴트값
 
                             String pw = pwEditText.getText().toString();
                             Log.d("result=="+result,"pw=="+pw);
@@ -112,9 +124,10 @@ public class ChangePasswordActivity extends AppCompatActivity {
                             RestAPI restAPI = builder.create(RestAPI.class);
                             Log.d("retrofit create ====","yeah~");
 
-                            String header = "JWT\n"+result;
+                            String header = "JWT "+result;
                             Call<Void> call = restAPI.changePw(header, pw);
-                            Log.d("1 =="+header + result,", 2=="+pw);
+                            Log.d("1 ==",header);
+                            Log.d("2==",pw);
 
                             call.enqueue(new Callback<Void>() {
                                 @Override

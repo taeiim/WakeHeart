@@ -35,5 +35,10 @@ public interface RestAPI {
     @POST(APIUrl.CHANGE_PW_URL)
     Call<Void> changePw(@Header("Authorization") String Authorization , @Field("pw") String pw);
 
+    @FormUrlEncoded
+    @POST(APIUrl.CHANGE_INFO_URL)
+    Call<Void> changeInfo(@Header("Authorization") String Authorization , @Field("position") int position,@Field("sex") String sex,@Field("age") int age);
+
+
 
 }

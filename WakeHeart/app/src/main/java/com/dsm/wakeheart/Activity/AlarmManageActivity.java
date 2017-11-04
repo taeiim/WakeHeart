@@ -1,5 +1,6 @@
 package com.dsm.wakeheart.Activity;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -18,8 +19,6 @@ public class AlarmManageActivity extends AppCompatActivity {
     ImageView back_icon;
     private Switch soundSwitch;
     private Switch vibrateSwitch;
-    static public boolean isSoundChecked = true;
-    static public boolean isVibrateChecked = true;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -41,17 +40,31 @@ public class AlarmManageActivity extends AppCompatActivity {
         soundSwitch = (Switch) findViewById(R.id.soundSwitch);
         vibrateSwitch = (Switch) findViewById(R.id.vibrateSwitch);
 
+        SharedPreferences soundPref = getSharedPreferences("soundSwitch",MODE_PRIVATE);
+        SharedPreferences vibratePref = getSharedPreferences("vibrateSwitch",MODE_PRIVATE);
+
+        soundSwitch.setChecked(soundPref.getBoolean("soundSwitch",true));
+        vibrateSwitch.setChecked(vibratePref.getBoolean("vibrateSwitch",true));
+
         soundSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                isSoundChecked = b;
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                SharedPreferences.Editor editor = getSharedPreferences("soundSwitch", MODE_PRIVATE).edit();
+                editor.putBoolean("soundSwitch", isChecked);
+                editor.commit();
+
+
             }
         });
 
         vibrateSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                isVibrateChecked = b;
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                SharedPreferences.Editor editor = getSharedPreferences("vibrateSwitch", MODE_PRIVATE).edit();
+                editor.putBoolean("vibrateSwitch", isChecked);
+                editor.commit();
+
+
             }
         });
     }
