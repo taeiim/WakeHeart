@@ -13,6 +13,8 @@ import android.widget.Switch;
 
 import com.dsm.wakeheart.R;
 
+import java.util.Collection;
+
 /**
  * Created by parktaeim on 2017. 9. 8..
  */
@@ -33,21 +35,21 @@ public class AlarmManageActivity extends AppCompatActivity {
         back_icon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                SharedPreferences ttsTextPref = getSharedPreferences("ttsEditText",MODE_PRIVATE);
-                SharedPreferences.Editor ttsEditor = getSharedPreferences("ttsEditText",MODE_PRIVATE).edit();
+                SharedPreferences ttsTextPref = getSharedPreferences("ttsTextPref",MODE_PRIVATE);
+                SharedPreferences.Editor ttsEditor = getSharedPreferences("ttsTextPref",MODE_PRIVATE).edit();
                 ttsEditor.putString(ttsEditText.getText().toString(),"null");
-                ttsEditor.putString(ttsEditText.getText().toString(),"null");
+                ttsEditor.commit();
 
-                Log.d("ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ",ttsTextPref.getString("ttsEditText","zzz"));
+                Log.d("ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ",ttsTextPref.getString("ttsTextPref","zzz"));
 
                 finish();
             }
         });
 
         ttsEditText = (EditText) findViewById(R.id.ttsEditText);
-        SharedPreferences ttsTextPref = getSharedPreferences("ttsEditText",MODE_PRIVATE);
-        ttsEditText.setText(ttsTextPref.getString("ttsEditText",""));
-        Log.d("ㅋㅋㅋㅋㅋ",ttsTextPref.getString("ttsEditText","zzz"));
+        SharedPreferences ttsTextPref = getSharedPreferences("ttsTextPref",MODE_PRIVATE);
+        ttsEditText.setText(ttsTextPref.getString("ttsTextPref",""));
+        Log.d("ㅋㅋㅋㅋㅋ",ttsTextPref.getString("ttsTextPref","zzz"));
 
         setSwitch();
     }
@@ -55,11 +57,18 @@ public class AlarmManageActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        SharedPreferences ttsTextPref = getSharedPreferences("ttsEditText",MODE_PRIVATE);
-        SharedPreferences.Editor ttsEditor = getSharedPreferences("ttsEditText",MODE_PRIVATE).edit();
-        ttsEditor.putString(ttsEditText.getText().toString(),"null");
+        SharedPreferences ttsTextPref = getSharedPreferences("ttsTextPref",MODE_PRIVATE);
+        SharedPreferences.Editor ttsEditor = getSharedPreferences("ttsTextPref",MODE_PRIVATE).edit();
+        ttsEditor.clear();
+        ttsEditor.putString("ttsTextPref",ttsEditText.getText().toString());
+        Log.d("ttsEdittext.gettext===",ttsEditText.getText().toString());
+        ttsEditor.commit();
 
-        Log.d("ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ",ttsTextPref.getString("ttsEditText","zzz"));
+
+        Collection<?> collection = ttsTextPref.getAll().values();
+        Log.d("after login pref ----",collection.toString());
+
+        Log.d("ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ",ttsTextPref.getString("ttsTextPref","zzz"));
 
     }
 

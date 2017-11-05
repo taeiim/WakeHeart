@@ -48,7 +48,6 @@ public class AlarmCustomDialog extends Activity {
     private Vibrator vibrator;
     MediaPlayer mediaPlayer;
     File f;
-    MediaPlayer ttsPlayer;
     String getTTStext;
     String[] ttsText;
     private NaverTTSTask naverTTSTask;
@@ -73,7 +72,7 @@ public class AlarmCustomDialog extends Activity {
         if (isSoundChecked) {
             mediaPlayer = MediaPlayer.create(this, R.raw.music);
             mediaPlayer.setLooping(true);  //음악 무한 재생
-//            mediaPlayer.start();  // 음악 재생
+            mediaPlayer.start();  // 음악 재생
 
         }
 
@@ -82,14 +81,16 @@ public class AlarmCustomDialog extends Activity {
             vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
 //            vibrator.vibrate(500);
 //            vibrator.vibrate(new long[]{100,1000,100,500,100,500,100,1000}, 0);
-//            vibrator.vibrate(new long[]{1000, 1000}, 0);
+            vibrator.vibrate(new long[]{1000, 1000}, 0);
 
         }
 
+
+
         Log.d("ttsPref onclick======",String.valueOf(ttsPref.getBoolean("ttsSwitch",true)));
         if(ttsPref.getBoolean("ttsSwitch",true)){
-            SharedPreferences ttsTextPref = getSharedPreferences("ttsEditText",MODE_PRIVATE);
-            getTTStext = ttsTextPref.getString("ttsEditText","null");
+            SharedPreferences ttsTextPref = getSharedPreferences("ttsTextPref",MODE_PRIVATE);
+            getTTStext = ttsTextPref.getString("ttsTextPref","null");
 
             Log.d("ttsText!!========",getTTStext);
 
@@ -116,11 +117,13 @@ public class AlarmCustomDialog extends Activity {
 //                    mediaPlayer.stop();
 
                 }
-//                if (vibrator.hasVibrator()) {
-//                    vibrator.cancel();
-//                }
+                if (vibrator.hasVibrator()) {
+                    vibrator.cancel();
+                }
 
-                ttsPlayer.stop();
+                if(NaverTTS.ttsPlayer.isPlaying()){
+                    NaverTTS.ttsPlayer.stop();
+                }
 
                 if (AccountManageActivity.position == 0) {  // 학생
                     Intent intent = new Intent(AlarmCustomDialog.this, MainActivity.class);

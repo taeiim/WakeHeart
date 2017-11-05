@@ -24,6 +24,7 @@ import java.util.Date;
  */
 
 public class NaverTTS {
+    public static MediaPlayer ttsPlayer;
 
     public static void main(String[] args) {
         final String clientId = "oPDj1y9Xk6B_IakJkQ0J";//애플리케이션 클라이언트 아이디값";
@@ -71,9 +72,10 @@ public class NaverTTS {
 
                 String filePath = Environment.getExternalStorageDirectory() + File.separator + "Naver/" + tempname + ".mp3";
                 Log.d("filePath=========", filePath.toString());
-                MediaPlayer ttsPlayer = new MediaPlayer();
+                ttsPlayer = new MediaPlayer();
                 ttsPlayer.setDataSource(filePath);
                 ttsPlayer.prepare();
+                ttsPlayer.setLooping(true);
                 ttsPlayer.start();
 
                 Log.d("ttsPlayer!!!!", "!!!!!");
