@@ -25,7 +25,11 @@
         android:theme="@style/AppTheme"
         tools:replace="android:icon">
         <activity android:exported="true" android:name=".Activity.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity android:exported="true" android:name=".Activity.SplashActivity"
             android:theme="@style/SplashTheme"
@@ -45,11 +49,7 @@
         <activity android:exported="true" android:name=".Activity.SignUpSuccessActivity" />
         <activity android:exported="true" android:name=".Activity.AlarmCustomDialog"
             android:theme="@android:style/Theme.Translucent">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
 
         <service android:externalService="true" android:name=".Arduino.MainService"/>

@@ -66,8 +66,13 @@ public class MainActivity extends AppCompatActivity implements AHBottomNavigatio
 
         mainActivity = MainActivity.this;
 
-        Intent intent = new Intent(this, MainService.class);
-        stopService(intent);
+        try{
+            Intent intent = new Intent(this, MainService.class);
+            stopService(intent);
+
+        }catch (SecurityException e){
+            e.printStackTrace();
+        }
 
         try{
             Intent getIntent = getIntent();

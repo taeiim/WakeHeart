@@ -38,9 +38,7 @@ public class AccountManageActivity extends AppCompatActivity {
     private MaterialSpinner ageSpinner;
     private int age;
     FButton okBtn;
-    public static int position = 0;  // 0:학생 / 1:운전자 / 2:일반
-
-    int changePosition;
+    public static int changePosition;
     String changeGenderStr;
 
     @Override
@@ -114,7 +112,7 @@ public class AccountManageActivity extends AppCompatActivity {
                                 .baseUrl(APIUrl.API_BASE_URL)
                                 .addConverterFactory(GsonConverterFactory.create())
                                 .build();
-
+                        
                         Log.d("retrofit build ====", "yeah~");
 
                         SharedPreferences prefs = getSharedPreferences("token pref", MODE_PRIVATE);

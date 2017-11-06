@@ -39,7 +39,7 @@ public class NaverTTS {
             con.setRequestProperty("X-Naver-Client-Id", clientId);
             con.setRequestProperty("X-Naver-Client-Secret", clientSecret);
             // post request
-            String postParams = "speaker=mijin&speed=0&text=" + text;
+            String postParams = "speaker=jinho&speed=0&text=" + text;
             con.setDoOutput(true);
             DataOutputStream wr = new DataOutputStream(con.getOutputStream());
             wr.writeBytes(postParams);

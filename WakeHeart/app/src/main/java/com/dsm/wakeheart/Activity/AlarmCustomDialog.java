@@ -69,16 +69,16 @@ public class AlarmCustomDialog extends Activity {
         SharedPreferences ttsPref = getSharedPreferences("ttsSwitch",MODE_PRIVATE);
 
         Log.d("isShoundChecked", String.valueOf(isSoundChecked));
+        mediaPlayer = MediaPlayer.create(this, R.raw.music);
         if (isSoundChecked) {
-            mediaPlayer = MediaPlayer.create(this, R.raw.music);
             mediaPlayer.setLooping(true);  //음악 무한 재생
             mediaPlayer.start();  // 음악 재생
 
         }
 
         Log.d("isVibrateChecked", String.valueOf(isVibrateChecked));
+        vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         if (isVibrateChecked) {
-            vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
 //            vibrator.vibrate(500);
 //            vibrator.vibrate(new long[]{100,1000,100,500,100,500,100,1000}, 0);
             vibrator.vibrate(new long[]{1000, 1000}, 0);
@@ -113,29 +113,31 @@ public class AlarmCustomDialog extends Activity {
             @Override
             public void onClick(View view) {
                 finish();
-                if (mediaPlayer.isPlaying()) {
-//                    mediaPlayer.stop();
+                if (mediaPlayer.isPlaying() == true) {
+                    mediaPlayer.stop();
 
                 }
-                if (vibrator.hasVibrator()) {
+                if (vibrator.hasVibrator() == true) {
                     vibrator.cancel();
                 }
 
-                if(NaverTTS.ttsPlayer.isPlaying()){
+                if(NaverTTS.ttsPlayer.isPlaying()== true){
                     NaverTTS.ttsPlayer.stop();
+
                 }
 
-                if (AccountManageActivity.position == 0) {  // 학생
+                Log.d("dialog position ======",String.valueOf(AccountManageActivity.changePosition));
+                if (AccountManageActivity.changePosition == 0) {  // 학생
                     Intent intent = new Intent(AlarmCustomDialog.this, MainActivity.class);
                     intent.putExtra("helper", "helper");
                     intent.putExtra("position", "0");
                     startActivity(intent);
-                } else if (AccountManageActivity.position == 1) {  //운전자
+                } else if (AccountManageActivity.changePosition == 1) {  //운전자
                     Intent intent = new Intent(AlarmCustomDialog.this, MainActivity.class);
                     intent.putExtra("helper", "helper");
                     intent.putExtra("position", "1");
                     startActivity(intent);
-                } else if (AccountManageActivity.position == 2) {  //일반
+                } else if (AccountManageActivity.changePosition == 2) {  //일반
                     Intent intent = new Intent(AlarmCustomDialog.this, MainActivity.class);
                     startActivity(intent);
                 }

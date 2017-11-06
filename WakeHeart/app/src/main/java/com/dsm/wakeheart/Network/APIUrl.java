@@ -14,4 +14,11 @@ public class APIUrl {
     public static final String CHANGE_INFO_URL ="/change/info";
     public static final String CHANGE_PW_URL = "/change/pw";
 
+    public static final String SEND_HEARTRATE = "/heart-rate";
+    public static final String A_RATE = "/heart-rate";
+    public static final String GET_HEARTRATE = "/heart-rate/range";
+
+    public static final String GAE_BASE_URL = "http://esplay.xyz:21218/";
+    public static final String GAE_REST_AREA_URL = "/API/rests/";
+
 }

@@ -4,6 +4,7 @@ import com.dsm.wakeheart.Model.LoginObjectModel;
 import com.dsm.wakeheart.Network.APIUrl;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonPrimitive;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -27,9 +28,9 @@ public interface RestAPI {
 
     @GET(APIUrl.WISE_SAYING_URL)
     Call<JsonArray> wiseSaying();
-
-    @GET(APIUrl.REST_AREA_URL)
-    Call<JsonObject> restArea();
+//
+//    @GET(APIUrl.REST_AREA_URL)
+//    Call<JsonObject> restArea();
 
     @FormUrlEncoded
     @POST(APIUrl.CHANGE_PW_URL)
@@ -39,6 +40,9 @@ public interface RestAPI {
     @POST(APIUrl.CHANGE_INFO_URL)
     Call<Void> changeInfo(@Header("Authorization") String Authorization , @Field("position") int position,@Field("sex") String sex,@Field("age") int age);
 
+    @FormUrlEncoded
+    @POST(APIUrl.GAE_REST_AREA_URL)
+    Call<JsonPrimitive> restArea(@Field("latitude") float latitude, @Field("longitude") float longitude);
 
 
 }

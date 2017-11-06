@@ -1,21 +1,23 @@
 package com.dsm.wakeheart.Graph;
 
-/**
- * Created by parktaeim on 2017. 9. 27..
- */
+
 public class Axis {
 
-    private float x;
+    private float index;
+
+    public float getIndex() {
+        return index;
+    }
+
+    public float getY() {
+        return y;
+    }
+
     private float y;
 
-    public Axis(float x, float y){
-        this.x = x;
+    public Axis(float index, float y){
+        this.index = index;
         this.y = y;
     }
-    public float getX() {
-        return x;
-    }
-    public float getY() {return y;}
-
 
 }

@@ -1,18 +1,18 @@
 package com.dsm.wakeheart.Graph;
-
 /**
- * Created by parktaeim on 2017. 9. 27..
+ * Created by admin on 2017-09-26.
  */
 
 public class Temp {
-    String hourTemp;
-    String dayTemp;
-    String monthTemp;
+    int iHourTemp;
+    int iDayTemp;
+    int iMonthTemp;
     int MinTemp;
-    public Temp(String hourTemp, String dayTemp, String monthTemp, int MinTemp){
-        this.hourTemp = hourTemp;
-        this.dayTemp = dayTemp;
-        this.monthTemp = monthTemp;
+
+    public Temp(int iHourTemp, int iDayTemp, int iMonthTemp, int MinTemp) {
+        this.iHourTemp = iHourTemp;
+        this.iDayTemp = iDayTemp;
+        this.iMonthTemp = iMonthTemp;
         this.MinTemp = MinTemp;
     }
 }

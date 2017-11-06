@@ -29,6 +29,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonIOException;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonPrimitive;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -63,14 +64,14 @@ public class RestAreaFragment extends Fragment implements OnMapReadyCallback {
                 .create();
 
         Retrofit builder = new Retrofit.Builder()
-                .baseUrl(APIUrl.API_BASE_URL)
+                .baseUrl(APIUrl.GAE_BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
         RestAPI restAPI = builder.create(RestAPI.class);
-        Call<JsonObject> call = restAPI.restArea();
-        call.enqueue(new Callback<JsonObject>() {
+        Call<JsonPrimitive> call = restAPI.restArea((float)latitude,(float)longitude);
+        call.enqueue(new Callback<JsonPrimitive>() {
             @Override
-            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+            public void onResponse(Call<JsonPrimitive> call, Response<JsonPrimitive> response) {
                 System.out.println("안뇽!");
                 Log.d("rest area response----", response.body().toString());
                 Log.d("rest area header----", response.headers().toString());
@@ -83,7 +84,7 @@ public class RestAreaFragment extends Fragment implements OnMapReadyCallback {
 
                 try {
 //                    jsonAr=jsonObject.getAsJsonArray("phrase");
-                    JsonElement object = response.body().getAsJsonPrimitive("list");
+                    JsonElement object = response.body().getAsJsonPrimitive();
                     String str = object.getAsString();
                     JSONObject jsonObject = new JSONObject(str);    // String으로 온 값을 JSON으로 변환
                     JSONArray array = jsonObject.getJSONArray("list");
@@ -120,7 +121,7 @@ public class RestAreaFragment extends Fragment implements OnMapReadyCallback {
             }
 
             @Override
-            public void onFailure(Call<JsonObject> call, Throwable t) {
+            public void onFailure(Call<JsonPrimitive> call, Throwable t) {
                 Log.d("실패ㅠㅠ----", t.toString());
             }
         });
@@ -267,7 +268,7 @@ public class RestAreaFragment extends Fragment implements OnMapReadyCallback {
         }
 
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
-                new LatLng(latitude, longitude), 12));  //Latitude(위도), Longitude(경도)
+                new LatLng(latitude, longitude), 15));  //Latitude(위도), Longitude(경도)
 
 
         mMap.addMarker(new MarkerOptions()

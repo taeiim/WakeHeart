@@ -29,7 +29,6 @@ import java.util.Collection;
  * Created by parktaeim on 2017. 9. 8..
  */
 
-
 public class SettingsActivity extends AppCompatActivity {
 
     Context context;
